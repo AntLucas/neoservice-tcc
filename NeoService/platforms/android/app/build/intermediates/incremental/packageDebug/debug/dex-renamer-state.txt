@@ -1,0 +1,4 @@
+#Wed Sep 12 12:08:40 BRT 2018
+base.0=C\:\\Users\\maemi\\Desktop\\Primeiro-Projeto-Cordova\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=C\:\\Users\\maemi\\Desktop\\Primeiro-Projeto-Cordova\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
