@@ -1,0 +1,161 @@
+*{
+margin:0;
+padding:0;
+font-family: 'Arial';
+}
+
+.menu{
+width: 100%;
+height: 50px;
+background-color:#222
+
+}
+
+.menu ul {
+List-style: none;
+position: relative;
+}
+
+.menu ul li {
+widht: 150px;
+float: left;
+}
+
+.menu a {
+padding: 15px;
+display: block;
+text-decoration: none;
+text-align: center;
+background-color: #222;
+color: #fff;
+}
+
+.menu ul ul {
+	position: absolute;
+	visibility: hidden;
+}
+
+.menu ul li:hover ul{
+	visibility: visible;
+}
+
+.menu a:hover{
+	background-color: #f4f4f4;
+	color:#555;
+}
+
+.menu ul ul li {
+	float: none;
+	border-bottom: solid 1px #ccc;
+}
+
+.menu ul ul li a {
+	background-color: #069;
+}
+
+
+
+
+label {
+	padding:5px;
+	background-color: #222;
+	color: #fff;
+	font-family: 'Arial';
+	text-align: center;
+	font-size:30px;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	display: none;
+	transition: all .4s linear;
+	
+}
+
+span{
+	width: 45px;
+	height: 6px;
+	top: 27px;
+	left: 08px;
+	position: absolute;
+	background-color: #fff;
+	transition: all .4s linear;
+}
+span:before{
+	content: '';
+	width: 45px;
+	height: 6px;
+	bottom: -15px;
+	position: absolute;
+	background-color: #fff;
+	transition: all .4s linear;
+}
+
+span:after{
+	content: '';
+	width: 45px;
+	height: 6px;
+	top: -15px;
+	position: absolute;
+	background-color: #fff;
+	transition: all .4s linear;
+}
+
+#bt_menu{
+	display:none;
+	position: absolute;
+	z-index:1;
+}
+
+#bt_menu:checked ~span{
+	background-color: transparent;
+}
+
+#bt_menu:checked ~span:before{
+	
+	transform: translate(0px, -16px)rotate(-45deg);
+}
+
+#bt_menu:checked ~span:after{
+	
+	transform: translate(0px, 16px)rotate(45deg);
+}
+
+#bt_menu:checked ~ label {
+	
+	border-radius: 50%;
+}
+
+
+
+@media(max-width: 800px){
+	label {
+		display:block;
+	}
+	
+	#bt_menu:checked ~.menu{
+		margin-left: 0;
+	}
+	
+	.menu{
+		margin-top: 5px;
+		margin-left:-100%;
+		transition: all .4s;
+	}
+	
+	.menu ul li{
+		width: 100%;
+		float: none;
+	}
+	.menu ul ul{
+		position: static;
+		overflow: hidden;
+		max-height: 0;
+		transition: all .4s;
+	}
+	.menu ul li:hover ul {
+		height: auto;
+		max-height: 200px;
+		
+	}
+	
+}
