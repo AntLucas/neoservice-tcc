@@ -32,10 +32,10 @@ O projeto tende a proporcionar uma aplicação, que possibilite auxiliar na busc
 
 Informações adicionais sobre este projeto.
 
-Linguagens utilizadas:
+O que foi utilizado?
 ```
-Website: HTML5, CSS3, JavaScript, PHP7 e (Nome do Banco).
-Mobile: Cordova e (Nome do Banco)
+Website: HTML5, CSS3, JavaScript, PHP7, Bootstrap e (Nome do Banco).
+Mobile: Cordova, JQuery e (Nome do Banco)
 ```
 Plataformas disponíveis:
 ```
@@ -58,7 +58,7 @@ Atualmente estamos em um versão alfa, para testes.
 
 **Antonio Lucas**
 
-- <https://github.com/>
+- <https://github.com/AntLucas>
 
 Veja também a lista de [contribuições](https://github.com/toosugoi4u/neoservice-tcc/graphs/contributors) de cada desenvolvedor do projeto.
 
