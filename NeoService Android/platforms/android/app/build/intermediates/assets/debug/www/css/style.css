@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Dosis');
+﻿@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+
+.m-b-10 {margin-bottom: 10px;}
+
+.p-b-45{margin-bottom: 25px;}
+
+.p-t-10 {margin-top: 15px;}
+
+
+
 /* BÁSICO */
 	*  {
     margin:0;
@@ -85,7 +95,7 @@
 
 /* HEADER */
 
-	body.bodyclass #header {
+	body.bodyclass #header {                                      /*nome NeoService*/
 		background-color: transparent;
 		left: 0;
 		position: absolute;
@@ -114,119 +124,11 @@
     		bottom: -25%;
 		}
 
-/* BANNER */
 
-	body {
-    background: url("../img/overlay.png"), url("../img/banner.jpg") no-repeat center top fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    overflow: hidden;
-	}
 
-/* CENTRO */
 
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 10px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 
-input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
 
-input[type=submit]:hover {
-    background-color: #45a049;
-}
 
-label{
-	color: white;
-}
 
-form{
-	text-align: center;
-}
 
-#label-login{
-	text-align: center;
-}
-
-#label-senha{
-	text-align: center;
-}
-
-.centro {
-    border-radius: 10px;
-    background-color: rgba(25,25,25,0.6);
-    padding: 100%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* BUTTON */
-
-input[type="submit"],
-	input[type="reset"],
-	input[type="button"],
-	.button {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-o-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		background-color: #3ba666;
-		border-radius: 4px;
-		border: 0;
-		color: white !important;
-		cursor: pointer;
-		display: inline-block;
-		font-weight: 400;
-		height: 2.85em;
-		line-height: 2.8em;
-		padding: 0 2em;
-		text-align: center;
-		text-decoration: none;
-		white-space: nowrap;
-	}
-
-		
-.botao{
-	text-align: center;
-	margin-top: 10%;
-}
-
-ul.botao {
-			cursor: default;
-			list-style: none;
-			padding-left: 0;
-		}
-
-			ul.botao li {
-				display: inline-block;
-				padding: 0 1em 0 0;
-				vertical-align: middle;
-			}
-
-				ul.botao li:last-child {
-					padding-right: 0;
-				}
