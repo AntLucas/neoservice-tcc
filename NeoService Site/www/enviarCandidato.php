@@ -1,6 +1,6 @@
 <?php 
 $con = @mysql_connect('localhost','root','') or die (mysql_error());
-$x1 = mysql_select_db('TCCs',$con) or die (mysql_error());
+$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
 ?>
 
 <?php

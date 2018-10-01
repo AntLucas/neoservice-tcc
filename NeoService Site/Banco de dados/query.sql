@@ -1,12 +1,10 @@
-
-
 use sys;
 
-drop database TCCs;
+drop database TCC;
 
-create database TCCs;
+create database TCC;
 
-use TCCs;
+use TCC;
 
 
 
@@ -59,10 +57,10 @@ primary key (IdContato)
 );
 
 insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero,Complemento)
-values('EmpresaUsuario','SenhaEmpresa','Empresa@teste','NeoService','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
+values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
 
 insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero,Complemento)
-values('EmpresaUsuario','SenhaEmpresa','Empresa@teste','eEmpresa Teste','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
+values('EmpresaUsuario','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
 
 
 insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email)
@@ -71,7 +69,6 @@ values('CandidatoUsuario','SenhaCandidato','Antonio','candidato@teste');
 
 insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email)
 values('Candidato2','Senha2','Douglas','candidato@teste2');
-
 
 
 
@@ -152,4 +149,21 @@ where d.IdContato =1
 ;
 
 select * from tbmensagens;
+
+select a.Email,
+a.Senha
+
+from tbempresas a;
+
+select * from tbempresas;
+
+DELETE FROM TbEmpresas where IdEmpresa = 3;
+
+select b.Email,
+b.Senha
+
+from tbcandidatos b;
+
+select * from tbcandidatos;
+select * from tbempresas;
 
