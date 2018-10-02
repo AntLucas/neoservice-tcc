@@ -181,7 +181,6 @@ header p {
 /* Services Section */
 #services-section {
 	padding: 80px 0 100px 0;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
 	background: rgb(3,39,49); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -215,7 +214,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 /* About Section */
 #about-section {
 	padding: 80px 0;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#032731+0,032e3a+20,032e3a+100,032731+100 */
 	background: rgb(3,39,49); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top, rgba(3,39,49,1) 0%, rgba(3,46,58,1) 20%, rgba(3,46,58,1) 100%, rgba(3,39,49,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -236,6 +234,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 	content: "✓";
 	color: #f3ca27;
 	padding-right: 5px;
+}
+/* Testimonials */
+#testimonials-section {
+	padding: 80px 0;
+	background: url("../img/overlay.png"), url(https://images.wallpaperscraft.com/image/city_skyscrapers_clouds_rain_road_cars_lights_58563_3840x2160.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+	color: #5b777f;
+}
+#testimonial {
+	padding: 30px 0;
+}
+#testimonial .item {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+#testimonial .item p {
+	font-weight: 400;
+	margin: 0 0 30px 0;
 }
 /* Footer */
 #footer {
