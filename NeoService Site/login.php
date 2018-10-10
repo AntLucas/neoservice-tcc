@@ -20,8 +20,8 @@
 
     <!-- Stylesheet
         ================================================== -->
+    <link rel="stylesheet" type="text/css" href="assets/css/login.css">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css"  href="assets/css/styleLoginEmpresa.css">
     <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
@@ -38,7 +38,7 @@
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="index.html"><img src="" alt="NeoService logo"><strong></strong></a> </div>
+            <a class="navbar-brand" href="index.html"><img src="" alt="#"><strong></strong></a> </div>
           
           <!-- Links de navegação do site -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -63,40 +63,60 @@
 <header class="text-left" name="home">
   <div class="intro-text">
     <!-- Tela login -->
-    <div class="limiter">
-      <div class="container-login100">
-        <div class="wrap-login100">
-          <form name="loginform" method="POST" action = "empresaAutenticacao.php" class="login100-form validate-form">
-            <span class="login100-form-logo">
-              <i class="zmdi zmdi-landscape"></i>
-            </span>
-            <span class="login100-form-title p-b-34 p-t-27">
-              Login
-            </span>
-            <div class="wrap-input100 validate-input" data-validate = "Enter email">
-              <input class="input100" type="text" name="Temail" placeholder="Email">
-              <span class="focus-input100" data-placeholder="&#xF002;"></span>
+    <div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                	<span class="login100-form-logo">
+              			<i class="zmdi zmdi-landscape"></i>
+            		</span>
+                    <h3>Empresa</h3>
+                    
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="E-mail" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Senha" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btnForgetPwd">Esqueceu sua senha?</a>
+                        </div>
+                        <div class="form-group">
+                        	<p></p>
+                            <a href="#" class="btnForgetPwd">Não possui uma conta? Crie uma!</a>
+                        </div>
+                    
+                </div>
+                <div class="col-md-6 login-form-2">
+                    <div class="login-logo">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                    </div>
+                    <span class="login100-form-logo">
+              			<i class="zmdi zmdi-landscape"></i>
+            		</span>
+                    <h3>Candidato</h3>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="E-mail" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Senha" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btnForgetPwd" value="Login">Esqueceu sua senha?</a>
+                        </div>
+                        <div class="form-group">
+                        	<p></p>
+                            <a href="#" class="btnForgetPwd">Não possui uma conta? Crie uma!</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="wrap-input100 validate-input" data-validate="Enter password">
-              <input class="input100" type="password" name="Tsenha" placeholder="Senha">
-              <span class="focus-input100" data-placeholder="&#xf191;"></span>
-            </div>
-            <div class="container-login100-form-btn">
-              <button class="login100-form-btn">
-                Login
-              </button>
-            </div>
-            <div class="text-center">
-              <a class="txt1" href="cadastroDeEmpresa.php">
-                <p></p>
-                Não tem uma conta? Crie uma!
-              </a>
-            </div>
-          </form>
         </div>
-      </div>
-    </div>
-
 </header>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
