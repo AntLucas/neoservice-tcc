@@ -266,6 +266,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#032731', end
 	margin-top: 10px;
 }
 
+
 @media (max-width: 768px) {
 .content {
 	padding: 40% 0 0;
@@ -289,3 +290,4 @@ label {
 	padding: 22% 10%;
 }
 }
+

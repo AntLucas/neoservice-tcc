@@ -11,7 +11,6 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome/css/font-awesome.css">
 
     <!-- Slider
         ================================================== -->
@@ -21,7 +20,7 @@
     <!-- Stylesheet
         ================================================== -->
     <link rel="stylesheet" type="text/css" href="assets/css/login.css">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/animate.min.css">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
@@ -31,6 +30,20 @@
     <link href="assets/css/material.min.css" rel="stylesheet">
   </head>
   <body>
+  <section>
+	<div class="bgPulse">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</section>
 <!-- Navigation
     ==========================================-->
     <nav id="menu" class="navbar navbar-default navbar-fixed-top">
@@ -38,23 +51,16 @@
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="index.html"><img src="" alt="#"><strong></strong></a> </div>
+            <a class="navbar-brand" href="index.html"><img src="" alt=""><strong></strong></a> </div>
           
           <!-- Links de navegação do site -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="index.html" class="page-scroll"><i class="fa fa-home"></i>  Início</a></li>
-          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sign-in"></i>  Login<i class="fa fa-angle-down"></i></a>
-          <ul class="dropdown-menu">
-          <li><a href="login-empresa.html"><i class="fa fa-building"></i>      Empresa</a></li>
-          <li><a href="login-usuario.html"><i class="fa fa-user"></i>       Usuário</a></li>
-          </ul>
-          <li><a href="contato.html" class="page-scroll"><i class="fa fa-envelope-o"></i>  Contato</a></li>
-          <li class="dropdown">
+              <li><a href="contato.html" class="page-scroll"><i class="fa fa-envelope"></i>  Contato</a></li>
             </ul>
           </div>
-          <!-- /.navbar-collapse --> 
+          <!-- /.navbar-collapse fa fa-sign-in--> 
         </div>
         <!-- /.container-fluid --> 
       </nav>
