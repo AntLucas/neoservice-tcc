@@ -32,10 +32,10 @@
 							<h2>Menu</i></h2>
 							<ul class="links">
 								<li><a href="index.html">INÍCIO</a></li>
-								<li><a href="#">LOGAR</a></li>
-								<li><a href="#">CADASTRAR</a></li>
+								<li><a href="www/loginCandidato.php">LOGAR COMO CANDIDATO</a></li>
+								<li><a href="www/loginEmpresa.php">LOGAR COMO EMPRESA</a></li>
 							</ul>
-							<a href="#" class="close">Close</a>
+							<a href="#" class="close">Fechar</a>
 						</div>
 					</nav>
 

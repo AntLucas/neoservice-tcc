@@ -1,0 +1,18 @@
+body{
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	color: #1c424d;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+#map {
+	position:absolute; 
+	top:0; 
+	bottom:0; 
+	width: 99%;
+}
+.mapboxgl-popup {
+	max-width: 400px;
+	font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}

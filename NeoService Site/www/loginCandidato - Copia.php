@@ -1,4 +1,3 @@
-<?php include_once("lib/dbconnect.php"); ?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -7,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/main-login.css" />
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<!-- Slider  -->
@@ -21,7 +20,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">NEOSERVICE</a></h1>
+						<h1><a href="index.php">NEOSERVICE</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -32,9 +31,11 @@
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
-								<li><a href="../index.php">RETORNAR</a></li>
+								<li><a href="index.html">INÍCIO</a></li>
+								<li><a href="www/loginCandidato.php">LOGAR COMO CANDIDATO</a></li>
+								<li><a href="www/loginEmpresa.php">LOGAR COMO EMPRESA</a></li>
 							</ul>
-							<a href="#" class="close">FECHAR</a>
+							<a href="#" class="close">Close</a>
 						</div>
 					</nav>
 
@@ -56,21 +57,21 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form name="loginform" method="POST" action = "" class="login100-form validate-form">
-					<span class="login100-form-logo-2 animated bounce">
+					<span class="login100-form-logo-2">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
-					<span class="login100-form-title p-b-34 p-t-27 animated infinite pulse">
+					<span class="login100-form-title p-b-34 p-t-27">
 						Login
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="Email">
-						<span class="focus-input100" data-placeholder="&#xf02b;"></span>
+						<input class="input100" type="text" name="Temail" placeholder="Email">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100 animated flash delay-5s" type="password" name="Tsenha" placeholder="Senha">
+						<input class="input100" type="password" name="Tsenha" placeholder="Senha">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
@@ -83,7 +84,6 @@
 
 					<div class="text-center p-t-90">
 						<a class="txt1" href="cadastroDeEmpresa.php">
-						<p></p>
 							Não tem uma conta? Crie uma!
 						</a>
 					</div>
@@ -134,15 +134,6 @@
 			</div>
 		</div>
 	</div>
-							<section id="footer">
-								<div class="inner">
-									<ul class="copyright">
-										<p>NeoService / Todos os direitos autorizados.</p>
-									</ul>
-								</div>
-						</div>
-					</section>
-			</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
