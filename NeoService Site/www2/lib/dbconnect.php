@@ -1,6 +1,5 @@
 <?php 
-$con = @mysql_connect('localhost','root','') or die (mysql_error());
-$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
+$link = mysqli_connect("localhost","root","","TCC") or die("Error " . mysqli_error($link));
 ?>
 
 <?php

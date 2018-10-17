@@ -20,7 +20,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="index.html">NEOSERVICE</a></h1>
+						<h1><a href="index.php">NEOSERVICE</a></h1>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -31,9 +31,9 @@
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
-								<li><a href="index.html">INÍCIO</a></li>
-								<li><a href="www/loginCandidato.php">LOGAR COMO CANDIDATO</a></li>
-								<li><a href="www/loginEmpresa.php">LOGAR COMO EMPRESA</a></li>
+								<li><a href="index.php">INÍCIO</a></li>
+								<li><a href="www2/loginCandidato.php">ENTRAR COMO CANDIDATO</a></li>
+								<li><a href="www2/loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
 							</ul>
 							<a href="#" class="close">Fechar</a>
 						</div>
@@ -94,7 +94,7 @@
 										<div class="col-md-8 col-md-offset-2">
 											<div id="testimonial" class="owl-carousel owl-theme" data-wow-delay="200ms">
 												<div class="item">
-													<p><font color="#DCDCDC" size="4">Na segunda-feira, dia 15 de outubro, realizaremos outra mudança em nossa interface principal, deixando-a mais agradável. Adicionamos diversas outras ferramentas em nossa plataforma, como exemplo a dashboard do candidato. E também estamos participando da 12° Feira Tecnológica do Centro Paula Souza.</p></font>
+													<p><font color="#DCDCDC" size="4">Na segunda-feira, dia 15 de outubro, realizaremos outra mudança em nossa interface principal, deixando-a mais agradável. Adicionamos diversas outras ferramentas em nossa plataforma, como exemplo a dashboard do candidato. E também estamos participando da Feira Tecnológica do Centro Paula Souza.</p></font>
 														<img class="img-center" src="http://www.learnex.in/wp-content/uploads/2015/12/flat-faces-icons-circle-6.png" height="100px" alt="">
 														<span style='color:white;'><p><strong>Douglas Almeida</span></strong>| @Dev</font></p></span>
 												</div>

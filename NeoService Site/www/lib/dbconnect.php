@@ -1,6 +1,10 @@
-<?php 
-$con = @mysql_connect('localhost','root','') or die (mysql_error());
-$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
+<?php
+$link = mysqli_connect('localhost', 'root', '');
+if (!$link) {
+    die('Não foi possível conectar: ' . mysqli_error());
+}
+echo 'Conexão bem sucedida';
+mysqli_close($link);
 ?>
 
 <?php
