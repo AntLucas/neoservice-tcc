@@ -1,5 +1,6 @@
 <?php 
-$link = mysqli_connect("localhost","root","","TCC") or die("Error " . mysqli_error($link));
+$con = @mysql_connect('neoservice.mysql.uhserver.com','neoservice','Nsrvce{69}') or die (mysql_error());
+$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
 ?>
 
 <?php
