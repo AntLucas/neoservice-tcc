@@ -8,5 +8,5 @@ $x1 = mysql_select_db('TCC',$con) or die (mysql_error());
 <?php
 session_start();
 session_destroy();
-header("Location: ../loginEmpresa.php")
+header("Location: loginEmpresa.php")
 ?>

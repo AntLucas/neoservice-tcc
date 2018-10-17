@@ -36,7 +36,7 @@ $idemp = $_SESSION['IdEmpresa'];
         </fieldset>
 </form>
 
-<a href="../telaInicialEmpresa.php">Tela Inicial</a>
+<a href="telaInicialEmpresa.php">Tela Inicial</a>
 
 
 </body>

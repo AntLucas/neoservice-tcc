@@ -11,7 +11,7 @@ $id = $_SESSION['IdCandidato'];
 
  if($_SESSION['Contador'] == 2){
 	echo "aeeeee";
-	header('Location: ../chatCandidato.php/');
+	header('Location: chatCandidato.php');
 	
 	$_SESSION['Contador'] = 0; 
 }
@@ -815,7 +815,7 @@ $_SESSION['Contador'] +=1;
 					
 					
 				?>
-				<form method="post" action="../chatCandidato.php" >
+				<form method="post" action="chatCandidato.php" >
 				<?php
 				if($_SESSION['idcontato'] == $idcont){
 					?><li class="contact active"> <?php
@@ -886,7 +886,7 @@ $_SESSION['Contador'] +=1;
 			</ul>
 		</div>
 		<div id="bottom-bar">
-		<a href="../telaInicialCandidato.php">	<button class="mudar"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Tela Inicial </button></a>
+		<a href="telaInicialCandidato.php">	<button class="mudar"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Tela Inicial </button></a>
 			<button class="mudar "id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Configurações</span></button>
 		</div>
 	</div>

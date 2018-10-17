@@ -35,7 +35,7 @@ $idcand = $_SESSION['IdCandidato'];
         </fieldset>
 </form>
 
-<a href="../telaInicialCandidato.php">Tela Inicial</a>
+<a href="telaInicialCandidato.php">Tela Inicial</a>
 
 
 </body>

@@ -64,7 +64,7 @@ else{
 }
 
 ?>
-<form action='../telaInicialCandidato.php'><input type='submit' value='Voltar'/></form>
+<form action='telaInicialCandidato.php'><input type='submit' value='Voltar'/></form>
 
 </body>
 </html>

@@ -108,10 +108,10 @@ while($lc = @mysql_fetch_array($slq) ){
 
 
 ?>
-<a href ="../logoutEmpresa.php/">Sair</a>
-<a href="../chatEmpresa.php/">chat</a>
-<a href="../cadastroDeVaga.php">cadastrar vaga</a>
-<a href="../perfilEmpresa.php">Perfil</a>
+<a href ="logoutEmpresa.php">Sair</a>
+<a href="chatEmpresa.php">chat</a>
+<a href="cadastroDeVaga.php">cadastrar vaga</a>
+<a href="perfilEmpresa.php">Perfil</a>
 </body>
 </html>
 
@@ -130,7 +130,7 @@ if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
 	else{
 	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
 		
-		header('Location: ../chatEmpresa.php/');
+		header('Location: chatEmpresa.php');
 	}
 	else{
 		echo"Erro ao iniciar Contato";
@@ -146,7 +146,7 @@ else{
 if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 	
 	$_SESSION['pesquisa'] = $_POST['pesquisa'];
-	header('Location: ../perfilDeCandidato.php/');
+	header('Location: perfilDeCandidato.php');
 }
 else{
 

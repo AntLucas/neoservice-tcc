@@ -8,7 +8,7 @@ $dados = mysql_fetch_assoc($sql);
 
  if($_SESSION['Contador'] == 2){
 	echo "aeeeee";
-	header('Location: ../editarPerfilCandidato.php');
+	header('Location: editarPerfilCandidato.php');
 	
 	$_SESSION['Contador'] = 0; 
 }
@@ -108,7 +108,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: ../perfilDeEmpresa.php/');
+								header('Location: perfilDeEmpresa.php');
 									}
 									else{
 										
@@ -226,7 +226,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <div>
-                    <a href="../logoutCandidato.php">
+                    <a href="logoutCandidato.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>

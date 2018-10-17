@@ -44,9 +44,9 @@ echo"<option value='$Usuario'></option>";
 ?>
 </datalist>
 </form>
-<a href ="../logoutCandidato.php/">Sair</a>
-<a href="../chatCandidato.php/">chat</a>
-<a href="../perfilCandidato.php">Perfil </a>
+<a href ="logoutCandidato.php">Sair</a>
+<a href="chatCandidato.php">chat</a>
+<a href="perfilCandidato.php">Perfil </a>
 </body>
 </html>
 
@@ -55,7 +55,7 @@ echo"<option value='$Usuario'></option>";
 if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 	
 	$_SESSION['pesquisa'] = $_POST['pesquisa'];
-	header('Location: ../perfilDeEmpresa.php/');
+	header('Location: perfilDeEmpresa.php');
 }
 else{
 

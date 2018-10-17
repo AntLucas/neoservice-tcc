@@ -8,7 +8,7 @@ $dados = mysql_fetch_assoc($sql);
 
  if($_SESSION['Contador'] == 2){
 	echo "aeeeee";
-	header('Location: ../editarPerfilEmpresa.php');
+	header('Location: editarPerfilEmpresa.php');
 	
 	$_SESSION['Contador'] = 0; 
 }
@@ -212,7 +212,7 @@ while($rowss = mysql_fetch_array($sql)){
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
-            <form method="post">
+            <form method="post" action="">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -226,8 +226,11 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        <?php echo"$nme";?>
+                                         <?php echo"$nme";?>
                                     </h5>
+                               
+                                       
+
                                     
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -235,7 +238,7 @@ while($rowss = mysql_fetch_array($sql)){
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">informações adicionais</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
                                 </li>
                             </ul>
                         </div>
@@ -245,19 +248,27 @@ while($rowss = mysql_fetch_array($sql)){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                        
+                            <p>COMPETÊNCIAS</p>
+                            <?php
+							/*$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
+							while($rowsss = mysql_fetch_array($query)){
+								$competencia = $rowsss['competencia'];
+                            echo"<p>$competencia</p>";
+							}*/
+                            ?>
+							
+						
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
-						
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Nome de Usuário</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser"name="usuario" value="<?php echo $dados['NmUsuario'];?>"required/>
+                                <input type="text" class="form-control" id="usuario"name="usuario" value="<?php echo $dados['NmUsuario'];?>"required/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -265,7 +276,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Nome da Empresa</label>
                                             </div>
                                     <div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="empresa" value="<?php echo $dados['NmEmpresa'];?>"required/>
+       							<input type="text" class="form-control" id="empresa" name="empresa" value="<?php echo $dados['NmEmpresa'];?>"required/>
         							</div>
                                         </div>
                                         <div class="row">
@@ -273,16 +284,15 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>E-mail</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="email" value="<?php echo $dados['Email'];?>"required/>
+       							<input type="email" class="form-control" id="email" name="email" value="<?php echo $dados['Email'];?>"required/>
         							</div>
                                         </div>
-                                       
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>CNPJ</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="cnpj" value="<?php echo $dados['CNPJ'];?>"required/>
+       							<input type="password" class="form-control" id="cnpj" name="cnpj" value="<?php echo $dados['CNPJ'];?>"required/>
         							</div>
                                         </div>
                                         <div class="row">
@@ -290,9 +300,10 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Razão Social</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="razao" value="<?php echo $dados['Razao'];?>"required/>
-        							</div>           
+       							<input type="text" class="form-control" id="razao" name="razao" value="<?php echo $dados['Razao'];?>"required/>
+        							</div>
                                         </div>
+                                        
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
@@ -300,7 +311,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>CEP</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser" name="cep" value="<?php echo $dados['CEP'];?>"required/>                
+                                <input type="text" class="form-control" id="cep" name="cep" value="<?php echo $dados['CEP'];?>"required/>                
                                             </div>
                                         </div>
                                         <div class="row">
@@ -308,7 +319,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Cidade</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser"name="cidade" value="<?php echo $dados['Cidade'];?>"required/>
+                                <input type="text" class="form-control" id="cidade"name="cidade" value="<?php echo $dados['Cidade'];?>"required/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -316,49 +327,54 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Estado</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="estado" value="<?php echo $dados['Estado'];?>"required/>
+       							<input type="text" class="form-control" id="estado" name="estado" value="<?php echo $dados['Estado'];?>"required/>
                                             </div>
                                         </div>
-                                        <div class="row">
+										
+										<div class="row">
                                             <div class="col-md-6">
                                                 <label>Bairro</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser" name="bairro" value="<?php echo $dados['Bairro'];?>"required/>
+       							<input type="text" class="form-control" id="bairro" name="bairro" value="<?php echo $dados['Bairro'];?>"required/>
                                             </div>
                                         </div>
-                                        <div class="row">
+										
+										<div class="row">
                                             <div class="col-md-6">
                                                 <label>Endereço</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser" name="endereco" value="<?php echo $dados['Endereco'];?>"required/>
+       							<input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $dados['Endereco'];?>"required/>
                                             </div>
                                         </div>
-                                        <div class="row">
+										
+										<div class="row">
                                             <div class="col-md-6">
                                                 <label>Numero</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser" name="numero" value="<?php echo $dados['Numero'];?>"required/>
+       							<input type="text" class="form-control" id="numero" name="numero" value="<?php echo $dados['Numero'];?>"required/>
                                             </div>
                                         </div>
-                                        <div class="row">
+										
+										 <div class="row">
                                             <div class="col-md-12">
                                                 <label>Sua biografia</label><br/>
-                                                <p> <input type="text" class="form-control" id="Cbiografia" name="biografia" value="<?php echo $dados['biografia'];?>"required/></p>
+                                                <p> <input type="text" class="form-control" id="biografia" name="biografia" value="<?php echo $dados['biografia'];?>"required/></p>
                                             </div>
                                         </div>
                             </div>
                         </div>
                     </div>
 					<input type="submit" value="Alterar dados">
-					<input type="text" name ="env" value="altera">
+					<input type="hidden" name ="env" value="altera">
                 </div>
+				
             </form>  
 
-<?php
 
+<?php
 if($_POST['env'] && $_POST['env'] == "altera"){
 	
 	if($_POST['usuario'] && $_POST['empresa'] && $_POST['email'] && $_POST['cnpj'] && $_POST['razao'] && $_POST['cep'] && $_POST['cidade'] && $_POST['estado'] && $_POST['bairro'] && $_POST['endereco'] && $_POST['numero'] && $_POST['biografia']){
@@ -378,10 +394,10 @@ if($_POST['env'] && $_POST['env'] == "altera"){
 	$bairro =	$_POST['bairro'];
 	$endereco =	$_POST['endereco'];
 	$numero =	$_POST['numero'];
-	$biografia =	$_POST['biografia'];
+	$biografia = $_POST['biografia'];
 	
-	$_SESSION['NmCandidato'] = $nomec;
-	$_SESSION['NmUsuario'] = $nomeu;
+	$_SESSION['NmEmpresa'] = $nme;
+	$_SESSION['NmUsuario'] = $nmu;
 	$_SESSION['Email'] =	$email;
 	$_SESSION['Senha'] = $senha;
 	
@@ -399,7 +415,7 @@ if($_POST['env'] && $_POST['env'] == "altera"){
 else{
 	echo"nao cliqa";
 }
-?>						
+?>		
         </div>
                 </div>
             </div>

@@ -95,7 +95,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: ../perfilDeEmpresa.php/');
+								header('Location: perfilDeEmpresa.php');
 									}
 									else{
 										
@@ -112,7 +112,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="../telaInicialCandidato.php">
+                            <a href="telaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -206,7 +206,7 @@ while($rowss = mysql_fetch_array($sql)){
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="../chatCandidato.php"><i class="fa fa-envelope"></i></a>
+                        <a href="chatCandidato.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -217,7 +217,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <div>
-                    <a href="../logoutCandidato.php">
+                    <a href="logoutCandidato.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
@@ -262,7 +262,7 @@ while($rowss = mysql_fetch_array($sql)){
                         </div>
                     </div>
                     <div class="col-md-2">
-					<form action="www.google.com">
+					<form action="editarPerfilCandidato.php">
                         <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
 					</form>
                     </div>

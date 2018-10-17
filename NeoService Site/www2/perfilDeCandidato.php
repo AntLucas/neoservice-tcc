@@ -59,7 +59,7 @@ else{
 	}
 
 ?>
-<form action='../telaInicialEmpresa.php'><input type='submit' value='Voltar'/></form>
+<form action='telaInicialEmpresa.php'><input type='submit' value='Voltar'/></form>
 </body>
 </html>
 
@@ -67,7 +67,7 @@ else{
 if(isset($_POST['env']) && $_POST['env'] == "enviou"){
 	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$idcand')")){
 		
-		header('Location: ../chatEmpresa.php/');
+		header('Location: chatEmpresa.php');
 	
 }
 else{

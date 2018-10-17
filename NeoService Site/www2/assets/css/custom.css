@@ -64,17 +64,11 @@ body {
 
 /*----------------page-wrapper----------------*/
 
-.page-wrapper {
-    height: 100vh;
-}
-
 .page-wrapper .theme {
     width: 40px;
     height: 40px;
-    display: inline-block;
-    border-radius: 4px;
-    margin: 2px;
     background-size: cover;
+	overflow: hidden;
 }
 .page-wrapper .theme.selected {
     border:2px solid #00c7ff;
@@ -128,6 +122,7 @@ body {
 
 .page-wrapper.toggled .sidebar-wrapper {
     left: 0px;
+    overflow: hidden;
 }
 
 @media screen and (min-width: 768px) {
