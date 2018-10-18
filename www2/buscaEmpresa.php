@@ -9,18 +9,8 @@ $senha = $_SESSION['Senha'];
 $NmC = $_SESSION['NmCandidato'];
 $NmU = $_SESSION['NmUsuario'];
 
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cel = $rowss['cel'];
-	$end = $rowss['ende'];
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
-}
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +19,7 @@ while($rowss = mysql_fetch_array($sql)){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>NeoService</title>
+    <title>NeoService - Busca</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -38,7 +28,7 @@ while($rowss = mysql_fetch_array($sql)){
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom-themes.css">
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
-	<link rel="stylesheet" href="assets/css/styleCandidato.css">
+	<link rel="stylesheet" href="assets/css/buscaCandidato.css">
 </head>
 
 <body>
@@ -133,7 +123,7 @@ while($rowss = mysql_fetch_array($sql)){
                                     </li>
 									
 									<li>
-                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
+                                        <a href="cadastrarCompetencias.php">Cadastrar competências</a>
                                     </li>
                                 </ul>
                             </div>
@@ -228,140 +218,61 @@ while($rowss = mysql_fetch_array($sql)){
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-									
-                                      <?php echo"$NmC"?>
-                                    </h5>
-                                    <h6>
-                                      <?php echo"$profissao"?>
-                                    </h6>
-                                    <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-					<form action="editarPerfilCandidato.php">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
-					</form>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>COMPETÊNCIAS</p><br/>
-							<?php
-							$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
-							while($rowsss = mysql_fetch_array($query)){
-								$competencia = $rowsss['competencia'];
-                            echo"<p>$competencia</p>";
-							}
-                            ?>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de Usuário</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$NmU";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$NmC"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>E-mail</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$email"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Celular</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$cel"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Endereço</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p><?php echo"$bio"; ?></p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experiência</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$xp"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Inglês</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$ingles"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Formação</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$formacao"; ?></p>
-                                            </div>
-                                        </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>           
-        </div>
-                </div>
+					<div class="container"><br>
+				<div class="jumbotron p-3 text-center">
+				  <h1 class="display-4">Busca de Empresas</h1><hr>
+				  <p class="lead">Resultados pela busca: "<?php echo"variavel aqui";?>"</p>
+				  <p class="lead">
+				  </p>
+				</div>
+				
+				
+				
+				
+		<?php 
+		
+		while()
+		{
+		?>
+				<div class="row">		
+				  <div class="col-sm-6">
+					<div class="card">
+					  <h4 class="card-header text-right bg-dark text-white"><?php echo"variavel aqui";?>
+					  <div class="float-left small">
+						<a class="btn btn-raised btn-danger" href="httpS://www.google.com.br" title="Ver perfil de EMPRESA" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+							<i class="fas fa-user-circle" aria-hidden="true"></i>
+						  </a>
+						  <a class="btn btn-raised btn-danger" href="www.google.com" title="Solicitar contato">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						  </a>
+					  </div>
+					  </h4>
+					  <div class="card-body">
+						  <div class="image float-right user-r">
+							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlzMdhwbQezvSU8ZGqUWZEJXPG7cdEGyCvs-4M3CHLHLHMrpZa6w" class="img-thumbnail" alt="avatar"/>
+						  </div>
+						<h4 class="card-title">Informações</h4>
+						  <p class="card-text"><?php echo"variavel aqui";?></p>
+					  </div>
+					</div>
+				  </div>
+
+				</div>
+			<?php
+		}
+				?>
+				
+				
+				
+
+
+				</div>
+
+				  <hr>
+					
+					</div>
+
+					<!-- jQuery first, then Bootstrap JS. -->
             </div>
         </main>
         <!-- page-content" -->
@@ -374,7 +285,8 @@ while($rowss = mysql_fetch_array($sql)){
         crossorigin="anonymous"></script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="assets/js/custom.js"></script>
+	<script src="https://unpkg.com/popper.js@1.12.5/dist/umd/popper.js"></script>
+	<script src="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/js/bootstrap-material-design.js"></script>
 </body>
 
 </html>
-

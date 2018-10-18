@@ -119,6 +119,10 @@ while($rowss = mysql_fetch_array($sql)){
                                     <li>
                                         <a href="editarPerfilEmpresa.php">Editar Perfil</a>
                                     </li>
+									
+									 <li>
+                                        <a href="VagasCadastrarEditarExcluir.php">Vagas</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -135,62 +139,95 @@ while($rowss = mysql_fetch_array($sql)){
             <div class="sidebar-footer">
                 <div class="dropdown">
 
-                    <a href="#" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
                         <span class="badge badge-pill badge-warning notification">3</span>
                     </a>
-                    <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                     <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
                             <i class="fa fa-bell"></i>
-                            Notifications
+                            Notificações
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-check text-success border border-success"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        6 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-exclamation text-info border border-info"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        Today
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
+                     <?php
+
+$slq = mysql_query("select a.NmCandidato,
+a.IdCandidato,
+b.NmEmpresa,
+b.IdEmpresa,
+c.IdSolicitacao
+
+from tbcandidatos a
+inner join tbsolicitacao c
+on a.IdCandidato = c.fk_IdCandidato
+inner join tbempresas b
+on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
+echo"Notificações";
+
+while($lc = @mysql_fetch_array($slq) ){
+	$idemp = $lc['IdEmpresa'];
+	$idcand = $lc['IdCandidato'];
+	$idsoli = $lc['IdSolicitacao'];
+	$nmcandidato = $lc['NmCandidato'];
+	$nmempresa= $lc['NmEmpresa'];
+	
+	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$fkid'");
+	$echo = mysql_num_rows($sqlil);
+	
+	if($echo>=1){
+	
+	}
+		
+	else{
+	
+	?>
+
+                        <a class="dropdown-item" href="chatEmpresa.php">
                             <div class="notification-content">
                                 <div class="icon">
                                     <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
                                 </div>
                                 <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
+                                    <div class="notification-detail">
+										
+	<?php
+	echo"<br>$nmcandidato Solicitou um contato!<br>";
+	
+
+
+?>
+</div>
                                     <div class="notification-time">
-                                        Yesterday
+                                       <form method="Post" action="">
+									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
+									<input type="submit" name="a" value="iniciar contato"/>
+									<input type="hidden" name="env2" value="clicou"/>
+	
+									</form>
+									
+									
                                     </div>
                                 </div>
                             </div>
+							<?php
+										}
+}
+	
+
+
+?>
+
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-center" href="#">View all notifications</a>
                     </div>
+					
+					
+					
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="index.html"><i class="fa fa-envelope"></i></a>
+                        <a href="chatEmpresa.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -201,7 +238,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="logoutEmpresa.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>

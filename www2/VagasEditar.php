@@ -1,23 +1,27 @@
 <?php include_once("lib/dbconnect.php"); ?>
 <?php 
 session_start();
+$fkid =$_SESSION['IdEmpresa'];
 ?>
 <?php
-$idcandidato =  $_SESSION['IdCandidato'];
+$idempresa=  $_SESSION['IdEmpresa'];
 $email = $_SESSION['Email'];
 $senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
+$nme = $_SESSION['NmEmpresa'];
+$nmu = $_SESSION['NmUsuario'];
 
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
+$sql = mysql_query("select * from TbEmpresas  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$cel = $rowss['cel'];
-	$end = $rowss['ende'];
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
+	$cnpj = $rowss['CNPJ'];
+	$razao = $rowss['Razao'];
+	$cep = $rowss['CEP'];
+	$estado = $rowss['Estado'];
+	$cidade = $rowss['Cidade'];
+	$bairro = $rowss['Bairro'];
+	$endereco = $rowss['Endereco'];
+	$numero = $rowss['Numero'];
+	$complemento = $rowss['Complemento'];
+	$biografia = $rowss['biografia'];
 }
 ?>
 
@@ -59,49 +63,21 @@ while($rowss = mysql_fetch_array($sql)){
                         <img class="img-responsive img-rounded" src="images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><?php echo"$NmC"?>
+                        <span class="user-name"><?php echo"$nme";?>
                         </span>
-                        <span class="user-role">Candidato</span>
+                        <span class="user-role">Empresa</span>
                     </div>
                 </div>
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
                         <div class="input-group">
-						
-						
-						<form method="post">
-                            <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+                            <input type="text" class="form-control search-menu" placeholder="Pesquise...">
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                 </span>
                             </div>
-							<input type="hidden" name="env" value="pesquisar"/>
-							
-							<datalist id="historico">
-							<?php
-							$sqli = mysql_query("select * from TbEmpresas;");
-							while($row = mysql_fetch_array($sqli)){
-							$Usuario = $row['NmUsuario'];
-							echo"<option value='$Usuario'></option>";
-							}
-							?>
-							</datalist>
-                           
-							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
-									}
-									else{
-										
-											}
-
-							?>
                         </div>
                     </div>
                 </div>
@@ -112,7 +88,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="mapa.html">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -124,16 +100,16 @@ while($rowss = mysql_fetch_array($sql)){
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="perfilCandidato.php">Resumo
+                                        <a href="perfilEmpresa.php">Resumo
 
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="editarPerfilCandidato.php">Editar Perfil</a>
+                                        <a href="editarPerfilEmpresa.php">Editar Perfil</a>
                                     </li>
 									
-									<li>
-                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
+									 <li>
+                                        <a href="VagasCadastrarEditarExcluir.php">Vagas</a>
                                     </li>
                                 </ul>
                             </div>
@@ -151,62 +127,95 @@ while($rowss = mysql_fetch_array($sql)){
             <div class="sidebar-footer">
                 <div class="dropdown">
 
-                    <a href="#" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
                         <span class="badge badge-pill badge-warning notification">3</span>
                     </a>
-                    <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                     <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
                             <i class="fa fa-bell"></i>
-                            Notifications
+                            Notificações
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-check text-success border border-success"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        6 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <div class="notification-content">
-                                <div class="icon">
-                                    <i class="fas fa-exclamation text-info border border-info"></i>
-                                </div>
-                                <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
-                                    <div class="notification-time">
-                                        Today
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item" href="#">
+                     <?php
+
+$slq = mysql_query("select a.NmCandidato,
+a.IdCandidato,
+b.NmEmpresa,
+b.IdEmpresa,
+c.IdSolicitacao
+
+from tbcandidatos a
+inner join tbsolicitacao c
+on a.IdCandidato = c.fk_IdCandidato
+inner join tbempresas b
+on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
+echo"Notificações";
+
+while($lc = @mysql_fetch_array($slq) ){
+	$idemp = $lc['IdEmpresa'];
+	$idcand = $lc['IdCandidato'];
+	$idsoli = $lc['IdSolicitacao'];
+	$nmcandidato = $lc['NmCandidato'];
+	$nmempresa= $lc['NmEmpresa'];
+	
+	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$fkid'");
+	$echo = mysql_num_rows($sqlil);
+	
+	if($echo>=1){
+	
+	}
+		
+	else{
+	
+	?>
+
+                        <a class="dropdown-item" href="chatEmpresa.php">
                             <div class="notification-content">
                                 <div class="icon">
                                     <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
                                 </div>
                                 <div class="content">
-                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
+                                    <div class="notification-detail">
+										
+	<?php
+	echo"<br>$nmcandidato Solicitou um contato!<br>";
+	
+
+
+?>
+</div>
                                     <div class="notification-time">
-                                        Yesterday
+                                       <form method="Post" action="">
+									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
+									<input type="submit" name="a" value="iniciar contato"/>
+									<input type="hidden" name="env2" value="clicou"/>
+	
+									</form>
+									
+									
                                     </div>
                                 </div>
                             </div>
+							<?php
+										}
+}
+	
+
+
+?>
+
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-center" href="#">View all notifications</a>
                     </div>
+					
+					
+					
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="chatCandidato.php"><i class="fa fa-envelope"></i></a>
+                        <a href="chatEmpresa.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -217,13 +226,11 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <div>
-                    <a href="logoutCandidato.php">
+                    <a href="logoutEmpresa.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
             </div>
-			
-			
         </nav>
         <!-- sidebar-wrapper  -->
         <main class="page-content">
@@ -244,118 +251,78 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-									
-                                      <?php echo"$NmC"?>
+                                         <?php echo"$nme";?>
                                     </h5>
-                                    <h6>
-                                      <?php echo"$profissao"?>
-                                    </h6>
+                                    
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Editar Vagas</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-					<form action="editarPerfilCandidato.php">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
-					</form>
-                    </div>
+                   
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>COMPETÊNCIAS</p><br/>
-							<?php
-							$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
-							while($rowsss = mysql_fetch_array($query)){
-								$competencia = $rowsss['competencia'];
-                            echo"<p>$competencia</p>";
-							}
-                            ?>
+                            <p>VAGAS</p>
+                             <div class="col-md-4">
+                                <label>Auxiliar Administrativo</label>
+                            </div>
                         </div>
                     </div>
+
+                    
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            	<form action="#">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de Usuário</label>
+                                            <div class="col-md-4">
+                                                <label>Nome Da Vaga</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$NmU";?></p>
+                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  a Vaga"required/><br/>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome</label>
+                                        
+                                         <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Sálario</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$NmC"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>E-mail</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$email"?></p>
+                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  o Sálario"required/><br/>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Celular</label>
+
+                                         <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Horario</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$cel"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Endereço</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
+                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  o Horario"required/><br/>
                                             </div>
                                         </div>
-                                        <div class="row">
+
+                                         <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Descrição</label><br/><br/>
+                                            </div>
+                                            <div class="col-md-6">
+                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar a Descrição"required/><br/>
+                                            </div>
+                                        </div>
+                                
+                   		
+                                         <div class="row">
                                             <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p><?php echo"$bio"; ?></p>
+                                <button type="submit" class="btn btn-primary">Editar</button>
                                             </div>
                                         </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experiência</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$xp"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Inglês</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$ingles"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Formação</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$formacao"; ?></p>
-                                            </div>
-                                        </div>
-                            </div>
+                              	</form>
+                            
                         </div>
                     </div>
                 </div>
@@ -377,4 +344,3 @@ while($rowss = mysql_fetch_array($sql)){
 </body>
 
 </html>
-

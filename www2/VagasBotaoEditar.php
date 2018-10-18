@@ -242,139 +242,54 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="images/user.jpg" alt=""/>
-                            
+                            <div class="file btn btn-lg btn-primary">
+                                Alterar
+                                <input type="file" name="file"/>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        <?php echo"$nme";?>
+                                         <?php echo"$nme";?>
                                     </h5>
-                                   
+                              
+
+                                    
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">informações adicionais</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Escolher vaga</a>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                    	
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            
+                            <p>VAGAS</p>
+                             <div class="col-md-4">
+                                <label>Auxiliar Administrativo</label>
+                            </div>
                         </div>
                     </div>
+
+                    
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							<form>
+							</form>
+                            	<form action="VagasEditar.php">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de Usuário</label>
+                                            <div class="col-md-4">
+                                                <label>Nome Da Vaga</label><br/>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$nmu";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome da Empresa</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$nme";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>E-mail</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$email";?></p>
-                                            </div>
-                                        </div>
-                                      
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>CNPJ</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$cnpj";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Razão Social</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$razao";?></p>
-                                            </div>
-                                        </div>
-                                        
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                      	<div class="row">
-                                            <div class="col-md-6">
-                                                <label>CEP</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$cep";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Cidade</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$cidade";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Estado</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$estado";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Bairro</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$bairro";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Endereço</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$endereco";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Numero</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$numero $complemento";?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p><?php echo"$biografia";?></p>
-                                            </div>
-                                        </div>
-                            </div>		
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                                            </div>    
+                              	</form>
+                            
                         </div>
                     </div>
                 </div>
@@ -396,43 +311,3 @@ while($lc = @mysql_fetch_array($slq) ){
 </body>
 
 </html>
-
-
-<?php
-$iddocan = $_POST["pegar"];
-
-echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
-	
-	echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		$sqlill = mysql_query("delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-			echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-			header('Location: chatCandidato.php');
-	}
-	else{
-		echo"<script>
-		alert('aaaaa');
-		</script>";
-	}
-	}
-}
-else{
-	
-}
-
-?>

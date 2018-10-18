@@ -98,6 +98,7 @@ while($lc = @mysql_fetch_array($slq) ){
 	<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
 	<input type="submit" name="a" value="iniciar contato"/>
 	<input type="hidden" name="env2" value="clicou"/>
+	
 	</form>
 	<?php
 	echo"<br>$idsoli $nmempresa $nmcandidato <br>";
@@ -112,6 +113,7 @@ while($lc = @mysql_fetch_array($slq) ){
 <a href="chatEmpresa.php">chat</a>
 <a href="cadastroDeVaga.php">cadastrar vaga</a>
 <a href="perfilEmpresa.php">Perfil</a>
+<a href="notificacoes.php">notificações</a>
 </body>
 </html>
 

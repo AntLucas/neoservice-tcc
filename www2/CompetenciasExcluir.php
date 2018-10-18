@@ -253,109 +253,41 @@ while($rowss = mysql_fetch_array($sql)){
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Excluir Competências</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
-                                </li>
+                               
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-					<form action="editarPerfilCandidato.php">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
-					</form>
-                    </div>
+                   
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>COMPETÊNCIAS</p><br/>
-							<?php
-							$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
-							while($rowsss = mysql_fetch_array($query)){
-								$competencia = $rowsss['competencia'];
-                            echo"<p>$competencia</p>";
-							}
-                            ?>
+                            <p>COMPETÊNCIAS</p>
+                            <a href="">Desenvolvimento Web</a><br/>
+                            <a href="">Java</a><br/>
+                            <a href="">C#</a><br/>
+                            <a href="">Cordova</a><br/>
+                            <a href="">Banco de Dados</a><br/>
+                        
                         </div>
                     </div>
+
+                    
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            	<form action="#">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de Usuário</label>
+                                            <div class="col-md-4">
+                                                <label>Não seii</label><br/><br/>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$NmU";?></p>
+                                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">X</button>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$NmC"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>E-mail</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$email"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Celular</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$cel"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Endereço</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p><?php echo"$bio"; ?></p>
-                                            </div>
-                                        </div>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Experiência</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$xp"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Inglês</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$ingles"; ?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Formação</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$formacao"; ?></p>
-                                            </div>
-                                        </div>
-                            </div>
+                                </form>
                         </div>
                     </div>
                 </div>
@@ -377,4 +309,3 @@ while($rowss = mysql_fetch_array($sql)){
 </body>
 
 </html>
-

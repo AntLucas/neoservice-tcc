@@ -78,7 +78,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                 <div class="sidebar-search">
+                <div class="sidebar-search">
                     <div>
                         <div class="input-group">
 						
@@ -125,7 +125,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="mapa.html">
+                            <a href="telaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -135,7 +135,7 @@ while($rowss = mysql_fetch_array($sql)){
                                 <span>Perfil</span>
                             </a>
                             <div class="sidebar-submenu">
-                               <ul>
+                                <ul>
                                     <li>
                                         <a href="perfilCandidato.php">Resumo
 
@@ -143,6 +143,10 @@ while($rowss = mysql_fetch_array($sql)){
                                     </li>
                                     <li>
                                         <a href="editarPerfilCandidato.php">Editar Perfil</a>
+                                    </li>
+									
+									<li>
+                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
                                     </li>
                                 </ul>
                             </div>
@@ -215,7 +219,7 @@ while($rowss = mysql_fetch_array($sql)){
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="index.html"><i class="fa fa-envelope"></i></a>
+                        <a href="chatCandidato.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -231,6 +235,8 @@ while($rowss = mysql_fetch_array($sql)){
                     </a>
                 </div>
             </div>
+			
+			
         </nav>
         <!-- sidebar-wrapper  -->
         <main class="page-content">

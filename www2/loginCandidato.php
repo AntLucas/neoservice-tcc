@@ -37,7 +37,6 @@ error_reporting(0);
 							<h2>Menu</i></h2>
 							<ul class="links">
 								<li><a href="../index.php">RETORNAR</a></li>
-								<li><a href="loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
 							</ul>
 							<a href="#" class="close">FECHAR</a>
 						</div>
