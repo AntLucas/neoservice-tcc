@@ -1,6 +1,11 @@
 <?php 
-$con = @mysql_connect('neoservice.mysql.uhserver.com','neoservice','Nsrvce{69}') or die (mysql_error());
-$x1 = mysql_select_db('neoservice',$con) or die (mysql_error());
+$host = 'neoservice.mysql.uhserver.com';
+$user = 'neoservice';
+$pass = 'Nsrvce{69}';
+$database = 'neoservice';
+mysql_connect($host, $user, $pass) or die('Não foi possível conectar');
+mysql_select_db($database) or die('Não foi possível conectar com o banco de dados');
+echo 'Banco de dados conectado com sucesso';
 ?>
 
 <?php
