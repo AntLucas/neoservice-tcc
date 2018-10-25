@@ -1,11 +1,6 @@
 <?php 
-$host = 'neoservice.mysql.uhserver.com';
-$user = 'neoservice';
-$pass = 'Nsrvce{69}';
-$database = 'neoservice';
-mysql_connect($host, $user, $pass) or die('Não foi possível conectar');
-mysql_select_db($database) or die('Não foi possível conectar com o banco de dados');
-echo 'Banco de dados conectado com sucesso';
+$con = @mysql_connect('localhost','root','') or die (mysql_error());
+$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
 ?>
 
 <?php

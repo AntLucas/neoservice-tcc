@@ -31,7 +31,6 @@
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
-								<li><a href="index.php">INÍCIO</a></li>
 								<li><a href="www2/loginCandidato.php">ENTRAR COMO CANDIDATO</a></li>
 								<li><a href="www2/loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
 							</ul>
@@ -54,10 +53,10 @@
 						<!-- One -->
 							<section id="one" class="wrapper spotlight style1">
 								<div class="inner">
-										<a href="#" class="image animated bounce delay-1s"><img src="images/pic02.jpg" alt="" /></a>
+										<a href="#" class="image animated bounce delay-1s"><img src="images/pic01.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">INTRODUÇÃO</h2>
-										<p>Nos dias atuais, conseguir um novo emprego não é nada fácil. E como exemplo os jovens, no qual estão focados nos estudos e começando na vida, necessitam ter uma renda enquanto não conseguem um emprego fixo. Portanto, é de suma importância buscar meios para que esta realidade mude. Nosso aplicativo mostrará uma possível solução temporária, assim como o tema do nosso projeto.</p>
+										<p>O Desemprego, pode ser considerado um enorme problema no Brasil, visto as dificuldades de se estar empregado em nosso país devido a presente crise que enfrentamos, assim como a dificuldade de empresas de encontrar bons profissionais para suas vagas. Portanto, é de suma importância buscar meios para que esta realidade mude. Nosso aplicativo mostrará uma possível solução para encontro de profissionais e empresas focadas em trabalhos sazonais.</p>
 									</div>
 								</div>
 							</section>
@@ -65,7 +64,7 @@
 						<!-- Two -->
 							<section id="two" class="wrapper alt spotlight style2">
 								<div class="inner">
-									<a href="#" class="image animated bounce delay-3s"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image animated bounce delay-3s"><img src="images/pic02.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">SOBRE O PROJETO</h2>
 										<p>O projeto tende a proporcionar uma aplicação, que possibilite auxiliar na busca de funcionários, sendo tanto estudantes quanto profissionais, de maneira prática, rápida e simples. Por esse motivo, o projeto é focado em trabalhos temporários, nos períodos em que o mercado mais necessita, sem qualquer efetivação. Para um estudante ou até mesmo uma pessoa que está atualmente desempregada.</p>
@@ -76,10 +75,10 @@
 						<!-- Three -->
 							<section id="three" class="wrapper spotlight style3">
 								<div class="inner">
-									<a href="#" class="image animated bounce delay-5s"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="#" class="image animated bounce delay-5s"><img src="images/pic03.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">INFORMAÇÕES</h2>
-										<p>bla bla bla bla bla bla bla </p>
+										<p>NeoService foi desenvolvido com as seguintes tecnologias (HTML, CSS, JAVASCRIPT, PHP e MySQL). O sistema será utilizado em um navegador, entregando uma interface de usuário para o candidato e a empresa, na qual ambos vão se conectar, formando uma ponte entre si.</p>
 									</div>
 								</div>
 							</section>

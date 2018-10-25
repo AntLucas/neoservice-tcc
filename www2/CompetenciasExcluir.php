@@ -1,6 +1,13 @@
 <?php include_once("lib/dbconnect.php"); ?>
 <?php 
 session_start();
+ if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: CompetenciasExcluir.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
 ?>
 <?php
 $idcandidato =  $_SESSION['IdCandidato'];
@@ -65,7 +72,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <div class="sidebar-search">
+               <div class="sidebar-search">
                     <div>
                         <div class="input-group">
 						
@@ -95,7 +102,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										
@@ -265,11 +272,22 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p>
-                            <a href="">Desenvolvimento Web</a><br/>
-                            <a href="">Java</a><br/>
-                            <a href="">C#</a><br/>
-                            <a href="">Cordova</a><br/>
-                            <a href="">Banco de Dados</a><br/>
+                           <?php
+							$if = mysql_query("select a.NmCandidato,
+							b.Competencia
+							
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcandidato;")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$comp = $ifrow['Competencia'];
+                            echo"<p>$comp<p><br/>";
+							}
+							?>
                         
                         </div>
                     </div>
@@ -278,17 +296,56 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form action="#">
+							<form>
+							</form>
+							 <?php
+							$iff = mysql_query("select a.NmCandidato,
+							b.Competencia,
+							b.IdCompetencia
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcandidato;")or die (mysql_error());
+							
+							while($iffrow = mysql_fetch_array($iff)){
+							$comp = $iffrow['Competencia'];
+							$idcomp = $iffrow['IdCompetencia'];
+                            
+							
+							?>
+                            	<form method="post">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label>Não seii</label><br/><br/>
+                                                <label><?php echo"$comp "?></label><br/><br/>
                                             </div>
                                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">X</button>
+								<input type="hidden" name="idcomp" value="<?php echo"$idcomp"?>">
+								<input type="hidden" name="exc" value="excluir"/>
                                             </div>
                                         </div>
                                 </form>
-                        </div>
+								<?php
+								}
+							?>
+							
+							<?php
+							if($_POST['exc'] && $_POST['exc'] == "excluir"){
+								$idcompetencia = $_POST['idcomp'];
+							
+								
+								if(mysql_query("delete from TbCompetenciarelacao where fk_IdCandidato = '$idcandidato' and fk_IdCompetencia = '$idcompetencia'")){
+									echo"excluido com sucesso";
+								}
+							}
+							else{
+								
+							}
+							?>
+                        </div
+						>
                     </div>
                 </div>
             </form>           

@@ -269,8 +269,16 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
-                             <div class="col-md-4">
-                                <label>Auxiliar Administrativo</label>
+                            <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
                             </div>
                         </div>
                     </div>
@@ -281,14 +289,45 @@ while($lc = @mysql_fetch_array($slq) ){
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<form>
 							</form>
-                            	<form action="VagasEditar.php">
+							 <?php
+							$iff = mysql_query("select * from TbVagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($iffrow = mysql_fetch_array($iff)){
+							$vag = $iffrow['vaga'];
+							$idvag = $iffrow['IdVaga'];
+                            
+							
+							?>
+                            	<form method="post" action="VagasEditar.php">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label>Nome Da Vaga</label><br/>
+                                                <label><?php echo"$vag "?></label><br/><br/>
                                             </div>
+                                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Editar</button>
-                                            </div>    
-                              	</form>
+								<input type="hidden" name="idvag" value="<?php echo"$idvag"?>">
+								<input type="hidden" name="edi" value="editar"/>
+                                            </div>
+                                        </div>
+                                </form>
+								<?php
+								}
+							?>
+							
+							<?php
+							if($_POST['edi'] && $_POST['edi'] == "editar"){
+								$idvaga = $_POST['idvag'];
+							
+								$_SESSION['idvaga'] = $idvaga;
+								
+								
+								
+								
+							}
+							else{
+								echo"falhou";
+							}
+							?>
                             
                         </div>
                     </div>

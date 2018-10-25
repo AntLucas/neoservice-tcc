@@ -1,12 +1,10 @@
-<?php include_once("lib/dbconnect.php"); ?>
+<?php include_once("../lib/dbconnect.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V15</title>
+	<title>NeoService - Cadastro</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -24,25 +22,39 @@
 <!--===============================================================================================-->	
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/cadastroCandidato.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
-	
+					<section>
+		<div class="bgPulse">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</section>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+				<div class="login100-form-title" style="background-image: url();">
 					<span class="login100-form-title-1">
-						Cadastro
+						Cadastro de Candidato
 					</span>
 				</div>
 
 				<form class="login100-form validate-form" method="post">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
 						<span class="label-input100">Usuario</span>
-						<input class="input100" type="text" name="nmu" placeholder="Nome de usuário">
+						<input class="input100" type="text" name="nmu" placeholder="Usuário">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -60,13 +72,13 @@
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Nome do candidato</span>
-						<input class="input100" type="text" name="nmc" placeholder="Nome do candidato">
+						<input class="input100" type="text" name="nmc" placeholder="Seu nome completo">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" >
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Email@Email">
+						<input class="input100" type="text" name="email" placeholder="exemplo@email.com">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -80,7 +92,7 @@
 				
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
 						<span class="label-input100">Endereço</span>
-						<input class="input100" type="text" name="end" placeholder="Rua tal, Bairro tal ,SP-São Paulo">
+						<input class="input100" type="text" name="end" placeholder="Rua exemplo, bairro - cep, São Paulo - SP">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -101,9 +113,13 @@
 			</div>
 		</div>
 	</div>
-	
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../../assets/js/jquery.min.js"></script>
+	<script src="../../assets/js/jquery.scrollex.min.js"></script>
+	<script src="../../assets/js/browser.min.js"></script>
+	<script src="../../assets/js/breakpoints.min.js"></script>
+	<script src="../../assets/js/util.js"></script>
+	<script src="../../assets/js/main.js"></script>
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

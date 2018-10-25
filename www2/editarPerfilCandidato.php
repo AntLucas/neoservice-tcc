@@ -78,7 +78,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <div class="sidebar-search">
+                 <div class="sidebar-search">
                     <div>
                         <div class="input-group">
 						
@@ -108,7 +108,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										
@@ -283,12 +283,21 @@ while($rowss = mysql_fetch_array($sql)){
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p>
                             <?php
-							$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
-							while($rowsss = mysql_fetch_array($query)){
-								$competencia = $rowsss['competencia'];
-                            echo"<p>$competencia</p>";
+							$if = mysql_query("select a.NmCandidato,
+							b.Competencia
+							
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcandidato;")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$comp = $ifrow['Competencia'];
+                            echo"<p>$comp<p><br/>";
 							}
-                            ?>
+							?>
 							
 						
                         </div>

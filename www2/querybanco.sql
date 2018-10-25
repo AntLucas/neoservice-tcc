@@ -289,6 +289,8 @@ Select * from TbContatos where fk_IdEmpresa = 1 and fk_IdCandidato= 1;
 select * from tbempresas;
 select * from tbcandidatos;
 select * from TbVagas;
+select * from TbCompetencias;
+select * from TbCompetenciarelacao;
 select * from tbmensagens where fk_IdEmpresa = 2;
 select * from tbmensagens where fk_IdCandidato = 4;
 
@@ -318,4 +320,5 @@ from TbCandidatos a
 inner join tbcompetenciaRelacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbcompetencias b
-on b.IdCompetencia = c.fk_IdCompetencia;
+on b.IdCompetencia = c.fk_IdCompetencia
+where IdCandidato = 2;

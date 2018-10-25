@@ -1,68 +1,151 @@
 <?php include_once("lib/dbconnect.php"); ?>
 <?php 
 session_start();
-$con = @mysql_connect('localhost','root','') or die (mysql_error());
-$x1 = mysql_select_db('TCC',$con) or die (mysql_error());
-?>
-
-<?php
-
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-
-
-$sql = mysql_query("select * from TbEmpresas  where Email = $email and Senha = $senha;");
-
-
-
-echo"<br>Bem Vindo  ".$_SESSION['IdEmpresa'];
-echo"<br>Bem Vindo  ".$_SESSION['NmUsuario'];
-echo"<br>Bem Vindo  ".$_SESSION['NmEmpresa'];
-echo"<br>Bem Vindo  ".$_SESSION['Email'];
-
-echo"<br>Bem Vindo ".$_SESSION['Senha'];
-
 $fkid =$_SESSION['IdEmpresa'];
 ?>
+<?php
+$idempresa=  $_SESSION['IdEmpresa'];
+$email = $_SESSION['Email'];
+$senha = $_SESSION['Senha'];
+$nme = $_SESSION['NmEmpresa'];
+$nmu = $_SESSION['NmUsuario'];
+
+$sql = mysql_query("select * from TbEmpresas  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
+while($rowss = mysql_fetch_array($sql)){
+	$cnpj = $rowss['CNPJ'];
+	$razao = $rowss['Razao'];
+	$cep = $rowss['CEP'];
+	$estado = $rowss['Estado'];
+	$cidade = $rowss['Cidade'];
+	$bairro = $rowss['Bairro'];
+	$endereco = $rowss['Endereco'];
+	$numero = $rowss['Numero'];
+	$complemento = $rowss['Complemento'];
+	$biografia = $rowss['biografia'];
+}
+?>
 
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-<title>Tela Inicial</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <title>NeoService - Início</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/custom-themes.css">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />  
+	<link rel="stylesheet" type="text/css" href="assets/css/styleMapa.css">
 </head>
 
 <body>
+    <main class="page-content">
+        <div class="container-fluid">
+            <div id='map'></div>
+        </div>
+    </main>
+    <div class="page-wrapper chiller-theme sidebar-bg bg1 toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <a href="#">PERFIL</a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="images/user.jpg" alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name"><?php echo"$nme";?>
+                        </span>
+                        <span class="user-role">Empresa</span>
+                    </div>
+                </div>
+                <!-- sidebar-header  -->
+                <div class="sidebar-search">
+                    <div>
+                        <div class="input-group">
+                            <input type="text" class="form-control search-menu" placeholder="Pesquise...">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>Painel Geral</span>
+                        </li>
+                        <li class="sidebar">
+                            <a href="mapa.html">
+                                <i class="fa fa-globe"></i>
+                                <span>Início</span>
+                            </a>
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-user"></i>
+                                <span>Perfil</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li>
+                                        <a href="perfilEmpresa.php">Resumo
 
-<form class="pesquisa" method="post">
-<input type="submit" value="Pesquisar"/>
-<input type="search" name="pesquisa" id="texto"  placeholder="Pesquise por candidatos..." list="historico"/>
-<input type="hidden" name="env" value="pesquisar"/>
-<datalist id="historico">
-<?php
-$sqli = mysql_query("select * from TbCandidatos;");
-while($row = mysql_fetch_array($sqli)){
-	$Usuario = $row['NmUsuario'];
-echo"<option value='$Usuario'></option>";
-}
-?>
-</datalist>
-</form>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="editarPerfilEmpresa.php">Editar Perfil</a>
+                                    </li>
+									
+									 <li>
+                                        <a href="VagasCadastrarEditarExcluir.php">Vagas</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar">
+                            <a href="#">
+                                <i class="far fa-gem"></i>
+                                <span>Não definido</span>
+                            </a>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <div class="dropdown">
 
-
-<?php
-$sqli = mysql_query("select * from TbCandidatos;");
-while($row = mysql_fetch_array($sqli)){
-	$Usuario = $row['NmUsuario'];
-echo"<option value='$Usuario'></option>";
-}
-?>
-</datalist>
-</form>
-<?php
+                    <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge badge-pill badge-warning notification">3</span>
+                    </a>
+                     <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                        <div class="notifications-header">
+                            <i class="fa fa-bell"></i>
+                            Notificações
+                        </div>
+                        <div class="dropdown-divider"></div>
+                     <?php
 
 $slq = mysql_query("select a.NmCandidato,
 a.IdCandidato,
@@ -74,7 +157,7 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa");
+on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
 echo"Notificações";
 
 while($lc = @mysql_fetch_array($slq) ){
@@ -94,68 +177,80 @@ while($lc = @mysql_fetch_array($slq) ){
 	else{
 	
 	?>
-	<form method="Post">
-	<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
-	<input type="submit" name="a" value="iniciar contato"/>
-	<input type="hidden" name="env2" value="clicou"/>
-	
-	</form>
+
+                        <a class="dropdown-item" href="chatEmpresa.php">
+                            <div class="notification-content">
+                                <div class="icon">
+                                    <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
+                                </div>
+                                <div class="content">
+                                    <div class="notification-detail">
+										
 	<?php
-	echo"<br>$idsoli $nmempresa $nmcandidato <br>";
+	echo"<br>$nmcandidato Solicitou um contato!<br>";
 	
-	}
+
+
+?>
+</div>
+                                    <div class="notification-time">
+                                       <form method="Post" action="">
+									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
+									<input type="submit" name="a" value="iniciar contato"/>
+									<input type="hidden" name="env2" value="clicou"/>
+	
+									</form>
+									
+									
+                                    </div>
+                                </div>
+                            </div>
+							<?php
+										}
 }
 	
 
 
 ?>
-<a href ="logoutEmpresa.php">Sair</a>
-<a href="chatEmpresa.php">chat</a>
-<a href="cadastroDeVaga.php">cadastrar vaga</a>
-<a href="perfilEmpresa.php">Perfil</a>
-<a href="notificacoes.php">notificações</a>
+
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-center" href="#">View all notifications</a>
+                    </div>
+					
+					
+					
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="chatEmpresa.php"><i class="fa fa-envelope"></i></a>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
+                        <a class="dropdown-item" href="#">Ajuda</a>
+                    </div>
+                </div>
+                <div>
+                    <a href="logoutEmpresa.php">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/mapa.js"></script>
+    
 </body>
+
 </html>
-
-<?php
-$iddocan = $_POST["pegar"];
-
-
-if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
-	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		
-		header('Location: chatEmpresa.php');
-	}
-	else{
-		echo"Erro ao iniciar Contato";
-	}
-	}
-}
-else{
-	
-}
-
-?>
-<?php
-if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-	
-	$_SESSION['pesquisa'] = $_POST['pesquisa'];
-	header('Location: perfilDeCandidato.php');
-}
-else{
-
-}
-
-?>
-
-
-
-

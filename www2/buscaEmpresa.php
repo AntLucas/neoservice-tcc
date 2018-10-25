@@ -9,7 +9,7 @@ $senha = $_SESSION['Senha'];
 $NmC = $_SESSION['NmCandidato'];
 $NmU = $_SESSION['NmUsuario'];
 
-
+$pesquisa = $_SESSION['pesquisa'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,7 @@ $NmU = $_SESSION['NmUsuario'];
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/custom-themes.css">
     <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
-	<link rel="stylesheet" href="assets/css/buscaCandidato.css">
+	<link rel="stylesheet" href="../assets/css/buscaCandidato.css">
 </head>
 
 <body>
@@ -85,7 +85,7 @@ $NmU = $_SESSION['NmUsuario'];
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										
@@ -102,7 +102,7 @@ $NmU = $_SESSION['NmUsuario'];
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="../mapa.html">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -129,9 +129,9 @@ $NmU = $_SESSION['NmUsuario'];
                             </div>
                         </li>
                         <li class="sidebar">
-                            <a href="#">
+                            <a href="telaInicialCandidato.php">
                                 <i class="far fa-gem"></i>
-                                <span>Não definido</span>
+                                <span>Tela Inicial Candidato</span>
                             </a>
                     </ul>
                 </div>
@@ -221,7 +221,7 @@ $NmU = $_SESSION['NmUsuario'];
 					<div class="container"><br>
 				<div class="jumbotron p-3 text-center">
 				  <h1 class="display-4">Busca de Empresas</h1><hr>
-				  <p class="lead">Resultados pela busca: "<?php echo"variavel aqui";?>"</p>
+				  <p class="lead">Resultados pela busca: "<?php echo"$pesquisa";?>"</p>
 				  <p class="lead">
 				  </p>
 				</div>
@@ -230,19 +230,21 @@ $NmU = $_SESSION['NmUsuario'];
 				
 				
 		<?php 
+		$sqlpesquisa = mysql_query("select * from TbEmpresas where NmUsuario = '$pesquisa'");
 		
-		while()
-		{
+		while($lc = @mysql_fetch_array($sqlpesquisa) ){
+		$nmempresa = $lc['NmEmpresa'];
+		$idempresa = $lc['IdEmpresa'];
 		?>
 				<div class="row">		
 				  <div class="col-sm-6">
 					<div class="card">
-					  <h4 class="card-header text-right bg-dark text-white"><?php echo"variavel aqui";?>
+					  <h4 class="card-header text-right bg-dark text-white"><?php echo"$nmempresa";?>
 					  <div class="float-left small">
-						<a class="btn btn-raised btn-danger" href="httpS://www.google.com.br" title="Ver perfil de EMPRESA" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+						<a class="btn btn-raised btn-danger" href="perfilDeEmpresa.php" title="Ver perfil de EMPRESA" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
 							<i class="fas fa-user-circle" aria-hidden="true"></i>
 						  </a>
-						  <a class="btn btn-raised btn-danger" href="www.google.com" title="Solicitar contato">
+						  <a class="btn btn-raised btn-danger" href="" title="Solicitar contato">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						  </a>
 					  </div>
@@ -251,9 +253,25 @@ $NmU = $_SESSION['NmUsuario'];
 						  <div class="image float-right user-r">
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlzMdhwbQezvSU8ZGqUWZEJXPG7cdEGyCvs-4M3CHLHLHMrpZa6w" class="img-thumbnail" alt="avatar"/>
 						  </div>
-						<h4 class="card-title">Informações</h4>
-						  <p class="card-text"><?php echo"variavel aqui";?></p>
-					  </div>
+						<h4 class="card-title">Vagas</h4>
+						
+
+                           
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                           
+							
+                            
+                    ?>
+						  <p class="card-text"><?php echo"$vag, R$ $sal";?></p>
+						  <?php
+					  }
+							?>
 					</div>
 				  </div>
 

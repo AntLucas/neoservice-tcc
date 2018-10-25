@@ -25,7 +25,7 @@ while($rowss = mysql_fetch_array($sql)){
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
@@ -65,7 +65,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <div class="sidebar-search">
+                 <div class="sidebar-search">
                     <div>
                         <div class="input-group">
 						
@@ -95,7 +95,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										
@@ -112,7 +112,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="../mapa.html">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -139,9 +139,9 @@ while($rowss = mysql_fetch_array($sql)){
                             </div>
                         </li>
                         <li class="sidebar">
-                            <a href="#">
+                            <a href="telaInicialCandidato.php">
                                 <i class="far fa-gem"></i>
-                                <span>Não definido</span>
+                                <span>Tela Inicial Candidato</span>
                             </a>
                     </ul>
                 </div>
@@ -271,13 +271,10 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p><br/>
-							<?php
-							$query = mysql_query("SELECT * from TbCompetencias where fk_IdCandidato = $idcandidato");
-							while($rowsss = mysql_fetch_array($query)){
-								$competencia = $rowsss['competencia'];
-                            echo"<p>$competencia</p>";
-							}
-                            ?>
+							
+							
+							
+							
                         </div>
                     </div>
                     <div class="col-md-8">

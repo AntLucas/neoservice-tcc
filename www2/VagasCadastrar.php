@@ -2,6 +2,15 @@
 <?php 
 session_start();
 $fkid =$_SESSION['IdEmpresa'];
+
+
+ if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: VagasCadastrar.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
 ?>
 <?php
 $idempresa=  $_SESSION['IdEmpresa'];
@@ -270,8 +279,16 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
-                             <div class="col-md-4">
-                                <label>Auxiliar Administrativo</label>
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
                             </div>
                         </div>
                     </div>
@@ -280,13 +297,15 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form action="#">
+							<form>
+							</form>
+                            	<form method="post">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label>Nome Da Vaga</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Digite a Vaga"required/><br/>
+                                        <input type="text" class="form-control"  name="nome" placeholder="Digite a Vaga"required/><br/>
                                             </div>
                                         </div>
                                         
@@ -295,7 +314,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Sálario</label>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Digite o Sálario"required/><br/>
+                                        <input type="text" class="form-control"  name="salario" placeholder="Digite o Sálario"required/><br/>
                                             </div>
                                         </div>
 
@@ -304,7 +323,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Horario</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Digite o Horario"required/><br/>
+                                        <input type="text" class="form-control"  name="horario" placeholder="Digite o Horario"required/><br/>
                                             </div>
                                         </div>
 
@@ -313,7 +332,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Descrição</label><br/><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Digite a Descrição"required/><br/>
+                                        <input type="text" class="form-control"  name="descricao" placeholder="Digite a Descrição"required/><br/>
                                             </div>
                                         </div>
                                 
@@ -321,9 +340,29 @@ while($lc = @mysql_fetch_array($slq) ){
                                          <div class="row">
                                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Cadastrar</button>
+								<input type="hidden" name="cad" value="cadastrar"/>
                                             </div>
                                         </div>
                               	</form>
+								<?php
+								if($_POST['cad'] && $_POST['cad']=="cadastrar"){
+									$nome = $_POST['nome'];
+									$salario = $_POST['salario'];
+									$horario = $_POST['horario'];
+									$descricao = $_POST['descricao'];
+									
+									if(mysql_query("insert into tbvagas (fk_idempresa,vaga,salario,horario,descricao)
+										values('$idempresa','$nome','$salario','$horario','$descricao')")){
+											echo"aeee";
+										}
+										else{
+											echo"aaaaaaa";
+										}
+								}
+								else{
+									echo"uuuhh";
+								}
+								?>
                             
                         </div>
                     </div>

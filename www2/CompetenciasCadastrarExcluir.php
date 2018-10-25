@@ -65,7 +65,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                <div class="sidebar-search">
+               <div class="sidebar-search">
                     <div>
                         <div class="input-group">
 						
@@ -95,7 +95,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										

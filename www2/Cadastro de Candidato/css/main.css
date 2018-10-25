@@ -178,7 +178,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #ebeeef;
+  background: transparent;
 }
 
 
@@ -204,7 +204,6 @@ iframe {
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -402,13 +401,13 @@ input.input100 {
   padding: 0 20px;
   min-width: 160px;
   height: 50px;
-  background-color: #57b846;
   border-radius: 25px;
 
   font-family: Poppins-Regular;
   font-size: 16px;
   color: #fff;
   line-height: 1.2;
+
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;

@@ -268,9 +268,20 @@ while($lc = @mysql_fetch_array($slq) ){
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                   <div class="col-md-4">
                         <div class="profile-work">
-                            
+                            <p>VAGAS</p>
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -401,9 +412,7 @@ while($lc = @mysql_fetch_array($slq) ){
 <?php
 $iddocan = $_POST["pegar"];
 
-echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
+
 if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
 	
 	echo"<script>

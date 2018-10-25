@@ -1,6 +1,6 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFlbWkiLCJhIjoiY2puYjZsc2YxMWxnNDNrbWwyMDlmcjY5byJ9.yjXV-R2JmPrcsXc3h0d5OQ';
 if (!mapboxgl.supported()) {
-  alert('Seu navegador não suporta nosso sistema de mapas, tente outro navegador :(');
+  alert('Seu navegador não suporta nosso sistema de mapas, tente em outro navegador :(');
 } else {
   var map = new mapboxgl.Map({
     container: 'map',
@@ -10,12 +10,13 @@ if (!mapboxgl.supported()) {
   });
 }
 
-map.addControl(new mapboxgl.GeolocateControl({
+  map.addControl(new mapboxgl.GeolocateControl({
   positionOptions: {
       enableHighAccuracy: true
   },
   trackUserLocation: true
-}));
+  }));
+  
 map.on('load', function () {
   // Add a layer showing the places.
   map.addLayer({
@@ -28,7 +29,7 @@ map.on('load', function () {
               "features": [{
                   "type": "Feature",
                   "properties": {
-                      "description": "<strong>Etec da Zona Leste</strong><p><a href=\"www.google.com\" target=\"_blank\" title=\"Abra em outra janela\">Exemplo de HREF</a> será utilizado como forma de possível contato com empresa/usuário. </p>",
+                      "description": "<strong>FEIRA TECNOLÓGICA ETEC-ZL</strong><p><a href=\"https://www.cps.sp.gov.br/tag/feira-tecnologica/\" target=\"_blank\" title=\"Abra em outra janela\">Site da Feira Tecnológica - CPS</a></p><p>EXEMPLO DE MARCAÇÃO QUE SERÁ UTILIZADO COMO VISUALIZAÇÃO PARA UMA VAGA DE UMA EMPRESA.</p>",
                       "icon": "rocket"
                   },
                   "geometry": {
@@ -43,7 +44,7 @@ map.on('load', function () {
                   },
                   "geometry": {
                       "type": "Point",
-                      "coordinates": [-46.4830317, -23.5334324]
+                      "coordinates": [-46.4689961, -23.5254726]
                   }
               }]
           }
@@ -53,7 +54,7 @@ map.on('load', function () {
           "icon-allow-overlap": true
       }
   });
-
+  
   // When a click event occurs on a feature in the places layer, open a popup at the
     // location of the feature, with description HTML from its properties.
     map.on('click', 'places', function (e) {

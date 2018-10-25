@@ -2,6 +2,13 @@
 <?php 
 session_start();
 $fkid =$_SESSION['IdEmpresa'];
+ if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: VagasExcluir.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
 ?>
 <?php
 $idempresa=  $_SESSION['IdEmpresa'];
@@ -269,8 +276,16 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
-                             <div class="col-md-4">
-                                <label>Auxiliar Administrativo</label>
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
                             </div>
                         </div>
                     </div>
@@ -279,14 +294,52 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form action="#">
+                            <form>
+							</form>
+							 <?php
+							$iff = mysql_query("select a.NmEmpresa,
+							b.vaga,
+							b.IdVaga
+							from TbEmpresas a
+							inner join tbVagas b
+							on a.IdEmpresa = b.fk_IdEmpresa
+							where IdEmpresa = $idempresa;")or die (mysql_error());
+							
+							while($iffrow = mysql_fetch_array($iff)){
+							$vag = $iffrow['vaga'];
+							$idvag = $iffrow['IdVaga'];
+                            
+							
+							?>
+                            	<form method="post">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label>Nome Da Vaga</label><br/>
+                                                <label><?php echo"$vag "?></label><br/><br/>
                                             </div>
-                                <button type="submit" class="btn btn-primary">Excluir</button>
-                                            </div>    
-                              	</form>
+                                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">X</button>
+								<input type="hidden" name="idvag" value="<?php echo"$idvag"?>"/>
+								<input type="hidden" name="exc" value="excluir"/>
+                                            </div>
+                                        </div>
+                                </form>
+								<?php
+								}
+							?>
+							
+							<?php
+							if($_POST['exc'] && $_POST['exc'] == "excluir"){
+								$idvaga = $_POST['idvag'];
+							
+								
+								if(mysql_query("delete from TbVagas where fk_IdEmpresa = '$idempresa' and IdVaga = '$idvaga'")){
+									echo"excluido com sucesso";
+								}
+							}
+							else{
+								echo"reilegado";
+							}
+							?>
                             
                         </div>
                     </div>

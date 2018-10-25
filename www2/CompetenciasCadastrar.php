@@ -1,6 +1,15 @@
 <?php include_once("lib/dbconnect.php"); ?>
 <?php 
 session_start();
+
+
+ if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: CompetenciasCadastrar.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
 ?>
 <?php
 $idcandidato =  $_SESSION['IdCandidato'];
@@ -95,7 +104,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: perfilDeEmpresa.php');
+								header('Location: buscaEmpresa.php');
 									}
 									else{
 										
@@ -237,6 +246,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <img src="images/user.jpg" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Alterar
+								
                                 <input type="file" name="file"/>
                             </div>
                         </div>
@@ -249,6 +259,7 @@ while($rowss = mysql_fetch_array($sql)){
                                     </h5>
                                     <h6>
                                       <?php echo"$profissao"?>
+									  
                                     </h6>
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -264,11 +275,23 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p>
-                            <a href="">Desenvolvimento Web</a><br/>
-                            <a href="">Java</a><br/>
-                            <a href="">C#</a><br/>
-                            <a href="">Cordova</a><br/>
-                            <a href="">Banco de Dados</a><br/>
+							<?php
+							$if = mysql_query("select a.NmCandidato,
+							b.Competencia
+
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcandidato;")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$comp = $ifrow['Competencia'];
+                            echo"<p>$comp<p><br/>";
+							}
+							?>
+                            
                         </div>
                     </div>
                    
@@ -277,29 +300,94 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form action="">
+							<form>
+							</form>
+                            	<form  method="post">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label>Escolha sua Competência</label><br/>
+                                                <label>Escolha sua Competência
+												
+												<select name='select'>
+														<?php
+							$query = mysql_query("select * from TbCompetencias;");
+							while($rowsss = mysql_fetch_array($query)){
+								$competencia = $rowsss['competencia'];
+								
+                            echo"
+							<option><p>$competencia</p></option>
+							
+							";
+							}
+                            ?>
+							</select></label><br/>
                                             </div>
                                         </div>
                                         
-                                         <div class="row">
-                                           
-                                            <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Competência"required/><br/>
-                                            </div>
-                                        </div>
+                                         
 
-                                        
+<br/>
+<br/>
                                 
                    		
                                          <div class="row">
                                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <input type="submit" class="btn btn-primary" value="Cadastrar"/>
+								<input type="hidden" name="cadcomp" value="cads"/>
                                             </div>
                                         </div>
                               	</form>
+								<?php
+								if($_POST['cadcomp'] && $_POST['cadcomp']=="cads"){
+									$competencia = $_POST['select'];
+									
+									
+									
+									
+									
+									$sqli = mysql_query("select * from TbCompetencias where competencia = '$competencia'")or die (mysql_error());
+			
+									while($rowssa = mysql_fetch_array($sqli)){
+									
+									$idcompetencia = $rowssa['IdCompetencia'];
+									
+									
+								
+									}
+	
+									$sqli = mysql_query("select * from tbcompetenciaRelacao where fk_IdCompetencia = '$idcompetencia' and fk_IdCandidato='$idcandidato'")or die (mysql_error());
+	
+									if(mysql_num_rows($sqli)>=1){
+		
+									echo "<div class='alert alert-danger'>Essa competência já foi cadastrada!</div>";
+		
+		
+									}
+									else{
+	
+									if(mysql_query("insert into tbcompetenciaRelacao(fk_IdCandidato,fk_IdCompetencia)
+										values('$idcandidato ','$idcompetencia');")){
+											
+										
+									}
+
+									else{
+		
+	
+	
+									
+	
+										echo"Erro ao cadastrar!";
+	
+ 
+									}
+								}
+								header('Location: CompetenciasCadastrar.php');
+								}
+								else{
+									echo"aa";
+									
+								}
+								?>
                             
                         </div>
                     </div>

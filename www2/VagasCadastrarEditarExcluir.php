@@ -270,8 +270,16 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
-                             <div class="col-md-4">
-                                <label>Auxiliar Administrativo</label>
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
                             </div>
                         </div>
                     </div>

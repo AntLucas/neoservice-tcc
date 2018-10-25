@@ -11,15 +11,17 @@ error_reporting(0);
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/main-login.css" />
+		<link rel="stylesheet" href="../assets/css/teste.css"/>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+		<link rel="stylesheet" href="assets/css/login.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<!-- Slider  -->
 		<link href="assets/css/owl.carousel.css" rel="stylesheet" media="screen">
 		<link href="assets/css/owl.theme.css" rel="stylesheet" media="screen">
 	</head>
 	<body class="is-preload">
-
+	<canvas id="space"></canvas>
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
@@ -36,31 +38,17 @@ error_reporting(0);
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
+								<li><a href="loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
 								<li><a href="../index.php">RETORNAR</a></li>
 							</ul>
 							<a href="#" class="close">FECHAR</a>
 						</div>
 					</nav>
-
-				<section>
-		<div class="bgPulse">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</section>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form name="loginform" method="POST" action = "" class="login100-form validate-form">
-					<span class="login100-form-logo-2 animated bounce">
+					<span class="login100-form-logo-1 animated bounce">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
@@ -86,7 +74,7 @@ error_reporting(0);
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="cadastroDeEmpresa.php">
+						<a class="txt1" href="Cadastro De Candidato/cadastroCandidato.php">
 						<p></p>
 							Não tem uma conta? Crie uma!
 						</a>
@@ -138,14 +126,6 @@ error_reporting(0);
 			</div>
 		</div>
 	</div>
-							<section id="footer">
-								<div class="inner">
-									<ul class="copyright">
-										<p>NeoService / Todos os direitos autorizados.</p>
-									</ul>
-								</div>
-						</div>
-					</section>
 			</div>
 
 		<!-- Scripts -->
@@ -155,6 +135,7 @@ error_reporting(0);
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="../assets/js/constelacoes.js"></script>
 			<script type="text/javascript" src="assets/js/owl.carousel.js"></script> 
 			<script type="text/javascript" src="assets/js/wow.min.js"></script> 
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

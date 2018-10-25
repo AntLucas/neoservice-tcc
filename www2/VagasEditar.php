@@ -2,6 +2,17 @@
 <?php 
 session_start();
 $fkid =$_SESSION['IdEmpresa'];
+ if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: VagasEditar.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
+
+$idvaga = $_SESSION['idvaga'];
+
+
 ?>
 <?php
 $idempresa=  $_SESSION['IdEmpresa'];
@@ -268,23 +279,42 @@ while($lc = @mysql_fetch_array($slq) ){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
-                             <div class="col-md-4">
-                                <label>Auxiliar Administrativo</label>
+                             <div class="col-md-6">
+								<?php
+							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							
+							while($ifrow = mysql_fetch_array($if)){
+							$vag = $ifrow['vaga'];
+							$sal = $ifrow['salario'];
+                            echo"<p>$vag, R$ $sal<p><br/>";
+							}
+							?>
                             </div>
                         </div>
                     </div>
 
-                    
+                    <?php
+					$sql = mysql_query("select * from TbVagas where fk_IdEmpresa = '$idempresa' and IdVaga = '$idvaga'  ;")or die(mysql_error()); 
+					while($rowss = mysql_fetch_array($sql)){
+					$vags = $rowss['vaga'];
+					$sals = $rowss['salario'];
+					$hors = $rowss['horario'];
+					$descs = $rowss['descricao'];
+					
+}	
+					?>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form action="#">
+							<form>
+							</form>
+                            	<form method="post">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label>Nome Da Vaga</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  a Vaga"required/><br/>
+                                        <input type="text" class="form-control"  name="nome" value="<?php echo"$vags"?>" required/><br/>
                                             </div>
                                         </div>
                                         
@@ -293,7 +323,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Sálario</label>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  o Sálario"required/><br/>
+                                        <input type="text" class="form-control"  name="salario" value="<?php echo"$sals"?>" required/><br/>
                                             </div>
                                         </div>
 
@@ -302,7 +332,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Horario</label><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar  o Horario"required/><br/>
+                                        <input type="text" class="form-control"  name="horario" value="<?php echo"$hors"?>" required/><br/>
                                             </div>
                                         </div>
 
@@ -311,7 +341,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Descrição</label><br/><br/>
                                             </div>
                                             <div class="col-md-6">
-                                        <input type="text" class="form-control" id="Cuser" placeholder="Editar a Descrição"required/><br/>
+                                        <input type="text" class="form-control"  name="descricao" value="<?php echo"$descs"?>" required/><br/>
                                             </div>
                                         </div>
                                 
@@ -319,9 +349,18 @@ while($lc = @mysql_fetch_array($slq) ){
                                          <div class="row">
                                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary">Editar</button>
+								<input type="hidden" name="edit" value="editar"/>
                                             </div>
                                         </div>
                               	</form>
+								<?php
+								if($_POST['edit'] && $_POST['edit'] == "editar"){
+									echo"ae";
+								}
+								else{
+									echo"no";
+								}
+								?>
                             
                         </div>
                     </div>

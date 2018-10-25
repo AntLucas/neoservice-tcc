@@ -199,6 +199,9 @@ section {
     margin-top: 5%;
     margin-bottom: 5%;
 }
+.container-login100{
+	background-color: transparent;
+}
 .login100-form-logo {
     font-size: 60px; 
     color: #33333;

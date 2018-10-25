@@ -197,7 +197,7 @@ $nmu = $_SESSION['NmUsuario'];
 				
 				
 				<?php
-				while(){
+			
 				?>
 				<div class="row">		
 				  <div class="col-sm-6">
@@ -225,7 +225,7 @@ $nmu = $_SESSION['NmUsuario'];
 				</div>
 
 				<?php
-				}
+				
 				?>
 				
 				
