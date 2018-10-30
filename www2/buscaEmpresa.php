@@ -18,6 +18,7 @@ $pesquisa = $_SESSION['pesquisa'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
     <title>NeoService - Busca</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -57,16 +58,14 @@ $pesquisa = $_SESSION['pesquisa'];
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
+                    <form method="post">
                         <div class="input-group">
 						
-						
-						<form method="post">
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+					
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>
@@ -102,7 +101,7 @@ $pesquisa = $_SESSION['pesquisa'];
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="../mapa.html">
+                            <a href="telaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -128,11 +127,6 @@ $pesquisa = $_SESSION['pesquisa'];
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
-                                <i class="far fa-gem"></i>
-                                <span>Tela Inicial Candidato</span>
-                            </a>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->

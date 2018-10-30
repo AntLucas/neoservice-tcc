@@ -27,9 +27,10 @@ while($rowss = mysql_fetch_array($sql)){
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>NeoService</title>
+    <title>NeoService - Perfil</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -138,11 +139,6 @@ while($rowss = mysql_fetch_array($sql)){
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
-                                <i class="far fa-gem"></i>
-                                <span>Tela Inicial Candidato</span>
-                            </a>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -263,7 +259,7 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                     <div class="col-md-2">
 					<form action="editarPerfilCandidato.php">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
+                        <a href="editarPerfilCandidato.php"><input type="button" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/></a>
 					</form>
                     </div>
                 </div>

@@ -6,19 +6,21 @@ error_reporting(0);
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>NeoService</title>
+		<title>NeoService - Login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
-		<link rel="stylesheet" href="../assets/css/teste.css"/>
 		<link rel="stylesheet" href="assets/css/main-login.css" />
 		<link rel="stylesheet" href="assets/css/login.css" />
+				<link rel="stylesheet" href="../assets/css/teste.css"/>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="assets/css/ceuBrilhando.css" />
 	</head>
-	<body class="is-preload">
-	<canvas id="space"></canvas>
+	<body>
+		<canvas id="space"></canvas>
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
@@ -35,8 +37,8 @@ error_reporting(0);
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
+								<li><a href="../index.php">INÍCIO</a></li>
 								<li><a href="loginCandidato.php">ENTRAR COMO CANDIDATO</a></li>
-								<li><a href="../index.php">RETORNAR</a></li>
 							</ul>
 							<a href="#" class="close">FECHAR</a>
 						</div>
@@ -50,7 +52,7 @@ error_reporting(0);
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27 animated infinite pulse">
-						Login
+						Empresa
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
