@@ -13,7 +13,7 @@ error_reporting(0);
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/main-login.css" />
 		<link rel="stylesheet" href="assets/css/login.css" />
-		<link rel="stylesheet" href="../assets/css/teste.css"/>
+		<link rel="stylesheet" href="../assets/css/estrelas.css" />
 		<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
@@ -22,8 +22,7 @@ error_reporting(0);
 		<link href="assets/css/owl.carousel.css" rel="stylesheet" media="screen">
 		<link href="assets/css/owl.theme.css" rel="stylesheet" media="screen">
 	</head>
-	<body class="is-preload">
-	<canvas id="space"></canvas>
+	<body class="galaxy">
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
@@ -136,7 +135,7 @@ error_reporting(0);
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="../assets/js/constelacoes.js"></script>
+			<script src="../assets/js/ceuEstrelado.js"></script>
 			<script type="text/javascript" src="assets/js/owl.carousel.js"></script> 
 			<script type="text/javascript" src="assets/js/wow.min.js"></script> 
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
