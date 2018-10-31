@@ -13,7 +13,8 @@ error_reporting(0);
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/main-login.css" />
 		<link rel="stylesheet" href="assets/css/login.css" />
-				<link rel="stylesheet" href="../assets/css/teste.css"/>
+		<link rel="stylesheet" href="../assets/css/teste.css"/>
+		<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -48,19 +49,18 @@ error_reporting(0);
 			<div class="wrap-login100">
 				<form name="loginform" method="POST" action = "" class="login100-form validate-form">
 					<span class="login100-form-logo-2 animated bounce">
-						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27 animated infinite pulse">
 						Empresa
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="Email">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<div class="wrap-input100 validate-input" data-validate = "Email">
+						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="E-mail">
+						<span class="focus-input100" data-placeholder="&#x2709;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<div class="wrap-input100 validate-input" data-validate="Senha">
 						<input class="input100 animated flash delay-5s" type="password" name="Tsenha" placeholder="Senha">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
