@@ -66,18 +66,16 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                 <div class="sidebar-search">
+                <div class="sidebar-search">
                     <div>
+                    <form method="post">
                         <div class="input-group">
 						
-						
-						<form method="post">
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+					
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>

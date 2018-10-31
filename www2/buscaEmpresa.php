@@ -267,7 +267,7 @@ $pesquisa = $_SESSION['pesquisa'];
 					  }
 							?>
 					</div>
-				  </div>
+				</div>
 
 				</div>
 			<?php
