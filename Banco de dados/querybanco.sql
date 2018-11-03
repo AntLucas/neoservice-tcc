@@ -1,11 +1,11 @@
 
 use sys;
 
-drop database TCC;
+drop database neoservice;
 
-create database TCC;
+create database neoservice;
 
-use TCC;
+use neoservice;
 
 create table TbEmpresas(
 IdEmpresa int NOT NULL AUTO_INCREMENT,
@@ -74,12 +74,18 @@ primary key (IdSolicitacao)
 
 create table TbCompetencias(
 IdCompetencia int NOT NULL AUTO_INCREMENT,
-fk_IdCandidato int,
-foreign key(fk_IdCandidato) references TbCandidatos(IdCandidato),
 competencia varchar(50) null,
 primary key (IdCompetencia)
 );
 
+create table TbCompetenciaRelacao(
+IdRelacao int NOT NULL AUTO_INCREMENT,
+fk_IdCandidato int,
+foreign key(fk_IdCandidato) references TbCandidatos(IdCandidato),
+fk_IdCompetencia int,
+foreign key(fk_IdCompetencia) references TbCompetencias(IdCompetencia),
+primary key (IdRelacao)
+);
 
 create table TbVagas(
 IdVaga int NOT NULL AUTO_INCREMENT,
@@ -123,33 +129,27 @@ insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,cel,ende,biografia,xp
 values('Candidato4','SenhaCandidato','Felipe','candidato@testess','912547854','Bairro das Ruas ,nº3b ,São Paulo,Brasil','Nenhuma',
 'Nenhuma','Nenhuma','Nenhuma','Nenhuma');
 
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'PHP');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'HTML');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'CSS');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'JavaScript');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'Java');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(1,'Banco de dados');
+insert into TbCompetencias(competencia)
+values('Informatica');
+insert into TbCompetencias(competencia)
+values('Relacionamento com o cliente');
+insert into TbCompetencias(competencia)
+values('Vendas');
+insert into TbCompetencias(competencia)
+values('Atendimento');
 
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(2,'Cordova');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(2,'Desenvolvimento WEB');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(2,'Banco de dados');
 
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(3,'História');
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(3,'Portugues');
+insert into TbCompetenciaRelacao (fk_IdCandidato,fk_IdCompetencia)
+values(1,1);
 
-insert into TbCompetencias(fk_IdCandidato,competencia)
-values(4,'Lavar pratos');
+insert into TbCompetenciaRelacao (fk_IdCandidato,fk_IdCompetencia)
+values(1,3);
+
+insert into TbCompetenciaRelacao (fk_IdCandidato,fk_IdCompetencia)
+values(2,1);
+
+insert into TbCompetenciaRelacao (fk_IdCandidato,fk_IdCompetencia)
+values(4,4);
 
 
 
@@ -271,10 +271,26 @@ select * from tbsolicitacao;
 insert into TbSolicitacao(fk_IdEmpresa,fk_IdCandidato) values(1,1);
 select * from tbcontatos;
 
+Select * from TbCompetencias;
+Select * from TbCompetenciaRelacao;
+
+select a.NmCandidato,
+b.Competencia
+
+from TbCandidatos a
+inner join tbcompetenciaRelacao c
+on a.IdCandidato = c.fk_IdCandidato
+inner join tbcompetencias b
+on b.IdCompetencia = c.fk_IdCompetencia;
+
+
+Select * from tbsolicitacao;
 Select * from TbContatos where fk_IdEmpresa = 1 and fk_IdCandidato= 1;
 select * from tbempresas;
 select * from tbcandidatos;
 select * from TbVagas;
+select * from TbCompetencias;
+select * from TbCompetenciarelacao;
 select * from tbmensagens where fk_IdEmpresa = 2;
 select * from tbmensagens where fk_IdCandidato = 4;
 
@@ -292,4 +308,17 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa
+on b.IdEmpresa = c.fk_IdEmpresa;
+
+
+
+
+select a.NmCandidato,
+b.Competencia
+
+from TbCandidatos a
+inner join tbcompetenciaRelacao c
+on a.IdCandidato = c.fk_IdCandidato
+inner join tbcompetencias b
+on b.IdCompetencia = c.fk_IdCompetencia
+where IdCandidato = 2;
