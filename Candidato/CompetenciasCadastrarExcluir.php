@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
 ?>
@@ -20,10 +20,6 @@ while($rowss = mysql_fetch_array($sql)){
 	$profissao = $rowss['profissao'];
 }
 ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +27,9 @@ error_reporting(0);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>NeoService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService - Competências</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -41,7 +37,6 @@ error_reporting(0);
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png" />
 	<link rel="stylesheet" href="../assets/css/styleCandidato.css">
 </head>
 
@@ -60,7 +55,7 @@ error_reporting(0);
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -69,18 +64,16 @@ error_reporting(0);
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-               <div class="sidebar-search">
+                <div class="sidebar-search">
                     <div>
+                    <form method="post">
                         <div class="input-group">
 						
-						
-						<form method="post">
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+					
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>
@@ -89,7 +82,7 @@ error_reporting(0);
 							<?php
 							$sqli = mysql_query("select * from TbEmpresas;");
 							while($row = mysql_fetch_array($sqli)){
-							$Usuario = $row['NmEmpresa'];
+							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
 							?>
@@ -142,11 +135,6 @@ error_reporting(0);
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>Não definido</span>
-                            </a>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -238,7 +226,7 @@ error_reporting(0);
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../images/user.jpg" alt=""/>
+                            <img src="../assets/images/user.jpg" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Alterar
                                 <input type="file" name="file"/>
@@ -266,31 +254,14 @@ error_reporting(0);
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                       <div class="profile-work">
-                            <p>COMPETÊNCIAS</p><br/>
-							
-                            
-                            <?php
-							$if = mysql_query("select a.NmCandidato,
-							b.Competencia
-							
-							from TbCandidatos a
-							inner join tbcompetenciaRelacao c
-							on a.IdCandidato = c.fk_IdCandidato
-							inner join tbcompetencias b
-							on b.IdCompetencia = c.fk_IdCompetencia
-							where IdCandidato = $idcandidato;")or die (mysql_error());
-							
-							while($ifrow = mysql_fetch_array($if)){
-							$comp = $ifrow['Competencia'];
-                            echo"<p>$comp<p><br/>";
-							}
-							?>
-							
-						
+                        <div class="profile-work">
+                            <p>COMPETÊNCIAS</p>
+                            <a href="">Desenvolvimento Web</a><br/>
+                            <a href="">Java</a><br/>
+                            <a href="">C#</a><br/>
+                            <a href="">Cordova</a><br/>
+                            <a href="">Banco de Dados</a><br/>
                         
-							
-							
                         </div>
                     </div>
 

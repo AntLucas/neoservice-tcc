@@ -1,10 +1,6 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
 ?>
 <?php
 $idcandidato =  $_SESSION['IdCandidato'];
@@ -12,17 +8,25 @@ $email = $_SESSION['Email'];
 $senha = $_SESSION['Senha'];
 $NmC = $_SESSION['NmCandidato'];
 $NmU = $_SESSION['NmUsuario'];
-/*
-$pesquisa = $_SESSION['pesquisa'];*/
+
+$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
+while($rowss = mysql_fetch_array($sql)){
+	$cel = $rowss['cel'];
+	$end = $rowss['ende'];
+	$bio = $rowss['biografia'];
+	$xp = $rowss['xp'];
+	$ingles = $rowss['ingles'];
+	$formacao = $rowss['formacao'];
+	$profissao = $rowss['profissao'];
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
     <title>NeoService - Início</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -31,16 +35,23 @@ $pesquisa = $_SESSION['pesquisa'];*/
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
-    <link rel="shortcut icon" type="../image/png" href="assets/img/favicon.png" />
-	<link rel="stylesheet" href="../assets/css/buscaCandidato.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png" />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />  
+	<link rel="stylesheet" type="text/css" href="../assets/css/styleMapa.css">
 </head>
 
 <body>
-    <div class="page-wrapper chiller-theme sidebar-bg bg1 toggled">
+    <main class="page-content">
+        <div class="container-fluid">
+            <div id='map'></div>
+        </div>
+    </main>
+     <div class="page-wrapper chiller-theme sidebar-bg bg1 toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
-       <nav id="sidebar" class="sidebar-wrapper">
+        <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
                     <a href="#">PERFIL</a>
@@ -50,7 +61,7 @@ $pesquisa = $_SESSION['pesquisa'];*/
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -61,16 +72,14 @@ $pesquisa = $_SESSION['pesquisa'];*/
                 <!-- sidebar-header  -->
                  <div class="sidebar-search">
                     <div>
+                    <form method="post">
                         <div class="input-group">
 						
-						
-						<form method="post">
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+					
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>
@@ -79,7 +88,7 @@ $pesquisa = $_SESSION['pesquisa'];*/
 							<?php
 							$sqli = mysql_query("select * from TbEmpresas;");
 							while($row = mysql_fetch_array($sqli)){
-							$Usuario = $row['NmEmpresa'];
+							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
 							?>
@@ -132,11 +141,6 @@ $pesquisa = $_SESSION['pesquisa'];*/
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>Não definido</span>
-                            </a>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->

@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php
 ini_set('display_errors', 0 );
 error_reporting(0);
@@ -9,11 +9,12 @@ error_reporting(0);
 		<title>NeoService - Login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    	<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
 		<link rel="stylesheet" type="text/css"  href="../assets/css/bootstrap.css">
 		<link rel="stylesheet" href="../assets/css/main-login.css" />
 		<link rel="stylesheet" href="../assets/css/login.css" />
-		<link rel="stylesheet" href="../assets/css/teste.css"/>
+		<link rel="stylesheet" href="../assets/css/estrelas.css" />
+		<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 		<link rel="stylesheet" type="text/css" href="../assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
@@ -21,8 +22,7 @@ error_reporting(0);
 		<link href="../assets/css/owl.carousel.css" rel="stylesheet" media="screen">
 		<link href="../assets/css/owl.theme.css" rel="stylesheet" media="screen">
 	</head>
-	<body class="is-preload">
-	<canvas id="space"></canvas>
+	<body class="galaxy">
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
@@ -40,7 +40,7 @@ error_reporting(0);
 							<h2>Menu</i></h2>
 							<ul class="links">
 								<li><a href="../index.php">INÍCIO</a></li>
-								<li><a href="loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
+								<li><a href="../Empresa/loginEmpresa.php">ENTRAR COMO EMPRESA</a></li>
 							</ul>
 							<a href="#" class="close">FECHAR</a>
 						</div>
@@ -50,19 +50,18 @@ error_reporting(0);
 			<div class="wrap-login100">
 				<form name="loginform" method="POST" action = "" class="login100-form validate-form">
 					<span class="login100-form-logo-1 animated bounce">
-						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27 animated infinite pulse">
 						Candidato
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="Email">
-						<span class="focus-input100" data-placeholder="&#xf02b;"></span>
+					<div class="wrap-input100 validate-input" data-validate = "Email">
+						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="E-mail">
+						<span class="focus-input100" data-placeholder="&#x2709;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<div class="wrap-input100 validate-input" data-validate="Senha">
 						<input class="input100 animated flash delay-5s" type="password" name="Tsenha" placeholder="Senha">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
@@ -136,7 +135,7 @@ error_reporting(0);
 			<script src="../assets/js/breakpoints.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
-			<script src="../assets/js/constelacoes.js"></script>
+			<script src="../assets/js/ceuEstrelado.js"></script>
 			<script type="text/javascript" src="../assets/js/owl.carousel.js"></script> 
 			<script type="text/javascript" src="../assets/js/wow.min.js"></script> 
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

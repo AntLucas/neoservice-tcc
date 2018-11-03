@@ -1,19 +1,26 @@
-<?php include_once("../lib/dbconnect.php"); ?>
-
+<?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+ini_set('display_errors', 0 );
+error_reporting(0);
+?>
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>NeoService</title>
+		<title>NeoService - Login</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    	<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
 		<link rel="stylesheet" type="text/css"  href="../assets/css/bootstrap.css">
 		<link rel="stylesheet" href="../assets/css/main-login.css" />
+		<link rel="stylesheet" href="../assets/css/login.css" />
+		<link rel="stylesheet" href="../assets/css/teste.css"/>
+		<link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="../assets/css/estrelas.css" />
 	</head>
-	<body class="is-preload">
-
+	<body class="galaxy">
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
 
@@ -30,44 +37,29 @@
 						<div class="inner">
 							<h2>Menu</i></h2>
 							<ul class="links">
-								<li><a href="../index.php">RETORNAR</a></li>
+								<li><a href="../index.php">INÍCIO</a></li>
+								<li><a href="../Candidato/loginCandidato.php">ENTRAR COMO CANDIDATO</a></li>
 							</ul>
 							<a href="#" class="close">FECHAR</a>
 						</div>
 					</nav>
-
-				<section>
-		<div class="bgPulse">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-	</section>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form name="loginform" method="POST" action = "" class="login100-form validate-form">
-					<span class="login100-form-logo-1 animated bounce">
-						<i class="zmdi zmdi-landscape"></i>
+					<span class="login100-form-logo-2 animated bounce">
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27 animated infinite pulse">
-						Login
+						Empresa
 					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="Email">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					<div class="wrap-input100 validate-input" data-validate = "Email">
+						<input class="input100 animated flash delay-2s" type="text" name="Temail" placeholder="E-mail">
+						<span class="focus-input100" data-placeholder="&#x2709;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
+					<div class="wrap-input100 validate-input" data-validate="Senha">
 						<input class="input100 animated flash delay-5s" type="password" name="Tsenha" placeholder="Senha">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
@@ -138,6 +130,7 @@
 			<script src="../assets/js/breakpoints.min.js"></script>
 			<script src="../assets/js/util.js"></script>
 			<script src="../assets/js/main.js"></script>
+			<script src="../assets/js/ceuEstrelado.js"></script>
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

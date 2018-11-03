@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php
 ini_set('display_errors', 0 );
 error_reporting(0);
@@ -21,7 +21,6 @@ $_SESSION['Contador'] +=1;
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

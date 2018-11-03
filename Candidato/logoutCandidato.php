@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 
 
 

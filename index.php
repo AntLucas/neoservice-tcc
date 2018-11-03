@@ -8,6 +8,7 @@ error_reporting(0);
 		<title>NeoService</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 		<link rel="stylesheet" type="text/css"  href="assets/css/bootstrap.css">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -57,7 +58,7 @@ error_reporting(0);
 						<!-- One -->
 							<section id="one" class="wrapper spotlight style1">
 								<div class="inner">
-										<a href="#" class="image animated bounce delay-1s"><img src="images/pic.png" alt="" /></a>
+										<a href="#" class="image animated bounce delay-1s"><img src="assets/images/pic.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">INTRODUÇÃO</h2>
 										<p>O Desemprego, pode ser considerado um enorme problema no Brasil, visto as dificuldades de se estar empregado em nosso país devido a presente crise que enfrentamos, assim como a dificuldade de empresas de encontrar bons profissionais para suas vagas. Portanto, é de suma importância buscar meios para que esta realidade mude. Nosso aplicativo mostrará uma possível solução para encontro de profissionais e empresas focadas em trabalhos sazonais.</p>
@@ -68,7 +69,7 @@ error_reporting(0);
 						<!-- Two -->
 							<section id="two" class="wrapper alt spotlight style2">
 								<div class="inner">
-									<a href="#" class="image animated bounce delay-3s"><img src="images/pic02.png" alt="" /></a>
+									<a href="#" class="image animated bounce delay-3s"><img src="assets/images/pic02.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">SOBRE O PROJETO</h2>
 										<p>O projeto tende a proporcionar uma aplicação, que possibilite auxiliar na busca de funcionários, sendo tanto estudantes quanto profissionais, de maneira prática, rápida e simples. Por esse motivo, o projeto é focado em trabalhos temporários, nos períodos em que o mercado mais necessita, sem qualquer efetivação. Para um estudante ou até mesmo uma pessoa que está atualmente desempregada.</p>
@@ -79,7 +80,7 @@ error_reporting(0);
 						<!-- Three -->
 							<section id="three" class="wrapper spotlight style3">
 								<div class="inner">
-									<a href="#" class="image animated bounce delay-5s"><img src="images/pic03.png" alt="" /></a>
+									<a href="#" class="image animated bounce delay-5s"><img src="assets/images/pic03.png" alt="" /></a>
 									<div class="content">
 										<h2 class="major">INFORMAÇÕES</h2>
 										<p>NeoService foi desenvolvido com as seguintes tecnologias (HTML, CSS, JAVASCRIPT, PHP e MySQL). O sistema será utilizado em um navegador, entregando uma interface de usuário para o candidato e a empresa, na qual ambos vão se conectar, formando uma ponte entre si.</p>

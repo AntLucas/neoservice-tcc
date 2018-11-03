@@ -1,21 +1,16 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
 ?>
 <?php
 $idcandidato =  $_SESSION['IdCandidato'];
 $email = $_SESSION['Email'];
 $senha = $_SESSION['Senha'];
 $NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
 
 $sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$cel = $rowss['cel'];
+	$nasc = $rowss['nascimento'];
 	$end = $rowss['ende'];
 	$bio = $rowss['biografia'];
 	$xp = $rowss['xp'];
@@ -26,14 +21,14 @@ while($rowss = mysql_fetch_array($sql)){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
-    <title>NeoService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService - Perfil</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -41,7 +36,6 @@ while($rowss = mysql_fetch_array($sql)){
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
-    <link rel="shortcut icon" type="../image/png" href="assets/img/favicon.png" />
 	<link rel="stylesheet" href="../assets/css/styleCandidato.css">
 </head>
 
@@ -60,7 +54,7 @@ while($rowss = mysql_fetch_array($sql)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -69,18 +63,16 @@ while($rowss = mysql_fetch_array($sql)){
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-                 <div class="sidebar-search">
+                <div class="sidebar-search">
                     <div>
+                    <form method="post">
                         <div class="input-group">
 						
-						
-						<form method="post">
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
-							
-							 <div class="input-group-append">
+					
+                            <div class="input-group-append">
                                 <span class="input-group-text">
-								<input value="" class="fa fa-search" aria-hidden="true"type="submit"/>
-                                    <i type="input"class="fa fa-search" aria-hidden="true"></i>
+                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>
@@ -89,7 +81,7 @@ while($rowss = mysql_fetch_array($sql)){
 							<?php
 							$sqli = mysql_query("select * from TbEmpresas;");
 							while($row = mysql_fetch_array($sqli)){
-							$Usuario = $row['NmEmpresa'];
+							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
 							?>
@@ -116,7 +108,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="TelaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -142,11 +134,6 @@ while($rowss = mysql_fetch_array($sql)){
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>Não definido</span>
-                            </a>
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -238,11 +225,7 @@ while($rowss = mysql_fetch_array($sql)){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
+                            <img src="../assets/images/user.jpg" alt=""/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -254,20 +237,20 @@ while($rowss = mysql_fetch_array($sql)){
                                     <h6>
                                       <?php echo"$profissao"?>
                                     </h6>
-                                    <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
+                                    <p class="proile-rating">ESTRELAS : <span>4/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Currículo</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
 					<form action="editarPerfilCandidato.php">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/>
+                        <a href="editarPerfilCandidato.php"><input type="button" class="profile-edit-btn" name="btnAddMore" value="Editar Perfil"/></a>
 					</form>
                     </div>
                 </div>
@@ -276,26 +259,7 @@ while($rowss = mysql_fetch_array($sql)){
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p><br/>
 							
-                            
-                            <?php
-							$if = mysql_query("select a.NmCandidato,
-							b.Competencia
 							
-							from TbCandidatos a
-							inner join tbcompetenciaRelacao c
-							on a.IdCandidato = c.fk_IdCandidato
-							inner join tbcompetencias b
-							on b.IdCompetencia = c.fk_IdCompetencia
-							where IdCandidato = $idcandidato;")or die (mysql_error());
-							
-							while($ifrow = mysql_fetch_array($if)){
-							$comp = $ifrow['Competencia'];
-                            echo"<p>$comp<p><br/>";
-							}
-							?>
-							
-						
-                        
 							
 							
                         </div>
@@ -303,14 +267,6 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de Usuário</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p><?php echo"$NmU";?></p>
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Nome</label>
@@ -327,17 +283,41 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <p><?php echo"$email"?></p>
                                             </div>
                                         </div>
-                                        <div class="row">
+										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Celular</label>
+                                                <label>Idade</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$cel"?></p>
+                                                <p><?php echo"$nasc"?></p>
                                             </div>
                                         </div>
-                                        <div class="row">
+										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Endereço</label>
+                                                <label>Rua</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$end"?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Bairro</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$end"?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Cidade</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$end"?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>CEP</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$end"?></p>
@@ -353,7 +333,7 @@ while($rowss = mysql_fetch_array($sql)){
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experiência</label>
+                                                <label>Experiência Profissional</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$xp"; ?></p>

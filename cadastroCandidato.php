@@ -1,4 +1,6 @@
+<?php include_once("assets/lib/dbconnect.php"); ?>
 <!DOCTYPE html>
+<html>
 <head>
 <title>NeoService - Cadastro</title>
 <meta charset="utf-8" />
@@ -112,7 +114,7 @@
                             <div class="tab-pane fade show active" id="candidato" role="tabpanel" aria-labelledby="candidato-tab">
                                 <h3 class="register-heading">Cadastre-se como candidato</h3>
 								
-								<form name="formCadastro" action="/naotempagina.php">
+								<form name="formCadastro" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -156,7 +158,7 @@
 										<input name="uf" type="text" id="uf" readonly="true" size="2" class="form-control" placeholder="Estado *" /><p />
 									 </form>
 									<div class="g-recaptcha" data-sitekey="6LdjfHgUAAAAABMPodoRp08r_wMK5Q39SgWFdgQ8"></div>
-									<input type="submit" class="btnRegister" value="Registrar" onclick="return validarSenha()"/>
+									<input type="submit" name="env" class="btnRegister" value="Registrar" onclick="return validarSenha()"/>
                                     </div>
                                 </div>
 								</form>
@@ -172,14 +174,15 @@
 			<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>
+
 <?php
-	if($_POST['env'] && $_POST['env'] == "cad"){
-		if($_POST['nmEsb'] || $_POST['senha'] || $_POST['senha2'] || $_POST['bday'] || $_POST['email'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] ){
+	if($_POST['env'] && $_POST['env'] == "Registrar"){
+		if($_POST['nmEsb'] || $_POST['email'] || $_POST['senha'] || $_POST['senha2'] || $_POST['bday'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] ){
 			$nmEsb = $_POST['nmEsb'];
+			$email = $_POST['email'];
 			$senha = $_POST['senha'];
 			$senha2 = $_POST['senha2'];
-			$bday = $_POST['bday'];
-			$email = $_POST['email'];
+			$nascimento = $_POST['bday'];
 			$cep = $_POST['cep'];
 			$rua = $_POST['rua'];
 			$bairro = $_POST['bairro'];
@@ -191,19 +194,20 @@
 	$sqli = mysql_query("select * from TbCandidatos where Email = '$email'");
 
 	if(mysql_num_rows($sqli)>=1){
-		
 	echo "<div class='alert alert-danger'>Esse e-mail já está sendo utilizado!</div>";
-		
-		
 	}
 	else{
-		$sql = @mysql_query("insert into TbCandidatos(NmCandidato,Senha,Email,cep,cep,rua,bairro,cidade,biografia,xp,ingles,formacao,profissao)
-		values('$nmEsb','$senha','$email','$cep','$rua','$bairro','$cidade','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');") or die (mysql_error());
+		$sql = @mysql_query("insert into TbCandidatos(NmCandidato,Senha,Email,nascimento,cep,rua,bairro,cidade,biografia,xp,ingles,formacao,profissao)
+		values('$nmEsb','$senha','$email','$nascimento','$cep','$rua','$bairro','$cidade','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');") or die (mysql_error());
 		echo"Você foi cadastrado com sucesso, aguarde um instante.";
 	}
 }
 else{
+
 }
+		}
+		else{
+			echo"<div class='alert alert-danger'>As Senhas devem ser iguais!</div>";
 		}
 		}
 		

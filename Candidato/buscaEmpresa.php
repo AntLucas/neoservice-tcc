@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
 ?>
@@ -18,8 +18,7 @@ $pesquisa = $_SESSION['pesquisa'];
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
     <title>NeoService - Busca</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -28,7 +27,6 @@ $pesquisa = $_SESSION['pesquisa'];
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png" />
 	<link rel="stylesheet" href="../assets/css/buscaCandidato.css">
 </head>
 
@@ -47,7 +45,7 @@ $pesquisa = $_SESSION['pesquisa'];
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>

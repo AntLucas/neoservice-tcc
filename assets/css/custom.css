@@ -203,7 +203,7 @@ body {
 .sidebar-content {
     max-height: calc(100% - 30px);
     height: calc(100% - 30px);
-    overflow-y: scroll;
+    overflow-y: hidden;
     position: relative;
 }
 
