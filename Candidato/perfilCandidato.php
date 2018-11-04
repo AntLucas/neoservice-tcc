@@ -10,7 +10,6 @@ $NmC = $_SESSION['NmCandidato'];
 
 $sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$nasc = $rowss['nascimento'];
 	$end = $rowss['ende'];
 	$bio = $rowss['biografia'];
 	$xp = $rowss['xp'];
@@ -288,7 +287,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Idade</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$nasc"?></p>
+                                                <p><?php echo""?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -302,6 +301,14 @@ while($rowss = mysql_fetch_array($sql)){
 										<div class="row">
                                             <div class="col-md-6">
                                                 <label>Bairro</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$end"?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Estado</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$end"?></p>

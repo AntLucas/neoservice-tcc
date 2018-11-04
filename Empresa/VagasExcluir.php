@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
 $fkid =$_SESSION['IdEmpresa'];
@@ -43,7 +43,7 @@ error_reporting(0);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
     <title>NeoService</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
@@ -52,7 +52,6 @@ error_reporting(0);
     <link rel="stylesheet" href="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
-    <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png" />
 	<link rel="stylesheet" href="../assets/css/styleCandidato.css">
 </head>
 
@@ -71,7 +70,7 @@ error_reporting(0);
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$nme";?>
@@ -80,6 +79,7 @@ error_reporting(0);
                     </div>
                 </div>
                 <!-- sidebar-header  -->
+				<div class="sidebar-search">
                 <div>
                     <form method="post">
                         <div class="input-group">
@@ -116,6 +116,7 @@ error_reporting(0);
 							?>
                         </div>
                     </div>
+				</div>
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
@@ -149,11 +150,7 @@ error_reporting(0);
                                 </ul>
                             </div>
                         </li>
-                        <li class="sidebar">
-                            <a href="#">
-                                <i class="far fa-gem"></i>
-                                <span>Não definido</span>
-                            </a>
+                       
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -290,11 +287,8 @@ while($lc = @mysql_fetch_array($slq) ){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
+                            <img src="../assets/images/user.jpg" alt=""/>
+                            
                         </div>
                     </div>
                     <div class="col-md-6">

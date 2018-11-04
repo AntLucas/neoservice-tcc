@@ -1,16 +1,16 @@
-<?php include_once("assets/lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 <title>NeoService - Cadastro</title>
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/css/cadastro.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/cadastro.css">
 <script type="text/javascript" >
     
     function limpa_formulário_cep() {
@@ -104,10 +104,10 @@
 <div class="container register">
                 <div class="row">
                     <div class="col-md-3 register-left">
-                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <img src="https://cdn0.iconfinder.com/data/icons/flat-design-galaxy/1701/Saturn1-512.png" alt=""/>
                         <h3>Bem-vindo!</h3>
                         <p>Você está perto de conseguir um trabalho temporário!</p>
-                        <a href="Candidato/loginCandidato.php"><input type="button" name="" value="Login"/></a>
+                        <a href="loginCandidato.php"><input type="button" name="" value="Login"/></a>
                     </div>
                     <div class="col-md-9 register-right">
                         <div class="tab-content" id="myTabContent">
@@ -170,7 +170,7 @@
 
             </div>
             </div>
-            <script src="assets/js/ceuEstrelado.js"></script>
+            <script src="../assets/js/ceuEstrelado.js"></script>
 			<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>

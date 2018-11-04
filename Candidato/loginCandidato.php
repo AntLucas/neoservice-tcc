@@ -74,7 +74,7 @@ error_reporting(0);
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="Cadastro De Candidato/cadastroCandidato.php">
+						<a class="txt1" href="cadastroCandidato.php">
 						<p></p>
 							Não tem uma conta? Crie uma!
 						</a>

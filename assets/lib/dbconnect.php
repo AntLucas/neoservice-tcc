@@ -1,5 +1,5 @@
 <?php 
-$con = @mysql_connect('neoservice.mysql.uhserver.com','neoservice','Nsrvce{69}') or die (mysql_error());
+$con = @mysql_connect('localhost','root','') or die (mysql_error());
 $x1 = mysql_select_db('neoservice',$con) or die (mysql_error());
 ?>
 

@@ -19,7 +19,6 @@ $idcandidato =  $_SESSION['IdCandidato'];
 $email = $_SESSION['Email'];
 $senha = $_SESSION['Senha'];
 $NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
 
 
 $sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
