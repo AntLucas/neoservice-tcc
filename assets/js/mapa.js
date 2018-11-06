@@ -10,6 +10,10 @@ if (!mapboxgl.supported()) {
   });
 }
 
+  map.addControl(new MapboxDirections({
+    accessToken: mapboxgl.accessToken
+}), 'bottom-right');
+  
   map.addControl(new mapboxgl.GeolocateControl({
   positionOptions: {
       enableHighAccuracy: true
@@ -17,18 +21,19 @@ if (!mapboxgl.supported()) {
   trackUserLocation: true
   }));
   
-map.on('load', function () {
-  // Add a layer showing the places.
-  map.addLayer({
-      "id": "places",
-      "type": "symbol",
-      "source": {
-          "type": "geojson",
-          "data": {
-              "type": "FeatureCollection",
-              "features": [{
-                  "type": "Feature",
-                  "properties": {
+map.on('load', function() {
+
+    // Add a layer showing the places.
+    map.addLayer({
+        "id": "places",
+        "type": "symbol",
+        "source": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
                       "description": "<strong>FEIRA TECNOLÓGICA ETEC-ZL</strong><p><a href=\"https://www.cps.sp.gov.br/tag/feira-tecnologica/\" target=\"_blank\" title=\"Abra em outra janela\">Site da Feira Tecnológica - CPS</a></p><p>EXEMPLO DE MARCAÇÃO QUE SERÁ UTILIZADO COMO VISUALIZAÇÃO PARA UMA VAGA DE UMA EMPRESA.</p>",
                       "icon": "rocket"
                   },
@@ -46,44 +51,48 @@ map.on('load', function () {
                       "type": "Point",
                       "coordinates": [-46.4689961, -23.5254726]
                   }
-              }]
-          }
-      },
-      "layout": {
-          "icon-image": "{icon}-15",
-          "icon-allow-overlap": true
-      }
-  });
-  
-  // When a click event occurs on a feature in the places layer, open a popup at the
-    // location of the feature, with description HTML from its properties.
-    map.on('click', 'places', function (e) {
-      var coordinates = e.features[0].geometry.coordinates.slice();
-      var description = e.features[0].properties.description;
+                }]
+            }
+        },
+        "layout": {
+            "icon-image": "{icon}-15",
+            "icon-allow-overlap": true
+        }
+    });
 
-      // Ensure that if the map is zoomed out such that multiple
-      // copies of the feature are visible, the popup appears
-      // over the copy being pointed to.
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-      }
+    // Create a popup, but don't add it to the map yet.
+    var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    });
 
-      new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(description)
-          .addTo(map);
-  });
+    map.on('mouseenter', 'places', function(e) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
 
-  // Change the cursor to a pointer when the mouse is over the places layer.
-  map.on('mouseenter', 'places', function () {
-      map.getCanvas().style.cursor = 'pointer';
-  });
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
 
-  // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'places', function () {
-      map.getCanvas().style.cursor = '';
-  });
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        popup.setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+
+    map.on('mouseleave', 'places', function() {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
 });
+
 
 var geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken
@@ -91,8 +100,6 @@ var geocoder = new MapboxGeocoder({
 
 map.addControl(geocoder);
 
-// After the map style has loaded on the page, add a source layer and default
-// styling for a single point.
 map.on('load', function() {
   map.addSource('single-point', {
       "type": "geojson",
@@ -117,4 +124,5 @@ map.on('load', function() {
   geocoder.on('result', function(ev) {
       map.getSource('single-point').setData(ev.result.geometry);
   });
+  
 });
