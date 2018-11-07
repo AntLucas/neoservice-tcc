@@ -10,7 +10,13 @@ $NmC = $_SESSION['NmCandidato'];
 
 $sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$end = $rowss['ende'];
+	$cep = $rowss['cep'];
+	$rua = $rowss['rua'];
+	$bairro = $rowss['bairro'];
+	$cidade = $rowss['cidade'];
+	$estado = $rowss['estado'];
+	$bday = $rowss['bdat'];
+	$nascimento = implode("/", array_reverse(explode("-", $bday)));
 	$bio = $rowss['biografia'];
 	$xp = $rowss['xp'];
 	$ingles = $rowss['ingles'];
@@ -236,7 +242,7 @@ while($rowss = mysql_fetch_array($sql)){
                                     <h6>
                                       <?php echo"$profissao"?>
                                     </h6>
-                                    <p class="proile-rating">ESTRELAS : <span>4/5</span></p>
+                                    <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
@@ -284,10 +290,10 @@ while($rowss = mysql_fetch_array($sql)){
                                         </div>
 										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Idade</label>
+                                                <label>Nascimento</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo""?></p>
+                                                <p><?php echo"$nascimento"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -295,7 +301,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Rua</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
+                                                <p><?php echo"$rua"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -303,7 +309,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Bairro</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
+                                                <p><?php echo"$bairro"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -311,7 +317,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Estado</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
+                                                <p><?php echo"$estado"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -319,7 +325,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Cidade</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
+                                                <p><?php echo"$cidade"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -327,20 +333,14 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>CEP</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$end"?></p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p><?php echo"$bio"; ?></p>
+                                                <p><?php echo"$cep"?></p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Experiência Profissional</label>
+                                                <label>Experiência Profissional?</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$xp"; ?></p>
@@ -348,18 +348,33 @@ while($rowss = mysql_fetch_array($sql)){
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Inglês</label>
+                                                <label>Idiomas</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$ingles"; ?></p>
                                             </div>
                                         </div>
-                                        <div class="row">
+										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Formação</label>
+                                                <label>Escolaridade</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$formacao"; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Formação Acadêmica Atual</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$formacao"; ?></p>
+                                            </div>
+                                        </div>
+										<br>
+										 <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Sua Biografia</label><br/>
+                                                <p><?php echo"$bio"; ?></p>
                                             </div>
                                         </div>
                             </div>

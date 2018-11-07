@@ -877,7 +877,7 @@ $_SESSION['Contador'] +=1;
 			</ul>
 		</div>
 		<div id="bottom-bar">
-		<a href="telaInicialEmpresa.php">	<button class="mudar"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Tela Inicial </button></a>
+		<a href="perfilEmpresa.php">	<button class="mudar"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Tela Inicial </button></a>
 			<button class="mudar "id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Configurações</span></button>
 		</div>
 	</div>

@@ -16,16 +16,15 @@ $nmu = $_SESSION['NmUsuario'];
 
 $sql = mysql_query("select * from TbEmpresas  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$cnpj = $rowss['CNPJ'];
-	$razao = $rowss['Razao'];
-	$cep = $rowss['CEP'];
-	$estado = $rowss['Estado'];
-	$cidade = $rowss['Cidade'];
-	$bairro = $rowss['Bairro'];
-	$endereco = $rowss['Endereco'];
-	$numero = $rowss['Numero'];
-	$complemento = $rowss['Complemento'];
-	$biografia = $rowss['biografia'];
+	$cnpj = utf8_encode($rowss['CNPJ']);
+	$razao = utf8_encode($rowss['Razao']);
+	$cep = utf8_encode($rowss['CEP']);
+	$estado = utf8_encode($rowss['Estado']);
+	$cidade = utf8_encode($rowss['Cidade']);
+	$bairro = utf8_encode($rowss['Bairro']);
+	$endereco = utf8_encode($rowss['Rua']);
+	$numero = utf8_encode($rowss['Numero']);
+	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
 
@@ -114,14 +113,9 @@ while($rowss = mysql_fetch_array($sql)){
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
-                        <li class="header-menu">
+                         <li class="header-menu">
                             <span>Painel Geral</span>
                         </li>
-                        <li class="sidebar">
-                            <a href="telaInicialEmpresa.php">
-                                <i class="fa fa-globe"></i>
-                                <span>Início</span>
-                            </a>
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user"></i>
@@ -143,6 +137,11 @@ while($rowss = mysql_fetch_array($sql)){
                                     </li>
                                 </ul>
                             </div>
+							<li class="sidebar">
+                            <a href="mapaEmpresa.php">
+                                <i class="fa fa-globe"></i>
+                                <span>Mapa</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -1,9 +1,13 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+ini_set('display_errors', 0 );
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <title>NeoService - Cadastro</title>
-<meta charset="utf-8" />
+<meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
@@ -117,8 +121,12 @@
 								<form name="formCadastro" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
+									 <div class="form-group">
+                                            <input type="text" required="required" name="nmUsu" maxlength="15" class="form-control" placeholder="Nome de Usuário *" value="" />
+											
+                                        </div>
                                         <div class="form-group">
-                                            <input type="text" required="required" name="nmEsb" maxlength="30" class="form-control texto" placeholder="Nome e Sobrenome *" value="" pattern="^[a-zA-Z\u00C0-\u017F´]+\s+[a-zA-Z\u00C0-\u017F´]{0,}$" />
+                                            <input type="text" style="text-transform: capitalize;" required="required" name="nmEsb" maxlength="30" class="form-control texto" placeholder="Nome e Sobrenome *" value="" pattern="^[a-zA-Z\u00C0-\u017F´]+\s+[a-zA-Z\u00C0-\u017F´]{0,}$" />
 											
                                         </div>
 										<div class="form-group">
@@ -177,29 +185,55 @@
 
 <?php
 	if($_POST['env'] && $_POST['env'] == "Registrar"){
-		if($_POST['nmEsb'] || $_POST['email'] || $_POST['senha'] || $_POST['senha2'] || $_POST['bday'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] ){
+		if($_POST['nmUsu'] || $_POST['nmEsb'] || $_POST['email'] || $_POST['senha'] || $_POST['senha2'] || $_POST['bday'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] || $_POST['estado']){
+			$nmUsu = $_POST['nmUsu'];
 			$nmEsb = $_POST['nmEsb'];
 			$email = $_POST['email'];
 			$senha = $_POST['senha'];
 			$senha2 = $_POST['senha2'];
-			$nascimento = $_POST['bday'];
+			$bday = $_POST['bday'];
 			$cep = $_POST['cep'];
 			$rua = $_POST['rua'];
 			$bairro = $_POST['bairro'];
 			$cidade = $_POST['cidade'];
+			$estado = $_POST['uf'];
 			
 			
 			if($senha == $senha2){
 			if ($con){
-	$sqli = mysql_query("select * from TbCandidatos where Email = '$email'");
+	$sqli = mysql_query("select * from TbCandidatos where NmUsuario = '$nmUsu'");
+	$sqlii = mysql_query("select * from TbCandidatos where Email = '$email'");
 
 	if(mysql_num_rows($sqli)>=1){
-	echo "<div class='alert alert-danger'>Esse e-mail já está sendo utilizado!</div>";
+		
+	echo "<div class='alert alert-danger'>Esse nome de usuário já está sendo utilizado!</div>";
+		
+		
 	}
+	
+	
+	
+	elseif(mysql_num_rows($sqlii)>=1){
+		
+	echo "<div class='alert alert-danger'>Esse E-mail já está sendo utilizado!</div>";
+	}
+	
+	
+	
+	
+
 	else{
-		$sql = @mysql_query("insert into TbCandidatos(NmCandidato,Senha,Email,nascimento,cep,rua,bairro,cidade,biografia,xp,ingles,formacao,profissao)
-		values('$nmEsb','$senha','$email','$nascimento','$cep','$rua','$bairro','$cidade','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');") or die (mysql_error());
-		echo"Você foi cadastrado com sucesso, aguarde um instante.";
+			
+			
+	
+	
+		$sql = @mysql_query("insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+		values('$nmUsu','$senha','$nmEsb','$email','$bday','$cep','$estado','$cidade','$bairro','$rua','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Sem Profissão');") or die (mysql_error());
+ 
+	
+	echo"<div class='alert alert-success'>Você foi cadastrado com sucesso, aguarde um instante.</div>";
+	
+ 
 	}
 }
 else{

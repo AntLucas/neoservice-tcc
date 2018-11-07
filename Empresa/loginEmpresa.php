@@ -72,7 +72,7 @@ error_reporting(0);
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="cadastroDeEmpresa.php">
+						<a class="txt1" href="cadastroEmpresa.php">
 						<p></p>
 							Não tem uma conta? Crie uma!
 						</a>
@@ -103,7 +103,7 @@ error_reporting(0);
 				$_SESSION['Senha'] = $linha['Senha'];
 				
 				
-				header('Location: telaInicialEmpresa.php');
+				header('Location: perfilEmpresa.php');
 				echo "<div class='alert alert-success'>Logado com sucesso!</div>";
 			}
 			

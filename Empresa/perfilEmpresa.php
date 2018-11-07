@@ -17,9 +17,8 @@ while($rowss = mysql_fetch_array($sql)){
 	$estado = utf8_encode($rowss['Estado']);
 	$cidade = utf8_encode($rowss['Cidade']);
 	$bairro = utf8_encode($rowss['Bairro']);
-	$endereco = utf8_encode($rowss['Endereco']);
+	$endereco = utf8_encode($rowss['Rua']);
 	$numero = utf8_encode($rowss['Numero']);
-	$complemento = utf8_encode($rowss['Complemento']);
 	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
@@ -115,11 +114,6 @@ error_reporting(0);
                         <li class="header-menu">
                             <span>Painel Geral</span>
                         </li>
-                        <li class="sidebar">
-                            <a href="telaInicialEmpresa.php">
-                                <i class="fa fa-globe"></i>
-                                <span>Início</span>
-                            </a>
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user"></i>
@@ -141,6 +135,11 @@ error_reporting(0);
                                     </li>
                                 </ul>
                             </div>
+							<li class="sidebar">
+                            <a href="mapaEmpresa.php">
+                                <i class="fa fa-globe"></i>
+                                <span>Mapa</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -296,7 +295,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">informações adicionais</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Endereço</a>
                                 </li>
                             </ul>
                         </div>
@@ -395,7 +394,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Endereço</label>
+                                                <label>Rua</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$endereco";?></p>
@@ -403,7 +402,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Numero</label>
+                                                <label>Número</label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$numero $complemento";?></p>

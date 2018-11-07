@@ -1,10 +1,8 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-$fkid =$_SESSION['IdEmpresa'];
 ?>
 <?php
-$idempresa=  $_SESSION['IdEmpresa'];
 $email = $_SESSION['Email'];
 $senha = $_SESSION['Senha'];
 $nme = $_SESSION['NmEmpresa'];
@@ -23,20 +21,14 @@ while($rowss = mysql_fetch_array($sql)){
 	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-    <title>NeoService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService - Início</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -45,11 +37,28 @@ error_reporting(0);
     <link rel="stylesheet" href="../assets/css/custom.css">
     <link rel="stylesheet" href="../assets/css/custom-themes.css">
     <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png" />
-	<link rel="stylesheet" href="../assets/css/styleCandidato.css">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />  
+	<link rel="stylesheet" type="text/css" href="../assets/css/styleMapa.css">
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.3/mapbox-gl-directions.css' type='text/css' />
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+	<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
 </head>
 
 <body>
-    <div class="page-wrapper chiller-theme sidebar-bg bg1 toggled">
+    <main class="page-content">
+        <div class="container-fluid">
+            <div id='map'></div>
+        </div>
+    </main>
+     <div class="page-wrapper chiller-theme sidebar-bg bg1 toggled">
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
@@ -66,13 +75,13 @@ error_reporting(0);
                         <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><?php echo"$nme";?>
+                        <span class="user-name"><?php echo"$nme"?>
                         </span>
                         <span class="user-role">Empresa</span>
                     </div>
                 </div>
                 <!-- sidebar-header  -->
-				<div class="sidebar-search">
+                 <div class="sidebar-search">
                 <div>
                     <form method="post">
                         <div class="input-group">
@@ -143,7 +152,6 @@ error_reporting(0);
                                 <span>Mapa</span>
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
                 <!-- sidebar-menu  -->
@@ -154,7 +162,8 @@ error_reporting(0);
 
                     <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification"><?php
+                        <span class="badge badge-pill badge-warning notification">
+						<?php
 						$slqs = mysql_query("select a.NmCandidato,
 a.IdCandidato,
 b.NmEmpresa,
@@ -168,7 +177,8 @@ inner join tbempresas b
 on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
 						$lins = mysql_num_rows($slqs);
 						echo"$lins";
-						?></span>
+						?>
+						</span>
                     </a>
                      <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
@@ -246,7 +256,7 @@ while($lc = @mysql_fetch_array($slq) ){
 
                         </a>
                         <div class="dropdown-divider"></div>
-                        
+                   
                     </div>
 					
 					
@@ -265,124 +275,25 @@ while($lc = @mysql_fetch_array($slq) ){
                     </div>
                 </div>
                 <div>
-                    <a href="logoutEmpresa.php">
+                    <a href="logoutCandidato.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
             </div>
+			
+			
         </nav>
-        <!-- sidebar-wrapper  -->
-        <main class="page-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="container emp-profile">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="../assets/images/user.jpg" alt=""/>
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
-                                    <h5>
-                                         <?php echo"$nme";?>
-                                    </h5>
-                              
-
-                                    
-                                    <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Escolher vaga</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <p>VAGAS</p>
-                            <div class="col-md-6">
-								<?php
-							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
-							
-							while($ifrow = mysql_fetch_array($if)){
-							$vag = $ifrow['vaga'];
-							$sal = $ifrow['salario'];
-                            echo"<p>$vag, R$ $sal<p><br/>";
-							}
-							?>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-							<form>
-							</form>
-							 <?php
-							$iff = mysql_query("select * from TbVagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
-							
-							while($iffrow = mysql_fetch_array($iff)){
-							$vag = $iffrow['vaga'];
-							$idvag = $iffrow['IdVaga'];
-                            
-							
-							?>
-                            	<form method="post" action="VagasEditar.php">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label><?php echo"$vag "?></label><br/><br/>
-                                            </div>
-                                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary">Editar</button>
-								<input type="hidden" name="idvag" value="<?php echo"$idvag"?>">
-								<input type="hidden" name="edi" value="editar"/>
-                                            </div>
-                                        </div>
-                                </form>
-								<?php
-								}
-							?>
-							
-							<?php
-							if($_POST['edi'] && $_POST['edi'] == "editar"){
-								$idvaga = $_POST['idvag'];
-							
-								$_SESSION['idvaga'] = $idvaga;
-								
-								
-								
-								
-							}
-							else{
-								echo"falhou";
-							}
-							?>
-                            
-                        </div>
-                    </div>
-                </div>
-            </form>           
-        </div>
-                </div>
-            </div>
-        </main>
-        <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="//malihu.github.io/custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
     <script src="../assets/js/custom.js"></script>
+    <script src="../assets/js/mapa.js"></script>
+    
 </body>
 
 </html>

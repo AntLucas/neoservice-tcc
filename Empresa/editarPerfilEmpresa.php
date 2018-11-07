@@ -24,16 +24,15 @@ $nmu = $_SESSION['NmUsuario'];
 
 $sql = mysql_query("select * from TbEmpresas  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
-	$cnpj = $rowss['CNPJ'];
-	$razao = $rowss['Razao'];
-	$cep = $rowss['CEP'];
-	$estado = $rowss['Estado'];
-	$cidade = $rowss['Cidade'];
-	$bairro = $rowss['Bairro'];
-	$endereco = $rowss['Endereco'];
-	$numero = $rowss['Numero'];
-	$complemento = $rowss['Complemento'];
-	$biografia = $rowss['biografia'];
+	$cnpj = utf8_encode($rowss['CNPJ']);
+	$razao = utf8_encode($rowss['Razao']);
+	$cep = utf8_encode($rowss['CEP']);
+	$estado = utf8_encode($rowss['Estado']);
+	$cidade = utf8_encode($rowss['Cidade']);
+	$bairro = utf8_encode($rowss['Bairro']);
+	$endereco = utf8_encode($rowss['Rua']);
+	$numero = utf8_encode($rowss['Numero']);
+	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
 <?php
@@ -128,11 +127,6 @@ error_reporting(0);
                         <li class="header-menu">
                             <span>Painel Geral</span>
                         </li>
-                        <li class="sidebar">
-                            <a href="telaInicialEmpresa.php">
-                                <i class="fa fa-globe"></i>
-                                <span>Início</span>
-                            </a>
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-user"></i>
@@ -154,6 +148,11 @@ error_reporting(0);
                                     </li>
                                 </ul>
                             </div>
+							<li class="sidebar">
+                            <a href="mapaEmpresa.php">
+                                <i class="fa fa-globe"></i>
+                                <span>Mapa</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -315,7 +314,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Linha do Tempo</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Endereço</a>
                                 </li>
                             </ul>
                         </div>
@@ -388,7 +387,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                                 <label>Rua</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $dados['Endereco'];?>"required/>
+       							<input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo $dados['Rua'];?>"required/>
                                             </div>
                                         </div>
 										<div class="row">

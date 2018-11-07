@@ -1,4 +1,8 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+ini_set('display_errors', 0 );
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -182,26 +186,30 @@ function validarCNPJ(cnpj) {
                         <img src="https://cdn0.iconfinder.com/data/icons/flat-design-galaxy/1701/Saturn3-512.png" alt=""/>
                         <h3>Bem-vindo!</h3>
                         <p>Você está perto de divulgar sua vaga!</p>
-                        <a href="Empresa/loginEmpresa.php"><input type="button" name="" value="Login"/></a>
+                        <a href="loginEmpresa.php"><input type="button" name="" value="Login"/></a>
                     </div>
                     <div class="col-md-9 register-right">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="empresa" role="tabpanel" aria-labelledby="candidato-tab">
                                 <h3 class="register-heading">Cadastre-se como empresa</h3>
-								<form name="formCadastro" action="/action_page.php">
+								
+								<form name="formCadastro" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input type="text" required="required" maxlength="30" class="form-control" placeholder="Nome da Empresa *" value="" />
+										<div class="form-group">
+                                            <input type="text" name="nmUsu" required="required" maxlength="30" class="form-control" placeholder="Nome de Usuário *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" required="required" maxlength="50" class="form-control" placeholder="Razão Social *" value="" />
+                                            <input type="text" name="nmEmpresa" required="required" maxlength="30" class="form-control" placeholder="Nome da Empresa *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" required="required" name="cnpj" id="cnpj" onkeyup="FormataCnpj(this,event)" onblur="if(!validarCNPJ(this.value)){alert('CNPJ Informado é inválido'); this.value='';}" maxlength="18" placeholder="CNPJ *" class="form-control input-md" ng-model="cadastro.cnpj" required>
+                                            <input type="text" name="razaoSocial" required="required" maxlength="50" class="form-control" placeholder="Razão Social *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" required="required" maxlength="45" class="form-control"  placeholder="E-mail *" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+                                            <input type="longtext" name="cnpj" required="required" name="cnpj" id="cnpj" onkeyup="FormataCnpj(this,event)" onblur="if(!validarCNPJ(this.value)){alert('CNPJ Informado é inválido'); this.value='';}" maxlength="18" placeholder="CNPJ *" class="form-control input-md" ng-model="cadastro.cnpj" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" required="required" maxlength="45" class="form-control"  placeholder="E-mail *" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                                         </div>
 										<div class="form-group">
                                             <input type="password" required="required" maxlength="16" name="senha" class="form-control" placeholder="Senha *" value="" />
@@ -220,10 +228,10 @@ function validarCNPJ(cnpj) {
 										<input name="uf" type="text" id="uf" readonly="true" size="2" class="form-control" placeholder="Estado *" /><p />
 									 </form>
 									 <div class="form-group">
-                                            <input type="text" class="form-control"  placeholder="Número *" value="" />
+                                            <input type="text" name="numero" class="form-control"  placeholder="Número *" value="" />
                                         </div>
 									<div class="g-recaptcha" data-sitekey="6LdjfHgUAAAAABMPodoRp08r_wMK5Q39SgWFdgQ8"></div>
-									<input type="submit" class="btnRegister" value="Registrar" onclick="return validarSenha()"/>
+									<input type="submit" name="env" class="btnRegister" value="Registrar" onclick="return validarSenha()"/>
                                     </div>
                                 </div>
 								</form>
@@ -239,3 +247,78 @@ function validarCNPJ(cnpj) {
 			<script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>
+
+<?php
+	if($_POST['env'] && $_POST['env'] == "Registrar"){
+		if($_POST['nmUsu'] || $_POST['nmEmpresa'] || $_POST['razaoSocial'] || $_POST['cnpj'] || $_POST['email'] || $_POST['senha'] || $_POST['senha2'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] || $_POST['estado'] || $_POST['numero']){
+			$nmUsu = $_POST['nmUsu'];
+			$nmEmpresa = $_POST['nmEmpresa'];
+			$razaoSocial = $_POST['razaoSocial'];
+			$cnpj = $_POST['cnpj'];
+			$email= $_POST['email'];
+			$senha = $_POST['senha'];
+			$senha2 = $_POST['senha2'];
+			$cep = $_POST['cep'];
+			$rua = $_POST['rua'];
+			$bairro = $_POST['bairro'];
+			$cidade = $_POST['cidade'];
+			$estado = $_POST['uf'];
+			$numero = $_POST['numero'];
+			
+			
+			if($senha == $senha2){
+			if ($con){
+	$sqli = mysql_query("select * from TbEmpresas where NmUsuario = '$nmUsu'");
+	$sqlii = mysql_query("select * from TbEmpresas where Email = '$email'");
+	$sqliii = mysql_query("select * from TbEmpresas where CNPJ = '$cnpj'");
+
+	if(mysql_num_rows($sqli)>=1){
+		
+	echo "<div class='alert alert-danger'>Esse nome de usuário já está sendo utilizado!</div>";
+		
+		
+	}
+	
+	
+	
+	elseif(mysql_num_rows($sqlii)>=1){
+		
+	echo "<div class='alert alert-danger'>Esse E-mail já está sendo utilizado!</div>";
+	}
+	
+	elseif(mysql_num_rows($sqliii)>=1){
+		
+	echo "<div class='alert alert-danger'>Esse CNPJ já está sendo utilizado!</div>";
+	}
+	
+	
+	
+	
+
+	else{
+			
+			
+			
+		$sql = @mysql_query("insert into TbEmpresas(NmUsuario,NmEmpresa,Razao,CNPJ,Email,Senha,CEP,Rua,Bairro,Cidade,Estado,Numero,biografia)
+		values('$nmUsu','$nmEmpresa','$razaoSocial','$cnpj','$email','$senha','$cep','$rua','$bairro','$estado','$cidade','$numero','Edite esse campo');") or die (mysql_error());
+ 
+	
+	echo"<div class='alert alert-success'>Você foi cadastrado com sucesso, aguarde um instante.</div>";
+	
+ 
+	}
+}
+else{
+
+}
+		}
+		else{
+			echo"<div class='alert alert-danger'>As Senhas devem ser iguais!</div>";
+		}
+		}
+		
+		else{
+			echo"<div class='alert alert-danger'>Preencha Todos os Campos</div>";
+		}
+	}
+?>
