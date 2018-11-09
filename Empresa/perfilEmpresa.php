@@ -17,14 +17,10 @@ while($rowss = mysql_fetch_array($sql)){
 	$estado = utf8_encode($rowss['Estado']);
 	$cidade = utf8_encode($rowss['Cidade']);
 	$bairro = utf8_encode($rowss['Bairro']);
-	$endereco = utf8_encode($rowss['Rua']);
+	$endereco = utf8_encode($rowss['Endereco']);
 	$numero = utf8_encode($rowss['Numero']);
 	$biografia = utf8_encode($rowss['biografia']);
 }
-?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
 ?>
 
 <!DOCTYPE html>
@@ -224,7 +220,7 @@ while($lc = @mysql_fetch_array($slq) ){
 ?>
 </div>
                                     <div class="notification-time">
-                                       <form method="Post" action="">
+                                       <form method="Post">
 									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
 									<input type="submit" name="a" value="iniciar contato"/>
 									<input type="hidden" name="env2" value="clicou"/>
@@ -243,6 +239,42 @@ while($lc = @mysql_fetch_array($slq) ){
 
 ?>
 
+
+<?php
+$iddocan = $_POST["pegar"];
+
+
+if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
+	
+	
+	
+	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+	$echo = mysql_num_rows($sqlil);
+	
+	if($echo>=1){
+		
+	}
+	else{
+	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
+		$sqlill = mysql_query("delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+		header("Location: chatEmpresa.php");
+			echo"<script>
+		alert('$iddocan  $fkid');
+		</script>";
+			
+	}
+	else{
+		echo"<script>
+		alert('aaaaa');
+		</script>";
+	}
+	}
+}
+else{
+	
+}
+
+?>
                         </a>
                         <div class="dropdown-divider"></div>
                    
@@ -315,7 +347,7 @@ while($lc = @mysql_fetch_array($slq) ){
 							while($ifrow = mysql_fetch_array($if)){
 							$vag = utf8_encode($ifrow['vaga']);
 							$sal = utf8_encode($ifrow['salario']);
-                            echo"<p>$vag, R$ $sal<p><br/>";
+                            echo"<p>$vag,<br> R$ $sal<p><br/>";
 							}
 							?>
                             </div>
@@ -334,7 +366,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>E-mail</label>
+                                                <label> E-mail  </label>
                                             </div>
                                             <div class="col-md-6">
                                                 <p><?php echo"$email";?></p>
@@ -436,41 +468,3 @@ while($lc = @mysql_fetch_array($slq) ){
 </body>
 
 </html>
-
-
-<?php
-$iddocan = $_POST["pegar"];
-
-
-if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
-	
-	echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		$sqlill = mysql_query("delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-			echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-			header('Location: chatCandidato.php');
-	}
-	else{
-		echo"<script>
-		alert('aaaaa');
-		</script>";
-	}
-	}
-}
-else{
-	
-}
-
-?>

@@ -27,15 +27,12 @@ while($rowss = mysql_fetch_array($sql)){
 	$estado = utf8_encode($rowss['Estado']);
 	$cidade = utf8_encode($rowss['Cidade']);
 	$bairro = utf8_encode($rowss['Bairro']);
-	$endereco = utf8_encode($rowss['Rua']);
+	$endereco = utf8_encode($rowss['Endereco']);
 	$numero = utf8_encode($rowss['Numero']);
 	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -375,7 +372,7 @@ while($lc = @mysql_fetch_array($slq) ){
                    		
                                          <div class="row">
                                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <input type="submit" class="btn btn-primary" value="Cadastrar"/>
 								<input type="hidden" name="cad" value="cadastrar"/>
                                             </div>
                                         </div>
@@ -389,14 +386,14 @@ while($lc = @mysql_fetch_array($slq) ){
 									
 									if(mysql_query("insert into tbvagas (fk_idempresa,vaga,salario,horario,descricao)
 										values('$idempresa','$nome','$salario','$horario','$descricao')")){
-											echo"aeee";
+											
 										}
 										else{
-											echo"aaaaaaa";
+										echo"erro ao cadastrar informações inválidas";
 										}
 								}
 								else{
-									echo"uuuhh";
+									
 								}
 								?>
                             

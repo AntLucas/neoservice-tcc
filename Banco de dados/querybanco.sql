@@ -1,4 +1,3 @@
-
 use sys;
 
 drop database neoservice;
@@ -21,7 +20,6 @@ Cidade varchar(100)NOT NULL,
 Bairro varchar(100)NOT NULL,
 Endereco varchar(225)NOT NULL,
 Numero int,
-Complemento char(1),
 biografia varchar(150) null,
 primary key (IdEmpresa)
 )default charset = utf8;
@@ -93,7 +91,7 @@ fk_IdEmpresa int,
 foreign key(fk_IdEmpresa) references TbEmpresas(IdEmpresa),
 vaga varchar(50) not null,
 salario decimal(10,2) not null,
-horario time,
+horario varchar(50),
 primary key (IdVaga)
 );
 
@@ -104,11 +102,11 @@ values(1,'Programador',100.00,'06:00');
 
 
 
-insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero,Complemento)
-values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
+insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero)
+values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1);
 
-insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero,Complemento)
-values('EmpresaUsuario2','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1,'A');
+insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero)
+values('EmpresaUsuario2','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1);
 
 
 

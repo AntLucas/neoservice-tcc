@@ -36,15 +36,14 @@ $_SESSION['Contador'] +=1;
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
 
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
-<style class="cp-pen-styles">body {
+<style class="cp-pen-styles">>body {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #27ae60;
+  
+  
+  
   font-family: "proxima-nova", "Source Sans Pro", sans-serif;
   font-size: 1em;
-  letter-spacing: 0.1px;
+
   color: #032731;
   text-rendering: optimizeLegibility;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
@@ -52,12 +51,12 @@ $_SESSION['Contador'] +=1;
 }
 
 #frame {
-  width: 95%;
+  width: 100%;
   min-width: 360px;
-  max-width: 1000px;
-  height: 92vh;
+  max-width: 4000px;
+  height: 100vh;
   min-height: 300px;
-  max-height: 720px;
+  max-height: 3500px;
   background: #E6EAEA;
 }
 @media screen and (max-width: 360px) {
@@ -885,8 +884,8 @@ $_SESSION['Contador'] +=1;
 			</ul>
 		</div>
 		<div id="bottom-bar">
-		<a href="telaInicialCandidato.php">	<button class="mudar"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Tela Inicial </button></a>
-			<button class="mudar "id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Configurações</span></button>
+		<a href="perfilCandidato.php">	<button class="mudar"><i class="fa fa-user" aria-hidden="true"></i> Perfil </button></a>
+			<a  href="logoutCandidato.php"><button class="mudar "id="settings"><i class="fa fa-power-off" aria-hidden="true"></i> <span>Sair</span></button></a>
 		</div>
 	</div>
 	

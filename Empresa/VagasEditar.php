@@ -1,4 +1,4 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
 $fkid =$_SESSION['IdEmpresa'];
@@ -14,10 +14,7 @@ $idvaga = $_SESSION['idvaga'];
 
 
 ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+
 <?php
 $idempresa=  $_SESSION['IdEmpresa'];
 $email = $_SESSION['Email'];

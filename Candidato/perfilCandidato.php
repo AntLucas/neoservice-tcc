@@ -11,7 +11,7 @@ $NmC = $_SESSION['NmCandidato'];
 $sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
 while($rowss = mysql_fetch_array($sql)){
 	$cep = $rowss['cep'];
-	$rua = $rowss['rua'];
+	$rua = $rowss['ende'];
 	$bairro = $rowss['bairro'];
 	$cidade = $rowss['cidade'];
 	$estado = $rowss['estado'];

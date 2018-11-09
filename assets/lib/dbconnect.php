@@ -1,13 +1,13 @@
 <?php 
-/*$con = @mysql_connect('localhost','root','') or die (mysql_error());
-$x1 = mysql_select_db('neoservice',$con) or die (mysql_error());*/
-$servername = "neoservice.mysql.uhserver.com";
+$con = @mysql_connect('localhost','root','') or die (mysql_error());
+$x1 = mysql_select_db('neoservice',$con) or die (mysql_error());
+/*$servername = "neoservice.mysql.uhserver.com";
 $database = "neoservice";
 $username = "neoservice";
 $password = "Nsrvce{69}";
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $database);
-mysqli_close($conn);
+$conn = mysqli_connect($servername, $username, $password, $database);*/
+//mysqli_close($conn);
 ?>
 
 <?php

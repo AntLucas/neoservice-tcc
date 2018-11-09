@@ -299,7 +299,7 @@ function validarCNPJ(cnpj) {
 			
 			
 			
-		$sql = @mysql_query("insert into TbEmpresas(NmUsuario,NmEmpresa,Razao,CNPJ,Email,Senha,CEP,Rua,Bairro,Cidade,Estado,Numero,biografia)
+		$sql = @mysql_query("insert into TbEmpresas(NmUsuario,NmEmpresa,Razao,CNPJ,Email,Senha,CEP,Endereco,Bairro,Cidade,Estado,Numero,biografia)
 		values('$nmUsu','$nmEmpresa','$razaoSocial','$cnpj','$email','$senha','$cep','$rua','$bairro','$estado','$cidade','$numero','Edite esse campo');") or die (mysql_error());
  
 	

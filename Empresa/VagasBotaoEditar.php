@@ -18,7 +18,7 @@ while($rowss = mysql_fetch_array($sql)){
 	$estado = utf8_encode($rowss['Estado']);
 	$cidade = utf8_encode($rowss['Cidade']);
 	$bairro = utf8_encode($rowss['Bairro']);
-	$endereco = utf8_encode($rowss['Rua']);
+	$endereco = utf8_encode($rowss['Endereco']);
 	$numero = utf8_encode($rowss['Numero']);
 	$biografia = utf8_encode($rowss['biografia']);
 }
@@ -361,7 +361,7 @@ while($lc = @mysql_fetch_array($slq) ){
 								
 							}
 							else{
-								echo"falhou";
+								
 							}
 							?>
                             
