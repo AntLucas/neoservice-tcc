@@ -96,17 +96,22 @@ fk_IdEmpresa int,
 foreign key(fk_IdEmpresa) references TbEmpresas(IdEmpresa),
 vaga varchar(50) not null,
 salario decimal(10,2) not null,
-horario varchar(50),
+horario varchar(50) not null,
+descricao varchar(100) not null,
 primary key (IdVaga)
 );
 
+update tbvagas set vaga = 'aeeeee', salario = '120.00', horario = '10:00' , descricao = 'dificil' where fk_IdEmpresa = 1;
+
+select * from tbvagas;
+
+insert into TbVagas(fk_IdEmpresa,vaga,salario,horario,descricao)
+values(1,'Programador','130.00','06:00','dificil');
 
 
-insert into TbVagas(fk_IdEmpresa,vaga,salario,horario)
-values(1,'Programador',100.00,'06:00');
 
 
-
+select * from TbContatos where fk_IdCandidato = '1' and fk_IdEmpresa='2';
 insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero)
 values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'SP','São Paulo','TesteBairro','TesteEndereço',1);
 
@@ -117,7 +122,7 @@ values('EmpresaUsuario2','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345
 
 
 insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
-values('CandidatoUsuario','SenhaCandidato','Antonio','candidato@teste','2018-11-05','08090210','SP','São Paulo','Jardim Helena','Rua das Avenidas','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');
+values('CandidatoUsuario','SenhaCandidato','Antonio','candidato@teste','2018-11-05','08090211','SP','São Paulo','Jardim Helena','Rua das Avenidas','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');
 
 
 insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
