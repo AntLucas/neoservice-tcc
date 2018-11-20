@@ -1,8 +1,54 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+<?php 
+	if($_POST['env'] && $_POST['env'] == "login"){
+		if($_POST['Temail'] && $_POST['Tsenha']){
+			$Temail = $_POST['Temail'];
+			$Tsenha = $_POST['Tsenha'];
+			
+			$sql= mysqli_query($conn,"select * from TbEmpresas  where Email = '$Temail' and Senha = '$Tsenha';"); 
+			$row = mysqli_num_rows($sql);
+			$linha = mysqli_fetch_assoc($sql);
+			
+			
+			
+			
+			if($row > 0){
+				
+				
+				session_start();
+				$_SESSION['Contador'] = 1;
+				$_SESSION['IdEmpresa'] = $linha['IdEmpresa'];
+				$_SESSION['NmEmpresa'] = $linha['NmEmpresa'];
+				$_SESSION['NmUsuario'] = $linha['NmUsuario'];
+				$_SESSION['Email'] = $linha['Email'];
+				$_SESSION['Senha'] = $linha['Senha'];
+				$_SESSION['cnpj'] = $linha['CNPJ'];
+				$_SESSION['razao'] = $linha['Razao'];
+				$_SESSION['cep']= $linha['CEP'];
+				$_SESSION['estado']= $linha['Estado'];
+				$_SESSION['cidade']= $linha['Cidade'];
+				$_SESSION['bairro']= $linha['Bairro'];
+				$_SESSION['endereco']= $linha['Endereco'];
+				$_SESSION['numero']= $linha['Numero'];
+				$_SESSION['biografia']= $linha['biografia'];
+				
+				header('Location: perfilEmpresa.php');
+				echo "<div class='alert alert-success'>Logado com sucesso!</div>";
+			}
+			
+			else{
+				echo "<div class='alert alert-danger'>Email ou senha inválidos!</div>";
+			}
+		}
+		else{
+			echo "<div class='alert alert-warning'>Preencha todos os campos</div>";
+		}
+	}
+	else{
+		
+	}
+	
+	?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -78,48 +124,7 @@ error_reporting(0);
 						</a>
 					</div>
 				</form>
-						<?php 
-	if($_POST['env'] && $_POST['env'] == "login"){
-		if($_POST['Temail'] && $_POST['Tsenha']){
-			$Temail = $_POST['Temail'];
-			$Tsenha = $_POST['Tsenha'];
-			
-			$sql= mysql_query("select * from TbEmpresas  where Email = '$Temail' and Senha = '$Tsenha';")or die(mysql_error()); 
-			$row = mysql_num_rows($sql);
-			$linha = mysql_fetch_assoc($sql);
-			
-			
-			
-			
-			if($row > 0){
-				
-				
-				session_start();
-				$_SESSION['Contador'] = 1;
-				$_SESSION['IdEmpresa'] = $linha['IdEmpresa'];
-				$_SESSION['NmEmpresa'] = $linha['NmEmpresa'];
-				$_SESSION['NmUsuario'] = $linha['NmUsuario'];
-				$_SESSION['Email'] = $linha['Email'];
-				$_SESSION['Senha'] = $linha['Senha'];
-				
-				
-				header('Location: perfilEmpresa.php');
-				echo "<div class='alert alert-success'>Logado com sucesso!</div>";
-			}
-			
-			else{
-				echo "<div class='alert alert-danger'>Email ou senha inválidos!</div>";
-			}
-		}
-		else{
-			echo "<div class='alert alert-warning'>Preencha todos os campos</div>";
-		}
-	}
-	else{
-		
-	}
-	
-	?>
+						
 			</div>
 		</div>
 	</div>

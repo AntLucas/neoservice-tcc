@@ -1,4 +1,14 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaEmpresa.php');
+									}
+									else{
+										
+											}
+
+							?>
 <?php 
 session_start();
 
@@ -12,24 +22,30 @@ session_start();
 $_SESSION['Contador'] +=1;
 ?>
 <?php
-$idcandidato =  $_SESSION['IdCandidato'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
 
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cep = $rowss['cep'];
-	$rua = $rowss['rua'];
-	$bairro = $rowss['bairro'];
-	$cidade = $rowss['cidade'];
-	$estado = $rowss['estado'];
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
+$sql = "select * from TbCandidatos  where Email = '$email' and Senha = '$senha';";
+$sql2 = mysqli_query($conn, $sql);
+while($rowss = mysqli_fetch_array($sql2)){
+
+	$bday = utf8_encode($rowss['bdat']);
+	$nascimento = implode("/", array_reverse(explode("-", $bday)));
+	
 }
 ?>
 
@@ -92,8 +108,9 @@ while($rowss = mysql_fetch_array($sql)){
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbEmpresas;");
-							while($row = mysql_fetch_array($sqli)){
+							$sqli = "select * from TbEmpresas;";
+							$sqli2 = mysqli_query($conn, $sqli);
+							while($row = mysqli_fetch_array($sqli2)){
 							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
@@ -101,16 +118,7 @@ while($rowss = mysql_fetch_array($sql)){
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
                         </div>
                     </div>
                 </div>
@@ -270,23 +278,26 @@ while($rowss = mysql_fetch_array($sql)){
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p>
-							<?php
-							$if = mysql_query("select a.NmCandidato,
+                            <?php
+							$if = "select a.NmCandidato,
 							b.Competencia
-
+							
 							from TbCandidatos a
 							inner join tbcompetenciaRelacao c
 							on a.IdCandidato = c.fk_IdCandidato
 							inner join tbcompetencias b
 							on b.IdCompetencia = c.fk_IdCompetencia
-							where IdCandidato = $idcandidato;")or die (mysql_error());
+							where IdCandidato = $idcandidato;";
 							
-							while($ifrow = mysql_fetch_array($if)){
-							$comp = $ifrow['Competencia'];
-                            echo"<p>$comp<p><br/>";
+							$if2 = mysqli_query($conn, $if);
+							
+							while($ifrow = mysqli_fetch_array($if2)){
+							$comp = utf8_encode($ifrow['Competencia']);
+                            echo"$comp<br/>";
 							}
 							?>
-                            
+							
+						
                         </div>
                     </div>
                    
@@ -304,12 +315,13 @@ while($rowss = mysql_fetch_array($sql)){
 												
 												<select name='select'>
 														<?php
-							$query = mysql_query("select * from TbCompetencias;");
-							while($rowsss = mysql_fetch_array($query)){
+							$query ="select * from TbCompetencias;";
+							$query2 = mysqli_query($conn,$query);
+							while($rowsss = mysqli_fetch_array($query2)){
 								$competencia = $rowsss['competencia'];
 								
                             echo"
-							<option><p>$competencia</p></option>
+							<option>$competencia</option>
 							
 							";
 							}
@@ -339,9 +351,10 @@ while($rowss = mysql_fetch_array($sql)){
 									
 									
 									
-									$sqli = mysql_query("select * from TbCompetencias where competencia = '$competencia'")or die (mysql_error());
+									$sqli = "select * from TbCompetencias where competencia = '$competencia'";
+									$sqli2 = mysqli_query($conn,$sqli);
 			
-									while($rowssa = mysql_fetch_array($sqli)){
+									while($rowssa = mysqli_fetch_array($sqli2)){
 									
 									$idcompetencia = $rowssa['IdCompetencia'];
 									
@@ -349,9 +362,11 @@ while($rowss = mysql_fetch_array($sql)){
 								
 									}
 	
-									$sqli = mysql_query("select * from tbcompetenciaRelacao where fk_IdCompetencia = '$idcompetencia' and fk_IdCandidato='$idcandidato'")or die (mysql_error());
+									$sqli = "select * from tbcompetenciaRelacao where fk_IdCompetencia = '$idcompetencia' and fk_IdCandidato='$idcandidato'";
+									
+									$sqli2 = mysqli_query($conn,$sqli);
 	
-									if(mysql_num_rows($sqli)>=1){
+									if(mysqli_num_rows($sqli2)>=1){
 		
 									echo "<div class='alert alert-danger'>Essa competência já foi cadastrada!</div>";
 		
@@ -359,7 +374,7 @@ while($rowss = mysql_fetch_array($sql)){
 									}
 									else{
 	
-									if(mysql_query("insert into tbcompetenciaRelacao(fk_IdCandidato,fk_IdCompetencia)
+									if(mysqli_query($conn,"insert into tbcompetenciaRelacao(fk_IdCandidato,fk_IdCompetencia)
 										values('$idcandidato ','$idcompetencia');")){
 											
 										

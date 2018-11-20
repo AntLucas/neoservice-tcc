@@ -1,8 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -87,15 +84,16 @@ error_reporting(0);
 			$Temail = $_POST['Temail'];
 			$Tsenha = $_POST['Tsenha'];
 			
-			$sql= mysql_query("select * from TbCandidatos where Email = '$Temail' and Senha = '$Tsenha';")or die(mysql_error()); 
-			$row = mysql_num_rows($sql);
-			$linha = mysql_fetch_assoc($sql);
+			$sql="select * from TbCandidatos where Email = '$Temail' and Senha = '$Tsenha';";		
+			$sql2 = mysqli_query($conn,$sql);
+			$row = mysqli_num_rows($sql2);
+			$linha = mysqli_fetch_assoc($sql2);
 			
 			
 			
 			
 			if($row > 0){
-				
+			
 				
 				session_start();
 				$_SESSION['Contador'] = 1;
@@ -104,7 +102,16 @@ error_reporting(0);
 				$_SESSION['NmUsuario'] = $linha['NmUsuario'];
 				$_SESSION['Email'] = $linha['Email'];
 				$_SESSION['Senha'] = $linha['Senha'];
-				
+				$_SESSION['cep']    = $linha['cep'];  
+				$_SESSION['estado']  = $linha['estado']; 
+				$_SESSION['cidade']  = $linha['cidade']; 
+				$_SESSION['bairro'] = $linha['bairro'];  
+				$_SESSION['rua']  = $linha['rua'];    
+				$_SESSION['biografia']= $linha['biografia'];
+				$_SESSION['xp']    = $linha['xp'];   
+				$_SESSION['ingles']  = $linha['ingles']; 
+				$_SESSION['formacao'] = $linha['formacao'];
+				$_SESSION['profissao'] = $linha['profissao'];
 				
 				header('Location: telaInicialCandidato.php');
 				echo "<div class='alert alert-success'>Logado com sucesso!</div>";

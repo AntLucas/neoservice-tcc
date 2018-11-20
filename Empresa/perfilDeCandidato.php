@@ -1,54 +1,8 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-if($_SESSION['Contador'] == 2){
-	echo "aeeeee";
-	header('Location: editarPerfilEmpresa.php');
-	
-	$_SESSION['Contador'] = 0; 
-}
-$_SESSION['Contador'] +=1;
+
 ?>
-<?php
-
-
-/*
-if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-	$idcand = $_POST['pegar'];
-	echo"<script>
-	alert('eeeeeee');
-	</script>";
-	
-	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
-	$echo = mysqli_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysqli_query($conn,"insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$idempresa','$idcand')")){
-		$sqlill = mysqli_query($conn,"delete from TbSolicitacao where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
-		header("Location: chatEmpresa.php");
-			echo"<script>
-		alert('$idcand  $idempresa');
-		</script>";
-			
-	}
-	else{
-		echo"<script>
-		alert('$idcand  $idempresa');
-		</script>";
-	}
-	}
-}
-else{
-	echo"<script>
-	alert('eeeeeeea');
-	</script>";
-}
-*/
-?>
-
 <?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
@@ -58,10 +12,12 @@ else{
 										
 											}
 
+											
+							
 							?>
 							
 <?php
-
+$_SESSION['Contador'] = 1;
 				
 	$nmu = utf8_encode($_SESSION['NmUsuario']) ;
 	$cnpj = utf8_encode($_SESSION['cnpj']) ;
@@ -78,7 +34,37 @@ else{
 	$senha = utf8_encode($_SESSION['Senha']);
 	$nme = utf8_encode($_SESSION['NmEmpresa']);
 
-
+	$idcand2 = $_SESSION['idbusca'];
+	$sqle = mysqli_query($conn,"select * from tbcandidatos where IdCandidato = '$idcand2'");
+	while($while = mysqli_fetch_assoc($sqle)){
+		$NmCs = utf8_encode($while['NmCandidato']);
+		$emails =  utf8_encode($while['Email']);
+		$bday = utf8_encode($while['bdat']);
+		$nascimentos = implode("/", array_reverse(explode("-", $bday)));
+		$ruas =  utf8_encode($while['rua']);
+		$bairros =  utf8_encode($while['bairro']);
+		$estados =  utf8_encode($while['estado']);
+		$cidades =  utf8_encode($while['cidade']);
+		$ceps =  utf8_encode($while['cep']);
+		$profissaos =  utf8_encode($while['profissao']);
+		$xps =  utf8_encode($while['xp']);
+		$ingless=  utf8_encode($while['ingles']);
+		$formacaos=  utf8_encode($while['formacao']);
+		$bios=  utf8_encode($while['biografia']);
+	}
+	if(isset($_POST['contato']) && $_POST['contato'] == "contatos"){
+								$id= $_POST['id'];
+								
+								if(mysqli_query($conn,"insert into tbcontatos (fk_IdEmpresa,fk_IdCandidato)values($idempresa,$id)")){
+									header('Location: chatEmpresa.php');
+								}
+								else{
+									echo"falha ao iniciar contato";
+								}
+							}
+							else{
+								
+							}
 
 ?>
 
@@ -357,119 +343,106 @@ else{
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
-					<form>
-					</form>
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="../assets/images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                         <?php echo"$nme";?>
+									
+                                      <?php echo"$NmCs"?>
                                     </h5>
-                               
-                                       
-
-                                    
+                                    <h6>
+                                      <?php echo"$profissaos"?>
+                                    </h6>
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Endereço</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Currículo</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                   
+                    <div class="col-md-2">
+					<?php
+					$sqly =mysqli_query($conn,"Select * from tbcontatos where fk_IdEmpresa=$idempresa and fk_IdCandidato=$idcand2");
+					$sqly2 = mysqli_num_rows($sqly);
+					
+					if($sqly2 >= 1){
+						echo"<h6>Você já tem um contato com esse candidato</h6>";
+					}
+					else{
+					?>
+					<form>
+					</form>
+					<form method="post">
+                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Iniciar contato"/>
+						<input type="hidden" name="contato" value="contatos">
+						<input type="hidden" name="id" value="<?php echo"$idcand2";?>">
+					</form>
+					<?php
+					}
+					?>
+                    </div>
                 </div>
                 <div class="row">
-                   <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="profile-work">
-                            <p>VAGAS</p>
-                             <div class="col-md-6">
-								<?php
-							$if = mysqli_query($conn,"select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysqli_error());
+                            <p>COMPETÊNCIAS</p>
+                            <?php
+							$if = "select a.NmCandidato,
+							b.Competencia
 							
-							while($ifrow = mysqli_fetch_array($if)){
-							$vag = utf8_encode($ifrow['vaga']);
-							$sal = utf8_encode($ifrow['salario']);
-                          echo"$vag,<br/>R$ $sal<br/><br/>";
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcand2;";
+							
+							$if2 = mysqli_query($conn, $if);
+							
+							while($ifrow = mysqli_fetch_array($if2)){
+							$comp = utf8_encode($ifrow['Competencia']);
+                            echo"$comp<br/>";
 							}
 							?>
-                            </div>
+							
+						
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-							
-							<div class="row">
-                                            <div class="col-md-6">
-                                                <label>Nome de usuário</label>
-                                            </div>
-                                    <div class="col-md-6">
-       							<input type="text" class="form-control" id="usuario"  name="usuario" value="<?php echo"$nmu";?>"required/>
-        							</div>
-                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Nome da Empresa</label>
+                                                <label>Nome</label>
                                             </div>
-                                    <div class="col-md-6">
-       							<input type="text" class="form-control" id="empresa"  name="empresa" value="<?php echo"$nme";?>"required/>
-        							</div>
-                                        </div>
-										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Senha</label>
+                                                <p><?php echo"$NmCs"?></p>
                                             </div>
-                                    <div class="col-md-6">
-       							<input type="password" class="form-control" id="senha"  name="senha" value="<?php echo"$senha";?>"required/>
-        							</div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>CNPJ</label>
-                                            </div>
-                                	<div class="col-md-6">
-       							<input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo "$cnpj";?>"required/>
-        							</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Razão Social</label>
-                                            </div>
-                                	<div class="col-md-6">
-       							<input type="text" class="form-control" id="razao" name="razao" value="<?php echo "$razao";?>"required/>
-        							</div>
-                                        </div>
-										<div class="row">
                                             <div class="col-md-6">
                                                 <label>E-mail</label>
                                             </div>
-                                	<div class="col-md-6">
-       							<input type="email" class="form-control" id="email" name="email" value="<?php echo "$email";?>"required/>
-        							</div>
-                                        </div>
-                                        
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                        <div class="row">
                                             <div class="col-md-6">
-                                                <label>CEP</label>
+                                                <p><?php echo"$emails"?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Nascimento</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="cep" name="cep" value="<?php echo "$cep ";?>"required/>                
+                                                <p><?php echo"$nascimentos"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -477,7 +450,7 @@ else{
                                                 <label>Rua</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="endereco" name="endereco" value="<?php echo "$endereco";?>"required/>
+                                                <p><?php echo"$ruas"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -485,7 +458,7 @@ else{
                                                 <label>Bairro</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="bairro" name="bairro" value="<?php echo "$bairro";?>"required/>
+                                                <p><?php echo"$bairros"?></p>
                                             </div>
                                         </div>
 										<div class="row">
@@ -493,125 +466,64 @@ else{
                                                 <label>Estado</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="estado" name="estado" value="<?php echo "$estado";?>"required/>
+                                                <p><?php echo"$estados"?></p>
                                             </div>
                                         </div>
-                                        <div class="row">
+										<div class="row">
                                             <div class="col-md-6">
                                                 <label>Cidade</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="cidade"name="cidade" value="<?php echo "$cidade";?>"required/>
+                                                <p><?php echo"$cidades"?></p>
                                             </div>
                                         </div>
-                                       										
 										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Número</label>
+                                                <label>CEP</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="numero" name="numero" value="<?php echo "$numero";?>"required/>
-                                            </div>
-                                        </div>
-										
-										 <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <p> <input type="text" class="form-control" id="biografia" name="biografia" value="<?php echo "$biografia";?>"required/></p>
+                                                <p><?php echo"$ceps"?></p>
                                             </div>
                                         </div>
                             </div>
-							<input class="btn btn-primary" type="submit" value="Alterar dados">
-					<input type="hidden" name ="env" value="altera">
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Experiência Profissional?</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$xps"; ?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Idiomas</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$ingless"; ?></p>
+                                            </div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Escolaridade</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$formacaos"; ?></p>
+                                            </div>
+                                        </div>
+                                        
+										<br>
+										 <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Sua Biografia</label><br/>
+                                                <p><?php echo"$bios"; ?></p>
+                                            </div>
+                                        </div>
+                            </div>
                         </div>
                     </div>
-					
                 </div>
-				
-            </form>  
-
-
-<?php
-if($_POST['env'] && $_POST['env'] == "altera"){
-	
-	if($_POST['usuario'] && $_POST['empresa'] && $_POST['email'] && $_POST['cnpj'] && $_POST['razao'] && $_POST['cep'] && $_POST['cidade'] && $_POST['estado'] && $_POST['bairro'] && $_POST['endereco'] && $_POST['numero'] && $_POST['biografia'] && $_POST['senha']){
-
-	
-	
-	$nmu = utf8_encode($_SESSION['NmUsuario']) ;
-	$cnpj = utf8_encode($_SESSION['cnpj']) ;
-	$razao =utf8_encode($_SESSION['razao']) ;
-	$cep =	utf8_encode($_SESSION['cep']);
-	$estado =utf8_encode($_SESSION['estado']);
-	$cidade =utf8_encode($_SESSION['cidade']);
-	$bairro = utf8_encode($_SESSION['bairro']);
-	$endereco =utf8_encode($_SESSION['endereco']);
-	$numero =utf8_encode($_SESSION['numero']);
-	$biografia =utf8_encode($_SESSION['biografia']);
-	$idempresa=  utf8_encode($_SESSION['IdEmpresa']);
-	$email = utf8_encode($_SESSION['Email']);
-	$senha = utf8_encode($_SESSION['Senha']);
-	$nme = utf8_encode($_SESSION['NmEmpresa']);
-
-	
-	
-	$usuarios =	$_POST['usuario'];
-	$empresas =	$_POST['empresa'];
-	$cnpjs =	$_POST['cnpj'];
-	$emails =	$_POST['email'];
-	$razaos =	$_POST['razao'];
-	$ceps =	$_POST['cep'];
-	$cidades =	$_POST['cidade'];
-	$estados =	$_POST['estado'];
-	$bairros =	$_POST['bairro'];
-	$enderecos =	$_POST['endereco'];
-	$numeros =	$_POST['numero'];
-	$biografias = $_POST['biografia'];
-	$senhas = $_POST['senha']; 
-	
-	$_SESSION['NmEmpresa'] = $empresas;
-	$_SESSION['NmUsuario'] = $usuarios;
-	$_SESSION['Email'] =	$emails;
-	$_SESSION['Senha'] = $senhas;
-	$_SESSION['cnpj'] = $cnpjs;
-	$_SESSION['razao'] = $razaos; 
-	$_SESSION['cep'] = $ceps;
-	$_SESSION['cidade'] = $cidades;
-	$_SESSION['estado'] = $estados;
-	$_SESSION['bairro'] = $bairros;
-	$_SESSION['endereco'] = $enderecos;
-	$_SESSION['numero'] = $numeros;
-	$_SESSION['biografia'] = $biografias;
-	
-	$empresass =utf8_encode($_SESSION['NmEmpresa']);
-	$usuarioss=utf8_encode($_SESSION['NmUsuario']);
-	$emailss=utf8_encode($_SESSION['Email']);
-	$senhass=utf8_encode($_SESSION['Senha']);
-	$cnpjss=utf8_encode($_SESSION['cnpj']);
-	$razaoss=utf8_encode($_SESSION['razao']);
-	$cepss=utf8_encode($_SESSION['cep']);
-	$cidadess=utf8_encode($_SESSION['cidade']);
-	$estadoss=utf8_encode($_SESSION['estado']);
-	$bairross=	utf8_encode($_SESSION['bairro']); 
-	$enderecoss=utf8_encode($_SESSION['endereco']);
-	$numeross=utf8_encode($_SESSION['numero']);
-	$biografiass=utf8_encode($_SESSION['biografia']);
-	
-	$query = mysqli_query($conn,"UPDATE TbEmpresas SET NmUsuario = '$usuarioss' ,NmEmpresa =  '$empresass', CNPJ = '$cnpjss', Email = '$emailss' , CEP = '$cepss',Endereco= '$enderecoss' , biografia = '$biografiass', Cidade = '$cidadess' , Estado = '$estadoss' , Bairro = '$bairross', Numero = '$numeross' , Razao = '$razaoss', Senha = '$senhass' where IdEmpresa = '$idempresa'")or die(mysqli_error()); 
-	
-	echo"dados alterados";
-	
-	}
-	else{
-		echo"Prrecha todos os campos";
-		
-	}
-	
-}
-else{
-	echo"nao cliqa";
-}
-?>		
+            </form>           
         </div>
                 </div>
             </div>

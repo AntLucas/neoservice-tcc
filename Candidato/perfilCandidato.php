@@ -1,27 +1,42 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaEmpresa.php');
+									}
+									else{
+										
+											}
+
+							?>
 <?php 
 session_start();
 ?>
 <?php
-$idcandidato =  $_SESSION['IdCandidato'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
 
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cep = $rowss['cep'];
-	$rua = $rowss['ende'];
-	$bairro = $rowss['bairro'];
-	$cidade = $rowss['cidade'];
-	$estado = $rowss['estado'];
-	$bday = $rowss['bdat'];
+$sql = "select * from TbCandidatos  where Email = '$email' and Senha = '$senha';";
+$sql2 = mysqli_query($conn, $sql);
+while($rowss = mysqli_fetch_array($sql2)){
+
+	$bday = utf8_encode($rowss['bdat']);
 	$nascimento = implode("/", array_reverse(explode("-", $bday)));
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
+	
 }
 ?>
 
@@ -70,7 +85,7 @@ while($rowss = mysql_fetch_array($sql)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post">
+                    <form method="post" >
                         <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -84,8 +99,9 @@ while($rowss = mysql_fetch_array($sql)){
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbEmpresas;");
-							while($row = mysql_fetch_array($sqli)){
+							$sqli = "select * from TbEmpresas;";
+							$sqli2 = mysqli_query($conn, $sqli);
+							while($row = mysqli_fetch_array($sqli2)){
 							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
@@ -93,16 +109,8 @@ while($rowss = mysql_fetch_array($sql)){
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
+							
                         </div>
                     </div>
                 </div>
@@ -262,11 +270,27 @@ while($rowss = mysql_fetch_array($sql)){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>COMPETÊNCIAS</p><br/>
+                            <p>COMPETÊNCIAS</p>
+                            <?php
+							$if = "select a.NmCandidato,
+							b.Competencia
 							
+							from TbCandidatos a
+							inner join tbcompetenciaRelacao c
+							on a.IdCandidato = c.fk_IdCandidato
+							inner join tbcompetencias b
+							on b.IdCompetencia = c.fk_IdCompetencia
+							where IdCandidato = $idcandidato;";
 							
+							$if2 = mysqli_query($conn, $if);
 							
+							while($ifrow = mysqli_fetch_array($if2)){
+							$comp = utf8_encode($ifrow['Competencia']);
+                            echo"$comp<br/>";
+							}
+							?>
 							
+						
                         </div>
                     </div>
                     <div class="col-md-8">

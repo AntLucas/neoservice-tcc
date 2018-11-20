@@ -201,10 +201,10 @@ error_reporting(0);
 			
 			if($senha == $senha2){
 			if ($con){
-	$sqli = mysql_query("select * from TbCandidatos where NmUsuario = '$nmUsu'");
-	$sqlii = mysql_query("select * from TbCandidatos where Email = '$email'");
+	$sqli = mysqli_query($conn,"select * from TbCandidatos where NmUsuario = '$nmUsu'");
+	$sqlii = mysqli_query($conn,"select * from TbCandidatos where Email = '$email'");
 
-	if(mysql_num_rows($sqli)>=1){
+	if(mysqli_num_rows($sqli)>=1){
 		
 	echo "<div class='alert alert-danger'>Esse nome de usuário já está sendo utilizado!</div>";
 		
@@ -213,7 +213,7 @@ error_reporting(0);
 	
 	
 	
-	elseif(mysql_num_rows($sqlii)>=1){
+	elseif(mysqli_num_rows($sqlii)>=1){
 		
 	echo "<div class='alert alert-danger'>Esse E-mail já está sendo utilizado!</div>";
 	}
@@ -227,8 +227,8 @@ error_reporting(0);
 			
 	
 	
-		$sql = @mysql_query("insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
-		values('$nmUsu','$senha','$nmEsb','$email','$bday','$cep','$estado','$cidade','$bairro','$rua','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Sem Profissão');") or die (mysql_error());
+		$sql = @mysqli_query($conn,"insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+		values('$nmUsu','$senha','$nmEsb','$email','$bday','$cep','$estado','$cidade','$bairro','$rua','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Sem Profissão');") or die (mysqli_error());
  
 	
 	echo"<div class='alert alert-success'>Você foi cadastrado com sucesso, aguarde um instante.</div>";

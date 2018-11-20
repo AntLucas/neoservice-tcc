@@ -1,26 +1,38 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-$fkid =$_SESSION['IdEmpresa'];
+
 ?>
 <?php
-$idempresa=  $_SESSION['IdEmpresa'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$nme = $_SESSION['NmEmpresa'];
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaCandidato.php');
+									}
+									else{
+										
+											}
 
-$sql = mysql_query("select * from TbEmpresas  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cnpj = utf8_encode($rowss['CNPJ']);
-	$razao = utf8_encode($rowss['Razao']);
-	$cep = utf8_encode($rowss['CEP']);
-	$estado = utf8_encode($rowss['Estado']);
-	$cidade = utf8_encode($rowss['Cidade']);
-	$bairro = utf8_encode($rowss['Bairro']);
-	$endereco = utf8_encode($rowss['Endereco']);
-	$numero = utf8_encode($rowss['Numero']);
-	$biografia = utf8_encode($rowss['biografia']);
-}
+							?>
+<?php
+$_SESSION['Contador'] = 1;
+				
+	$nmu = utf8_encode($_SESSION['NmUsuario']) ;
+	$cnpj = utf8_encode($_SESSION['cnpj']) ;
+	$razao =utf8_encode($_SESSION['razao']) ;
+	$cep =	utf8_encode($_SESSION['cep']);
+	$estado =utf8_encode($_SESSION['estado']);
+	$cidade =utf8_encode($_SESSION['cidade']);
+	$bairro = utf8_encode($_SESSION['bairro']);
+	$endereco =utf8_encode($_SESSION['endereco']);
+	$numero =utf8_encode($_SESSION['numero']);
+	$biografia =utf8_encode($_SESSION['biografia']);
+	$idempresa=  utf8_encode($_SESSION['IdEmpresa']);
+	$email = utf8_encode($_SESSION['Email']);
+	$senha = utf8_encode($_SESSION['Senha']);
+	$nme = utf8_encode($_SESSION['NmEmpresa']);
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,25 +94,16 @@ while($rowss = mysql_fetch_array($sql)){
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbCompetencias;");
-							while($row = mysql_fetch_array($sqli)){
-							$competencia = $row['competencia'];
+							$sqli = mysqli_query($conn,"select * from TbCompetencias;");
+							while($row = mysqli_fetch_array($sqli)){
+							$competencia = utf8_encode($row['competencia']);
 							echo"<option value='$competencia'></option>";
 							}
 							?>
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaCandidato.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
                         </div>
                     </div>
 				</div>
@@ -141,7 +144,7 @@ while($rowss = mysql_fetch_array($sql)){
                 </div>
                 <!-- sidebar-menu  -->
             </div>
-            <!-- sidebar-content  -->
+           <!-- sidebar-content  -->
             <div class="sidebar-footer">
                 <div class="dropdown">
 
@@ -149,7 +152,7 @@ while($rowss = mysql_fetch_array($sql)){
                         <i class="fa fa-bell"></i>
                         <span class="badge badge-pill badge-warning notification">
 						<?php
-						$slqs = mysql_query("select a.NmCandidato,
+						$slqs = mysqli_query($conn,"select a.NmCandidato,
 a.IdCandidato,
 b.NmEmpresa,
 b.IdEmpresa,
@@ -159,8 +162,8 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
-						$lins = mysql_num_rows($slqs);
+on b.IdEmpresa = c.fk_IdEmpresa where fk_IdEmpresa=$idempresa") or die (mysqli_error());
+						$lins = mysqli_num_rows($slqs);
 						echo"$lins";
 						?>
 						</span>
@@ -173,7 +176,7 @@ on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
                         <div class="dropdown-divider"></div>
                      <?php
 
-$slq = mysql_query("select a.NmCandidato,
+$slq = mysqli_query($conn,"select a.NmCandidato,
 a.IdCandidato,
 b.NmEmpresa,
 b.IdEmpresa,
@@ -183,20 +186,20 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
+on b.IdEmpresa = c.fk_IdEmpresa") or die (mysqli_error());
 echo"Notificações";
 
-while($lc = @mysql_fetch_array($slq) ){
+while($lc = @mysqli_fetch_array($slq) ){
 	$idemp = $lc['IdEmpresa'];
 	$idcand = $lc['IdCandidato'];
 	$idsoli = $lc['IdSolicitacao'];
-	$nmcandidato = $lc['NmCandidato'];
-	$nmempresa= $lc['NmEmpresa'];
+	$nmcandidato = utf8_encode($lc['NmCandidato']);
+	$nmempresa= utf8_encode($lc['NmEmpresa']);
 	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
+	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
+	$echo = mysqli_num_rows($sqlil);
 	
-	if($echo>=1){
+	if($echo==0){
 	
 	}
 		
@@ -213,7 +216,7 @@ while($lc = @mysql_fetch_array($slq) ){
                                     <div class="notification-detail">
 										
 	<?php
-	echo"<br>$nmcandidato Solicitou um contato!<br>";
+	echo"<br>$nmcandidato Solicitou um contato$echo!<br>";
 	
 
 
@@ -248,15 +251,15 @@ if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
 	
 	
 	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
+	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+	$echo = mysqli_num_rows($sqlil);
 	
 	if($echo>=1){
 		
 	}
 	else{
-	if(mysql_query("insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		$sqlill = mysql_query("delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+	if(mysqli_query($conn,"insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
+		$sqlill = mysqli_query($conn,"delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
 		header("Location: chatEmpresa.php");
 			echo"<script>
 		alert('$iddocan  $fkid');
@@ -342,12 +345,12 @@ else{
                             <p>VAGAS</p>
                              <div class="col-md-6">
 								<?php
-							$if = mysql_query("select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysql_error());
+							$if = mysqli_query($conn,"select * from tbvagas where fk_IdEmpresa = '$idempresa';")or die (mysqli_error());
 							
-							while($ifrow = mysql_fetch_array($if)){
+							while($ifrow = mysqli_fetch_array($if)){
 							$vag = utf8_encode($ifrow['vaga']);
 							$sal = utf8_encode($ifrow['salario']);
-                            echo"<p>$vag,<br> R$ $sal<p><br/>";
+                           echo"$vag,<br/>R$ $sal<br/><br/>";
 							}
 							?>
                             </div>
@@ -437,7 +440,7 @@ else{
                                                 <label>Número</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><?php echo"$numero $complemento";?></p>
+                                                <p><?php echo"$numero ";?></p>
                                             </div>
                                         </div>
                                         <div class="row">

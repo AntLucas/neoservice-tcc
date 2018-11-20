@@ -1,4 +1,40 @@
-<?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); 
+session_start();
+
+if($_SESSION['Contador'] == 2){
+	echo "aeeeee";
+	header('Location: perfilDeEmpresa.php');
+	
+	$_SESSION['Contador'] = 0; 
+}
+$_SESSION['Contador'] +=1;
+
+$idcandidato =  $_SESSION['IdCandidato'];
+$email = $_SESSION['Email'];
+$senha = $_SESSION['Senha'];
+$NmC = $_SESSION['NmCandidato'];
+$NmU = $_SESSION['NmUsuario'];
+
+$pesquisa = $_SESSION['pesquisa'];
+echo"aa".$_SESSION['idbusca'];
+$idempresa = $_SESSION['idbusca'];
+
+$sql1 = "select * from tbempresas where IdEmpresa = '$idempresa'";
+$sql2 = mysqli_query($conn,$sql1);
+while($rowss = mysqli_fetch_array($sql2)){
+	$nome = utf8_encode($rowss['NmEmpresa']);
+	$cnpj = utf8_encode($rowss['CNPJ']);
+	$razao = utf8_encode($rowss['Razao']);
+	$email2 = utf8_encode($rowss['Email']);
+	$cep = utf8_encode($rowss['CEP']);
+	$estado = utf8_encode($rowss['Estado']);
+	$cidade = utf8_encode($rowss['Cidade']);
+	$bairro = utf8_encode($rowss['Bairro']);
+	$endereco = utf8_encode($rowss['Endereco']);
+	$numero = utf8_encode($rowss['Numero']);
+	$biografia = utf8_encode($rowss['biografia']);
+}
+?>
 <?php
 							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
 							$_SESSION['pesquisa'] = $_POST['pesquisa'];
@@ -9,46 +45,15 @@
 											}
 
 							?>
-<?php 
-session_start();
-?>
-<?php
-$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
-$email = utf8_encode($_SESSION['Email']);
-$senha = utf8_encode($_SESSION['Senha']);
-$NmC = utf8_encode($_SESSION['NmCandidato']);
-$nomeu = utf8_encode($_SESSION['NmUsuario']);
-$senha	= utf8_encode($_SESSION['Senha']);
-$cep	= utf8_encode($_SESSION['cep'] );
-$estado	= utf8_encode($_SESSION['estado']); 
-$cidade	= utf8_encode( $_SESSION['cidade']) ;
-$bairro	= utf8_encode($_SESSION['bairro'] );
-$rua	= utf8_encode($_SESSION['rua'] );
-$bio	= utf8_encode($_SESSION['biografia']);
-$xp	= utf8_encode($_SESSION['xp'] );
-$ingles	= utf8_encode($_SESSION['ingles']); 
-$formacao	= utf8_encode($_SESSION['formacao']);
-$profissao	= utf8_encode($_SESSION['profissao']); 
-
-$sql = "select * from TbCandidatos  where Email = '$email' and Senha = '$senha';";
-$sql2 = mysqli_query($conn, $sql);
-while($rowss = mysqli_fetch_array($sql2)){
-
-	$bday = utf8_encode($rowss['bdat']);
-	$nascimento = implode("/", array_reverse(explode("-", $bday)));
-	
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-    <title>NeoService - Competências</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -64,7 +69,7 @@ while($rowss = mysqli_fetch_array($sql2)){
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
-        <nav id="sidebar" class="sidebar-wrapper">
+     <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
                     <a href="#">PERFIL</a>
@@ -85,7 +90,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post">
+                    <form method="post" action="buscaEmpresa.php">
                        <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -141,7 +146,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                                     </li>
 									
 									<li>
-                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
+                                        <a href="cadastrarCompetencias.php">Cadastrar competências</a>
                                     </li>
                                 </ul>
                             </div>
@@ -238,87 +243,151 @@ while($rowss = mysqli_fetch_array($sql2)){
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="../assets/images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-									
-                                      <?php echo"$NmC"?>
+                                        <?php echo"$nome ";?>
                                     </h5>
-                                    <h6>
-                                      <?php echo"$profissao"?>
-                                    </h6>
+                                   
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Competências</a>
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sobre</a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Endereço</a>
+                                </li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-md-2">
+					<?php
+					$query = mysqli_query($conn,"select * from tbsolicitacao where fk_IdEmpresa = '$idempresa' and fk_IdCandidato='$idcandidato'");
+					$rown = mysqli_num_rows($query);
+					if($rown > 0){
+					?>
+					<a>Você já solicitou contato com essa empresa</a>
+					<?php
+					}
+					else{
+					?>
+					<form method="post">
+						<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Solicitar"/>
+						<input type="hidden" name="env2" value="clicou"/>
+						</form>
+						<?php
+					}
+						?>
                     </div>
                 </div>
                 <div class="row">
                    <div class="col-md-4">
                         <div class="profile-work">
-                            <p>COMPETÊNCIAS</p>
-                            <?php
-							$if = "select a.NmCandidato,
-							b.Competencia
-							
-							from TbCandidatos a
-							inner join tbcompetenciaRelacao c
-							on a.IdCandidato = c.fk_IdCandidato
-							inner join tbcompetencias b
-							on b.IdCompetencia = c.fk_IdCompetencia
-							where IdCandidato = $idcandidato;";
-							
-							$if2 = mysqli_query($conn, $if);
+                            <p>VAGAS</p>
+                             <div class="col-md-6">
+								<?php
+							$if = "select * from tbvagas where fk_IdEmpresa = '$idempresa';";
+							$if2 = mysqli_query($conn,$if);
 							
 							while($ifrow = mysqli_fetch_array($if2)){
-							$comp = utf8_encode($ifrow['Competencia']);
-                            echo"$comp<br/>";
+							$vag = utf8_encode($ifrow['vaga']);
+							$sal = utf8_encode($ifrow['salario']);
+                            echo"$vag, R$ $sal<br/>";
 							}
 							?>
-							
-						
+                            </div>
                         </div>
                     </div>
-
-                    
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            	<form>
-								</form>
-								
-								<form action="CompetenciasCadastrar.php">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Cadastar Competências</label><br/><br/>
+                                                <label>Nome da Empresa</label>
                                             </div>
                                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                                <p><?php echo"$nome ";?></p>
                                             </div>
                                         </div>
-                                </form>
-
-                                <form action="CompetenciasExcluir.php">
-                                         <div class="row">
+                                        <div class="row">
                                             <div class="col-md-6">
-                                                <label>Excluir Competências</label>
+                                                <label> E-mail  </label>
                                             </div>
                                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">Excluir</button>
+                                                <p><?php echo"$email2";?></p>
                                             </div>
                                         </div>
-                              	</form>
-                            
+                                      
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>CNPJ</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$cnpj";?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Razão Social</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$razao";?></p>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                      	<div class="row">
+                                            <div class="col-md-6">
+                                                <label>CEP</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$cep";?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Cidade</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$cidade";?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Estado</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo "$estado";?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Bairro</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$bairro";?></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Rua</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><?php echo"$endereco";?></p>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label>Biografia</label><br/>
+                                                <p><?php echo"$biografia";?></p>
+                                            </div>
+                                        </div>
+                            </div>		
                         </div>
                     </div>
                 </div>
@@ -330,7 +399,7 @@ while($rowss = mysqli_fetch_array($sql2)){
         <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -340,3 +409,34 @@ while($rowss = mysqli_fetch_array($sql2)){
 </body>
 
 </html>
+
+
+
+<?php
+
+
+if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
+	
+	
+	
+	$sqlil = "select * from tbsolicitacao where fk_IdCandidato = '$idcandidato' and fk_IdEmpresa='$idempresa'";
+	$sqlil2 = mysqli_query($conn,$sqlil);
+	$echo = mysqli_num_rows($sqlil2);
+	
+	if($echo>=1){
+		
+	}
+	else{
+	if(mysqli_query($conn,"insert into tbsolicitacao(fk_IdEmpresa,fk_IdCandidato) values('$idempresa','$idcandidato')")){
+		
+	}
+	else{
+		
+	}
+	}
+}
+else{
+	
+}
+
+?>

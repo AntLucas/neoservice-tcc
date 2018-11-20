@@ -1,28 +1,36 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaEmpresa.php');
+									}
+									else{
+										
+											}
+
+							?>
 <?php 
 session_start();
 ?>
 <?php
-$idcandidato =  $_SESSION['IdCandidato'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
-
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cep = $rowss['cep'];
-	$rua = $rowss['rua'];
-	$bairro = $rowss['bairro'];
-	$cidade = $rowss['cidade'];
-	$estado = $rowss['estado'];
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
-}
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,8 +93,8 @@ while($rowss = mysql_fetch_array($sql)){
                 <!-- sidebar-header  -->
                  <div class="sidebar-search">
                     <div>
-                    <form method="post">
-                        <div class="input-group">
+                    <form method="post" >
+                       <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
 					
@@ -99,8 +107,9 @@ while($rowss = mysql_fetch_array($sql)){
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbEmpresas;");
-							while($row = mysql_fetch_array($sqli)){
+							$sqli = "select * from TbEmpresas;";
+							$sqli2 = mysqli_query($conn, $sqli);
+							while($row = mysqli_fetch_array($sqli2)){
 							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
@@ -108,16 +117,7 @@ while($rowss = mysql_fetch_array($sql)){
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
                         </div>
                     </div>
                 </div>

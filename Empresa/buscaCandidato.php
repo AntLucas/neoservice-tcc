@@ -1,17 +1,57 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
 session_start();
-//$biografia = utf8_encode("")
+
 ?>
 <?php
-$idempresa=  $_SESSION['IdEmpresa'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$nme = $_SESSION['NmEmpresa'];
-$nmu = $_SESSION['NmUsuario'];
-
-$pesquisa = $_SESSION['pesquisa'];
+ini_set('display_errors', 0 );
+error_reporting(0);
 ?>
+
+<?php
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaCandidato.php');
+									}
+									else{
+										
+											}
+
+							?>
+<?php
+$_SESSION['Contador'] = 1;
+	$pesquisa = $_SESSION['pesquisa'];
+	$nmu = utf8_encode($_SESSION['NmUsuario']) ;
+	$cnpj = utf8_encode($_SESSION['cnpj']) ;
+	$razao =utf8_encode($_SESSION['razao']) ;
+	$cep =	utf8_encode($_SESSION['cep']);
+	$estado =utf8_encode($_SESSION['estado']);
+	$cidade =utf8_encode($_SESSION['cidade']);
+	$bairro = utf8_encode($_SESSION['bairro']);
+	$endereco =utf8_encode($_SESSION['endereco']);
+	$numero =utf8_encode($_SESSION['numero']);
+	$biografia =utf8_encode($_SESSION['biografia']);
+	$idempresa=  utf8_encode($_SESSION['IdEmpresa']);
+	$email = utf8_encode($_SESSION['Email']);
+	$senha = utf8_encode($_SESSION['Senha']);
+	$nme = utf8_encode($_SESSION['NmEmpresa']);
+
+
+
+?>
+<?php
+						if($_POST['perfil'] && $_POST['perfil']=="perfils"){
+						$idemp = $_POST['idd'];
+						$_SESSION['idbusca'] = $idemp;
+						header('Location: perfilDeCandidato.php');
+					
+						}
+						else{
+							
+						}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -57,7 +97,7 @@ $pesquisa = $_SESSION['pesquisa'];
                 </div>
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
-                    <div>
+                <div>
                     <form method="post">
                         <div class="input-group">
 						
@@ -65,35 +105,26 @@ $pesquisa = $_SESSION['pesquisa'];
 					
                             <div class="input-group-append">
                                 <span class="input-group-text">
-                                <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
+                                 <button type="hidden" class="fa fa-search" aria-hidden="true" style="background:transparent;border:none;color:gray;"></button>
                                 </span>
                             </div>
 							<input type="hidden" name="env" value="pesquisar"/>
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbCompetencias;");
-							while($row = mysql_fetch_array($sqli)){
-							$competencia = $row['competencia'];
+							$sqli = mysqli_query($conn,"select * from TbCompetencias;");
+							while($row = mysqli_fetch_array($sqli)){
+							$competencia = utf8_encode($row['competencia']);
 							echo"<option value='$competencia'></option>";
 							}
 							?>
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaCandidato.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
                         </div>
                     </div>
-                </div>
+				</div>
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
@@ -135,10 +166,11 @@ $pesquisa = $_SESSION['pesquisa'];
             <div class="sidebar-footer">
                 <div class="dropdown">
 
-                    <a href="#" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification"><?php
-						$slqs = mysql_query("select a.NmCandidato,
+                        <span class="badge badge-pill badge-warning notification">
+						<?php
+						$slqs = mysqli_query($conn,"select a.NmCandidato,
 a.IdCandidato,
 b.NmEmpresa,
 b.IdEmpresa,
@@ -148,10 +180,11 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
-						$lins = mysql_num_rows($slqs);
+on b.IdEmpresa = c.fk_IdEmpresa where fk_IdEmpresa=$idempresa") or die (mysqli_error());
+						$lins = mysqli_num_rows($slqs);
 						echo"$lins";
-						?></span>
+						?>
+						</span>
                     </a>
                      <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
@@ -161,7 +194,7 @@ on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
                         <div class="dropdown-divider"></div>
                      <?php
 
-$slq = mysql_query("select a.NmCandidato,
+$slq = mysqli_query($conn,"select a.NmCandidato,
 a.IdCandidato,
 b.NmEmpresa,
 b.IdEmpresa,
@@ -171,20 +204,20 @@ from tbcandidatos a
 inner join tbsolicitacao c
 on a.IdCandidato = c.fk_IdCandidato
 inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa") or die (mysql_error());
+on b.IdEmpresa = c.fk_IdEmpresa") or die (mysqli_error());
 echo"Notificações";
 
-while($lc = @mysql_fetch_array($slq) ){
+while($lc = @mysqli_fetch_array($slq) ){
 	$idemp = $lc['IdEmpresa'];
 	$idcand = $lc['IdCandidato'];
 	$idsoli = $lc['IdSolicitacao'];
-	$nmcandidato = $lc['NmCandidato'];
-	$nmempresa= $lc['NmEmpresa'];
+	$nmcandidato = utf8_encode($lc['NmCandidato']);
+	$nmempresa= utf8_encode($lc['NmEmpresa']);
 	
-	$sqlil = mysql_query("select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$fkid'");
-	$echo = mysql_num_rows($sqlil);
+	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
+	$echo = mysqli_num_rows($sqlil);
 	
-	if($echo>=1){
+	if($echo==0){
 	
 	}
 		
@@ -201,14 +234,14 @@ while($lc = @mysql_fetch_array($slq) ){
                                     <div class="notification-detail">
 										
 	<?php
-	echo"<br>$nmcandidato Solicitou um contato!<br>";
+	echo"<br>$nmcandidato Solicitou um contato$echo!<br>";
 	
 
 
 ?>
 </div>
                                     <div class="notification-time">
-                                       <form method="Post" action="">
+                                       <form method="Post">
 									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
 									<input type="submit" name="a" value="iniciar contato"/>
 									<input type="hidden" name="env2" value="clicou"/>
@@ -227,14 +260,53 @@ while($lc = @mysql_fetch_array($slq) ){
 
 ?>
 
+
+<?php
+$iddocan = $_POST["pegar"];
+
+
+if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
+	
+	
+	
+	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+	$echo = mysqli_num_rows($sqlil);
+	
+	if($echo>=1){
+		
+	}
+	else{
+	if(mysqli_query($conn,"insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
+		$sqlill = mysqli_query($conn,"delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
+		header("Location: chatEmpresa.php");
+			echo"<script>
+		alert('$iddocan  $fkid');
+		</script>";
+			
+	}
+	else{
+		echo"<script>
+		alert('aaaaa');
+		</script>";
+	}
+	}
+}
+else{
+	
+}
+
+?>
                         </a>
                         <div class="dropdown-divider"></div>
-                    
+                   
                     </div>
+					
+					
+					
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="index.html"><i class="fa fa-envelope"></i></a>
+                        <a href="chatEmpresa.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -271,29 +343,29 @@ while($lc = @mysql_fetch_array($slq) ){
 				
 				<div class="row">	
 <?php
-$sqlpesquisa = mysql_query("select * from TbCompetencias where competencia = '$pesquisa'");
-		while($ld = @mysql_fetch_array($sqlpesquisa) ){
+$sqlpesquisa = mysqli_query($conn,"select * from TbCompetencias where competencia = '$pesquisa'");
+		while($ld = @mysqli_fetch_array($sqlpesquisa) ){
 		$IdCompetencia = $ld['IdCompetencia'];
 		
 		
-		$sqlpesquisa2 =  mysql_query("select * from TbCandidatos as a inner join TbCompetenciaRelacao as b
+		$sqlpesquisa2 =  mysqli_query($conn,"select * from TbCandidatos as a inner join TbCompetenciaRelacao as b
 		on a.IdCandidato = b.fk_IdCandidato
-		where b.fk_IdCompetencia = '$IdCompetencia'")or die (mysql_error());
-		while($lc = @mysql_fetch_array($sqlpesquisa2) ){
+		where b.fk_IdCompetencia = '$IdCompetencia'")or die (mysqli_error());
+		while($lc = @mysqli_fetch_array($sqlpesquisa2) ){
 		$nmcandidato = utf8_encode($lc['NmCandidato']);
 		$biografia = utf8_encode($lc['biografia']);
+		$idca = utf8_encode($lc['IdCandidato']);
 		
 ?>				
 				  <div class="col-sm-6">
 					<div class="card">
 					  <h4 class="card-header text-right bg-dark text-white"><?php echo"$nmcandidato";?>
 					  <div class="float-left small">
-						<a class="btn btn-raised btn-danger" href="httpS://www.google.com.br" title="Ver perfil de CANDIDATO" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-							<i class="fas fa-user-circle" aria-hidden="true"></i>
-						  </a>
-						  <a class="btn btn-raised btn-danger" href="www.google.com" title="Solicitar contato">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						  </a>
+					  <form method="post">
+						<input type="submit" class="btn btn-raised btn-danger" title="Ver perfil de Candidato" value="Perfil"/>
+						<input type="hidden" name="perfil" value="perfils"/>
+						<input type="hidden" name="idd" value="<?php echo"$idca"?>">
+						  </form>
 					  </div>
 					  </h4>
 					  <div class="card-body">

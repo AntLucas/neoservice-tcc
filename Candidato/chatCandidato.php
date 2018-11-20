@@ -1,8 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+
 <?php
 session_start();
 $id = $_SESSION['IdCandidato'];
@@ -784,7 +781,7 @@ $_SESSION['Contador'] +=1;
 				<?php
 				
 				
-				$seleciona = mysql_query("select a.IdEmpresa,
+				$seleciona = mysqli_query($conn,"select a.IdEmpresa,
 				a.NmEmpresa,
 				b.IdCandidato,
 				b.NmCandidato,
@@ -800,16 +797,17 @@ $_SESSION['Contador'] +=1;
 		
 		
 		
-				$conta = mysql_num_rows($seleciona);
+				$conta = mysqli_num_rows($seleciona);
 				
 				if($conta <=0){
 					echo"Nenhuma conversa encontrada!";
 				}
 				else{
-					while($row = mysql_fetch_array($seleciona)){
-					$nome = $row['NmEmpresa'];
-					$ide = $row['IdEmpresa'];
-					$idcont = $row['IdContato'];
+					while($row = mysqli_fetch_array($seleciona)){
+						
+					$nome = utf8_encode($row['NmEmpresa']);
+					$ide = utf8_encode($row['IdEmpresa']);
+					$idcont = utf8_encode($row['IdContato']);
 					
 					
 				?>
@@ -835,23 +833,24 @@ $_SESSION['Contador'] +=1;
 							<p class="name"><?php echo"<input type='hidden' name='clicarcontato' value='clicou'><input type='hidden' name='nomeemp' value='$nome'/>$nome";  ?></p>
 							<p class="preview"><?php
 							
-							$ultimo = mysql_query("select max(IdMensagem) from Tbmensagens where fk_IdContato = $idcont;");
-							while($rowss = mysql_fetch_array($ultimo)){
+							$ultimo = mysqli_query($conn,"select max(IdMensagem) from Tbmensagens where fk_IdContato = $idcont;");
+							while($rowss = mysqli_fetch_array($ultimo)){
 					
-							$mensagemultimo = $rowss['max(IdMensagem)'];
+							$mensagemultimo = utf8_encode($rowss['max(IdMensagem)']);
 					
-							$ultimo = mysql_query("select * from TbMensagens where IdMensagem = $mensagemultimo");
-							while($rowsss = mysql_fetch_array($ultimo)){
+							$ultimo = mysqli_query($conn,"select * from TbMensagens where IdMensagem = $mensagemultimo");
+							while($rowsss = mysqli_fetch_array($ultimo)){
 					
 							$mensagemultima = $rowsss['Mensagem'];
-							$falando = $rowsss['fk_IdCandidato'];
+							$falando = utf8_encode($rowsss['fk_IdCandidato']);
 							
 							
 							if($falando<=0){
-							echo"Você: $mensagemultima ";
+							
+							echo"$nome: $mensagemultima";
 							}
 							else{
-								echo"$nome: $mensagemultima";
+								echo"Você: $mensagemultima ";
 							}
 							}
 					
@@ -911,7 +910,7 @@ $_SESSION['Contador'] +=1;
 			echo"<code>Não é possível enviar uma mensagem vazia!</code>";
 		}
 		else{
-			if(mysql_query("insert into TbMensagens(fk_IdContato,fk_IdEmpresa,fk_IdCandidato,Mensagem)
+			if(mysqli_query($conn,"insert into TbMensagens(fk_IdContato,fk_IdEmpresa,fk_IdCandidato,Mensagem)
 			values('$fkcontato',null,$idde,'$mensagem');")){
 			
 			}
@@ -931,7 +930,7 @@ $_SESSION['Contador'] +=1;
 		<?php
 		$contatoconversa = $_SESSION['idcontato'];
 		
-		$nc = @mysql_query("select a.NmEmpresa,
+		$nc = @mysqli_query($conn,"select a.NmEmpresa,
 		b.NmCandidato,
 		c.fk_IdEmpresa,
 		c.fk_IdCandidato,
@@ -949,12 +948,12 @@ $_SESSION['Contador'] +=1;
 		
 		
 		
-		while($lc = @mysql_fetch_array($nc) ){
+		while($lc = @mysqli_fetch_array($nc) ){
 			$ide = $lc['fk_IdEmpresa'];
 			$idc = $lc['fk_IdCandidato'];
-			$a = $lc['NmEmpresa'];
-			$b = $lc['NmCandidato'];
-			$mensagens = $lc ['Mensagem'];
+			$a = utf8_encode($lc['NmEmpresa']);
+			$b = utf8_encode($lc['NmCandidato']);
+			$mensagens = utf8_encode($lc ['Mensagem']);
 			
 			
 			

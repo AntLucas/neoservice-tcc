@@ -30,8 +30,12 @@ NmUsuario varchar(100)NOT NULL,
 Senha varchar(100)NOT NULL,
 NmCandidato varchar(100) NOT NULL,
 Email varchar(150)NOT NULL,
-cel varchar(13)NOT NULL,
-ende char(255)NOT NULL,
+bdat date NOT NULL,
+cep varchar(10) NOT NULL,
+estado varchar(2)NOT NULL,
+cidade varchar(50)NOT NULL,
+bairro varchar(100)NOT NULL,
+rua varchar(225)NOT NULL,
 biografia varchar(150) NULL,
 xp varchar(150) NULL,
 ingles varchar(30) NULL,
@@ -39,6 +43,7 @@ formacao varchar (150) NULL,
 profissao varchar (50) NULL,
 primary key (IdCandidato)
 )default charset = utf8;
+
 
 create table TbMensagens(
 IdMensagem int NOT NULL AUTO_INCREMENT,
@@ -103,28 +108,28 @@ values(1,'Programador',100.00,'06:00');
 
 
 insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero)
-values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1);
+values('EmpresaUsuario','SenhaEmpresa','Empresa@teste1','NeoService','12345678910111','Testerazao',00000001,'SP','São Paulo','TesteBairro','TesteEndereço',1);
 
 insert into TbEmpresas(NmUsuario,Senha,Email,NmEmpresa,CNPJ,Razao,CEP,Estado,Cidade,Bairro,Endereco,Numero)
-values('EmpresaUsuario2','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345678910111','Testerazao',00000001,'São Paulo','São Paulo','TesteBairro','TesteEndereço',1);
+values('EmpresaUsuario2','SenhaEmpresa','Empresa@teste2','eEmpresa Teste','12345678910111','Testerazao',00000001,'SP','São Paulo','TesteBairro','TesteEndereço',1);
 
 
 
 
-insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,cel,ende,biografia,xp,ingles,formacao,profissao)
-values('CandidatoUsuario','SenhaCandidato','Antonio','candidato@teste','940028922','Rua das Avenidas','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');
+insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+values('CandidatoUsuario','SenhaCandidato','Antonio','candidato@teste','2018-11-05','08090210','SP','São Paulo','Jardim Helena','Rua das Avenidas','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo');
 
 
-insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,cel,ende,biografia,xp,ingles,formacao,profissao)
-values('Candidato2','Senha2','Douglas','candidato@teste2','924567842','Av das Ruas','Nascido no Ceará no dia 07/12/2001, ensino médio completo na escola *** e está  Cursando na universidade **** Contabilidade',
+insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+values('Candidato2','Senha2','Douglas','candidato@teste2','2018-11-05','03570480','São Paulo','SP','Parque Savoy City','Rua Julia Antonieta Tepedino Guerra','Nascido no Ceará no dia 07/12/2001, ensino médio completo na escola *** e está  Cursando na universidade **** Contabilidade',
 'nenhuma','Avançado','Ensino fundamental completo, Ensino médio completo, Cursando na universidade **** Contabilidade','Técnico de informática');
 
-insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,cel,ende,biografia,xp,ingles,formacao,profissao)
-values('Candidato3','SenhaCandidato','Bruno','candidato@testes','915784236','Rua dos Bairros','Nascido são paulo no dia 07/03/1983, ensino médio completo na escola **** e está cursando Admninistração na ETEC Zona Leste',
+insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+values('Candidato3','SenhaCandidato','Bruno','candidato@testes','2018-11-05','03575480','SP','São Paulo','Bairro Teste','Teste','Nascido são paulo no dia 07/03/1983, ensino médio completo na escola **** e está cursando Admninistração na ETEC Zona Leste',
 'Atendente de supermercado','Intermediário','Ensino fundamental completo, Ensino médio completo, Cursanddo na ETEC Zona Leste o curso de ADM','Empresário');
 
-insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,cel,ende,biografia,xp,ingles,formacao,profissao)
-values('Candidato4','SenhaCandidato','Felipe','candidato@testess','912547854','Bairro das Ruas ,nº3b ,São Paulo,Brasil','Nenhuma',
+insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
+values('Candidato4','SenhaCandidato','Felipe','candidato@testess','2018-11-05','03515480','SP','São Paulo','Bairro Teste','Teste','Nenhuma',
 'Nenhuma','Nenhuma','Nenhuma','Nenhuma');
 
 insert into TbCompetencias(competencia)

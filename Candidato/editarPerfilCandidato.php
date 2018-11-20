@@ -1,40 +1,53 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
+							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
+							$_SESSION['pesquisa'] = $_POST['pesquisa'];
+								header('Location: buscaEmpresa.php');
+									}
+									else{
+										
+											}
+
+							?>
 <?php 
 session_start();
 $idcandidato = $_SESSION['IdCandidato'];
-$sql = mysql_query("SELECT * FROM TbCandidatos where IdCandidato = '$idcandidato'");
-$dados = mysql_fetch_assoc($sql);
 
-
- if($_SESSION['Contador'] == 2){
+ if($_SESSION['Contador'] >= 2){
 	echo "aeeeee";
 	header('Location: editarPerfilCandidato.php');
 	
 	$_SESSION['Contador'] = 0; 
 }
-$_SESSION['Contador'] +=1;
+$_SESSION['Contador'] += 1;  
+
 ?>
 <?php
-$idcandidato =  $_SESSION['IdCandidato'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
 
 
-$sql = mysql_query("select * from TbCandidatos  where Email = '$email' and Senha = '$senha';")or die(mysql_error()); 
-while($rowss = mysql_fetch_array($sql)){
-	$cep = $rowss['cep'];
-	$rua = $rowss['rua'];
-	$bairro = $rowss['bairro'];
-	$cidade = $rowss['cidade'];
-	$estado = $rowss['estado'];
-	$bday = $rowss['bdat'];
+$sql = "select * from TbCandidatos  where IdCandidato = '$idcandidato';";
+$sql2 = mysqli_query($conn, $sql);
+while($rowss = mysqli_fetch_array($sql2)){
+	
+	$bday = utf8_encode($rowss['bdat']);
 	$nascimento = implode("/", array_reverse(explode("-", $bday)));
-	$bio = $rowss['biografia'];
-	$xp = $rowss['xp'];
-	$ingles = $rowss['ingles'];
-	$formacao = $rowss['formacao'];
-	$profissao = $rowss['profissao'];
+	
 }
 ?>
 
@@ -83,7 +96,7 @@ while($rowss = mysql_fetch_array($sql)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post">
+                    <form method="post" >
                         <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -97,8 +110,9 @@ while($rowss = mysql_fetch_array($sql)){
 							
 							<datalist id="historico">
 							<?php
-							$sqli = mysql_query("select * from TbEmpresas;");
-							while($row = mysql_fetch_array($sqli)){
+							$sqli = "select * from TbEmpresas;";
+							$sqli2 = mysqli_query($conn, $sqli);
+							while($row = mysqli_fetch_array($sqli2)){
 							$Usuario = $row['NmUsuario'];
 							echo"<option value='$Usuario'></option>";
 							}
@@ -106,16 +120,7 @@ while($rowss = mysql_fetch_array($sql)){
 							</datalist>
                            
 							</form>
-							<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
-
-							?>
+							
                         </div>
                     </div>
                 </div>
@@ -239,6 +244,8 @@ while($rowss = mysql_fetch_array($sql)){
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
+					<form>
+					</form>
             <form method="post" action="editarPerfilCandidato.php">
                 <div class="row">
                     <div class="col-md-4">
@@ -257,7 +264,7 @@ while($rowss = mysql_fetch_array($sql)){
                                     </h5>
                                
                                         <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser"name="profissao" value="<?php echo $dados['profissao'];?>"required/>                
+                                <input type="text" class="form-control" id="Cuser"name="profissao" value="<?php echo"$profissao";?>"required/>                
                                             </div>
 
                                     
@@ -279,7 +286,7 @@ while($rowss = mysql_fetch_array($sql)){
                         <div class="profile-work">
                             <p>COMPETÊNCIAS</p>
                             <?php
-							$if = mysql_query("select a.NmCandidato,
+							$if = "select a.NmCandidato,
 							b.Competencia
 							
 							from TbCandidatos a
@@ -287,11 +294,13 @@ while($rowss = mysql_fetch_array($sql)){
 							on a.IdCandidato = c.fk_IdCandidato
 							inner join tbcompetencias b
 							on b.IdCompetencia = c.fk_IdCompetencia
-							where IdCandidato = $idcandidato;")or die (mysql_error());
+							where IdCandidato = $idcandidato;";
 							
-							while($ifrow = mysql_fetch_array($if)){
-							$comp = $ifrow['Competencia'];
-                            echo"<p>$comp<p><br/>";
+							$if2 = mysqli_query($conn, $if);
+							
+							while($ifrow = mysqli_fetch_array($if2)){
+							$comp = utf8_encode($ifrow['Competencia']);
+                            echo"$comp<br/>";
 							}
 							?>
 							
@@ -306,7 +315,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Nome de Usuário</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser"name="nomeu" value="<?php echo $dados['NmUsuario'];?>" required/>
+                                <input type="text" class="form-control" id="Cuser"name="nomeu" value="<?php echo "$nomeu";?>" required/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -314,7 +323,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Nome</label>
                                             </div>
                                     <div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="nomec" value="<?php echo $dados['NmCandidato'];?>" required/>
+       							<input type="text" class="form-control" id="Cuser" name="nomec" value="<?php echo "$NmC";?> "required/>
         							</div>
                                         </div>
                                         <div class="row">
@@ -322,7 +331,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>E-mail</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="email" class="form-control" id="Cuser" name="email" value="<?php echo $dados['Email'];?>"required/>
+       							<input type="email" class="form-control" id="Cuser" name="email" value="<?php echo "$email";?>"required/>
         							</div>
                                         </div>
                                         <div class="row">
@@ -330,31 +339,51 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Nova senha</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="password" class="form-control" id="Cuser" name="senha" value="<?php echo $dados['Senha'];?>" required/>
+       							<input type="password" class="form-control" id="Cuser" name="senha" value="<?php echo "$senha";?>" required/>
+        							</div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>CEP</label>
+                                            </div>
+                                	<div class="col-md-6">
+       							<input type="text" class="form-control" id="Cuser" name="cep" value="<?php echo "$cep";?>"required/>
         							</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Telefone</label>
+                                                <label>Estado</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser" name="celular" value="<?php echo $dados['cel'];?>"required/>
+       							<input type="text" class="form-control" id="Cuser" name="estado" value="<?php echo "$estado";?>"required/>
         							</div>
                                         </div>
-                                        <div class="row">
+										<div class="row">
                                             <div class="col-md-6">
-                                                <label>Endereço</label>
+                                                <label>Cidade</label>
                                             </div>
                                 	<div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser"name="endereco" value="<?php echo $dados['ende'];?>"required/>
+       							<input type="text" class="form-control" id="Cuser" name="cidade" value="<?php echo "$cidade";?>"required/>
+        							</div>
+                                        </div>
+										<div class="row">
+                                            <div class="col-md-6">
+                                                <label>Bairro</label>
+                                            </div>
+                                	<div class="col-md-6">
+       							<input type="text" class="form-control" id="Cuser" name="bairro" value="<?php echo "$bairro";?>"required/>
+        							</div>
+                                        </div>
+										
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Rua</label>
+                                            </div>
+                                	<div class="col-md-6">
+       							<input type="text" class="form-control" id="Cuser"name="rua" value="<?php echo "$rua";?>"required/>
         							</div>           
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <label>Sua biografia</label><br/>
-                                                <input type="text" class="form-control" name="biografia" value="<?php echo $dados['biografia'];?>"required/>
-                                            </div>
-                                        </div>
+                                        
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
@@ -362,7 +391,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Experiência</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser" name="experiencias" value="<?php echo $dados['xp'];?>"required/>                
+                                <input type="text" class="form-control" id="Cuser" name="experiencias" value="<?php echo "$xp";?>"required/>                
                                             </div>
                                         </div>
                                         <div class="row">
@@ -370,7 +399,7 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Inglês</label>
                                             </div>
                                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="Cuser"name="ingles" value="<?php echo $dados['ingles'];?>"required/>
+                                <input type="text" class="form-control" id="Cuser"name="ingles" value="<?php echo "$ingles";?>"required/>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -378,14 +407,25 @@ while($rowss = mysql_fetch_array($sql)){
                                                 <label>Formação</label>
                                             </div>
                                             <div class="col-md-6">
-       							<input type="text" class="form-control" id="Cuser"  name="formacao" value="<?php echo $dados['formacao'];?>"required/>
+       							<input type="text" class="form-control" id="Cuser"  name="formacao" value="<?php echo "$formacao";?>"required/>
                                             </div>
                                         </div>
+										<div class="row">
+                                            <div class="col-md-12">
+                                                <label>Sua biografia</label><br/>
+                                                <input type="text" class="form-control" name="biografia" value="<?php echo"$bio";?>" />
+                                            </div>
+                                        </div>
+										
                             </div>
+							<input class="btn btn-primary" type="submit" value="Alterar dados"/>
+					<input type="hidden" name ="env" value="altera">
+					<?php
+					echo"".$_SESSION['Contador'];
+					?>
                         </div>
                     </div>
-					<input type="submit" value="Alterar dados">
-					<input type="hidden" name ="env" value="altera">
+					
                 </div>
 				
             </form>  
@@ -394,42 +434,98 @@ while($rowss = mysql_fetch_array($sql)){
 <?php
 if($_POST['env'] && $_POST['env'] == "altera"){
 	
-	if($_POST['nomeu'] && $_POST['senha'] && $_POST['nomec'] && $_POST['email'] && $_POST['celular'] && $_POST['endereco'] && $_POST['biografia'] && $_POST['experiencias'] && $_POST['ingles'] && $_POST['formacao'] && $_POST['profissao'] ){
+	?>
+	<script>
+	alert("AAAA");
+	</script>
+	<?php
+	if($_POST['nomeu'] && $_POST['senha'] && $_POST['nomec'] && $_POST['email'] && $_POST['rua'] && $_POST['biografia'] && $_POST['experiencias'] && $_POST['ingles'] && $_POST['formacao'] && $_POST['profissao'] ){
+		
+		
+		$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
+		
 
+	$nomeus =	$_POST['nomeu'];
+	$senhas =	$_POST['senha'];
+	$nomecs =	$_POST['nomec'];
+	$emails =	$_POST['email'];
+	$ceps=	$_POST['cep'];
+	$estados =	$_POST['estado'];
+	$cidades =	$_POST['cidade'];
+	$bairros =	$_POST['bairro'];
+	$ruas =	$_POST['rua'];
+	$biografias =	$_POST['biografia'];
+	$experienciass =	$_POST['experiencias'];
+	$ingless =	$_POST['ingles'];
+	$formacaos =	$_POST['formacao'];
+	$profissaos =	$_POST['profissao'];
 	
+	$_SESSION['NmCandidato'] = $nomecs;
+	$_SESSION['Email'] = $emails;
+	$_SESSION['NmUsuario'] = $nomeus;
+	$_SESSION['Senha'] = $senhas;
+	$_SESSION['cep']  = $ceps;
+	$_SESSION['estado'] = $estados;
+	$_SESSION['cidade'] = $cidades;
+	$_SESSION['bairro']  = $bairros;
+	$_SESSION['rua']  = $ruas;
+	$_SESSION['biografia'] = $biografias;
+	$_SESSION['xp']  = $experienciass;
+	$_SESSION['ingles'] = $ingless;
+	$_SESSION['formacao'] = $formacaos;
+	$_SESSION['profissao'] = $profissaos;
+
+	$nomecss = $_SESSION['NmCandidato'];
+	$emailss = $_SESSION['Email'];
+	$nomeuss = $_SESSION['NmUsuario'];
+	$senhass =$_SESSION['Senha'];
+	$cepss =$_SESSION['cep'];
+	$estadoss =$_SESSION['estado'];
+	$cidadess =$_SESSION['cidade'];
+	$bairross =$_SESSION['bairro'] ;
+	$ruass =$_SESSION['rua'] ;
+	$biografiass =$_SESSION['biografia'];
+	$experienciasss=$_SESSION['xp'] ;
+	$inglesss =$_SESSION['ingles'];
+	$formacaoss =$_SESSION['formacao'];
+	$profissaoss =$_SESSION['profissao'];
+	echo"$nomecss";
 	
+/*$query = "UPDATE TbCandidatos SET NmUsuario = '$nomeus' ,Senha =  '$senhas', NmCandidato = '$nomecss',
+	Email = '$emails' , estado = '$estados',cidade='$cidades',rua= '$ruas' , biografia = '$biografias',bairro= '$bairros', xp = '$experienciass' , ingles = '$ingless' ,
+	formacao = '$formacaos', profissao = '$profissaos' where IdCandidato = '$idcandidatos'";*/
 	
-	
-	$nomeu =	$_POST['nomeu'];
-	$senha =	$_POST['senha'];
-	$nomec =	$_POST['nomec'];
-	$email =	$_POST['email'];
-	$celular =	$_POST['celular'];
-	$endereco =	$_POST['endereco'];
-	$biografia =	$_POST['biografia'];
-	$experiencias =	$_POST['experiencias'];
-	$ingles =	$_POST['ingles'];
-	$formacao =	$_POST['formacao'];
-	$profissao =	$_POST['profissao'];
-	
-	$_SESSION['NmCandidato'] = $nomec;
-	$_SESSION['NmUsuario'] = $nomeu;
-	$_SESSION['Email'] =	$email;
-	$_SESSION['Senha'] = $senha;
-	
-	$query = mysql_query("UPDATE TbCandidatos SET NmUsuario = '$nomeu' ,Senha =  '$senha', NmCandidato = '$nomec', Email = '$email' , cel = '$celular',ende= '$endereco' , biografia = '$biografia', xp = '$experiencias' , ingles = '$ingles' , formacao = '$formacao', profissao = '$profissao' where IdCandidato = '$idcandidato'")or die(mysql_error()); 
+	$query = "update TbCandidatos set NmCandidato = '$nomecss' , NmUsuario='$nomeuss', Senha= '$senhass', Email = '$emailss', estado = '$estadoss', cidade='$cidadess', cidade = '$ciadess', rua = '$ruass', biografia = '$biografiass', bairro = '$bairross', xp = '$experienciasss', ingles = '$inglesss', formacao = '$formacaoss', profissao = '$profissaoss' where IdCandidato=$idcandidato;";
+	$query2 = mysqli_query($conn, $query);
 	
 	echo"dados alterados";
 	
 	}
 	else{
-		echo"Prrecha todos os campos";
-		
+		echo"Preencha todos os campos";
+		echo"nao cliquei $nomeu $nomecs";
 	}
 	
 }
 else{
-	echo"nao cliquei";
+	echo"nao cliquei $nomeu $nomecs";
+	
+	
 }
 ?>			
         </div>
