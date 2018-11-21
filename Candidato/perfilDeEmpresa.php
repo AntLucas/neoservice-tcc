@@ -1,22 +1,37 @@
-<?php include_once("../assets/lib/dbconnect.php"); 
-session_start();
+<?php include_once("../assets/lib/dbconnect.php"); ?>
 
-if($_SESSION['Contador'] == 2){
+<?php 
+session_start();
+$idcandidato = $_SESSION['IdCandidato'];
+
+ if($_SESSION['Contador'] >= 2){
 	echo "aeeeee";
-	header('Location: perfilDeEmpresa.php');
+	header('Location: editarPerfilCandidato.php');
 	
 	$_SESSION['Contador'] = 0; 
 }
-$_SESSION['Contador'] +=1;
+$_SESSION['Contador'] += 1;  
 
-$idcandidato =  $_SESSION['IdCandidato'];
-$email = $_SESSION['Email'];
-$senha = $_SESSION['Senha'];
-$NmC = $_SESSION['NmCandidato'];
-$NmU = $_SESSION['NmUsuario'];
+?>
+<?php
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
+$email = utf8_encode($_SESSION['Email']);
+$senha = utf8_encode($_SESSION['Senha']);
+$NmC = utf8_encode($_SESSION['NmCandidato']);
+$nomeu = utf8_encode($_SESSION['NmUsuario']);
+$senha	= utf8_encode($_SESSION['Senha']);
+$cep	= utf8_encode($_SESSION['cep'] );
+$estado	= utf8_encode($_SESSION['estado']); 
+$cidade	= utf8_encode( $_SESSION['cidade']) ;
+$bairro	= utf8_encode($_SESSION['bairro'] );
+$rua	= utf8_encode($_SESSION['rua'] );
+$bio	= utf8_encode($_SESSION['biografia']);
+$xp	= utf8_encode($_SESSION['xp'] );
+$ingles	= utf8_encode($_SESSION['ingles']); 
+$formacao	= utf8_encode($_SESSION['formacao']);
+$profissao	= utf8_encode($_SESSION['profissao']); 
 
-$pesquisa = $_SESSION['pesquisa'];
-echo"aa".$_SESSION['idbusca'];
+
 $idempresa = $_SESSION['idbusca'];
 
 $sql1 = "select * from tbempresas where IdEmpresa = '$idempresa'";
@@ -35,19 +50,15 @@ while($rowss = mysqli_fetch_array($sql2)){
 	$biografia = utf8_encode($rowss['biografia']);
 }
 ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
 
-							?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,7 +80,7 @@ while($rowss = mysqli_fetch_array($sql2)){
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
-     <nav id="sidebar" class="sidebar-wrapper">
+         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
                     <a href="#">PERFIL</a>
@@ -79,7 +90,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                       <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -90,8 +101,8 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post" action="buscaEmpresa.php">
-                       <div class="input-group">
+                   <form method="post" action="pesquisa.php">
+                        <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
 					
@@ -146,7 +157,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                                     </li>
 									
 									<li>
-                                        <a href="cadastrarCompetencias.php">Cadastrar competências</a>
+                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
                                     </li>
                                 </ul>
                             </div>
@@ -221,7 +232,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                         <i class="fa fa-cog"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                        <a class="dropdown-item" href="excluirCandidato.php"><strong>EXCLUIR CONTA</strong></a>
                     </div>
                 </div>
                 <div>
@@ -234,7 +245,7 @@ while($rowss = mysqli_fetch_array($sql2)){
 			
         </nav>
         <!-- sidebar-wrapper  -->
-        <main class="page-content">
+       <main class="page-content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
@@ -399,7 +410,7 @@ while($rowss = mysqli_fetch_array($sql2)){
         <!-- page-content" -->
     </div>
     <!-- page-wrapper -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
@@ -409,8 +420,6 @@ while($rowss = mysqli_fetch_array($sql2)){
 </body>
 
 </html>
-
-
 
 <?php
 
@@ -440,3 +449,13 @@ else{
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
