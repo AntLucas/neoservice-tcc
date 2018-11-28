@@ -234,10 +234,6 @@ while($rowss = mysqli_fetch_array($sql2)){
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">

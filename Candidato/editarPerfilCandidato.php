@@ -241,9 +241,11 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <div class="row">
                     <div class="container emp-profile">
 					<form method="post" action="alterarCandidato.php" enctype="multipart/form-data">
-                                <input type="file" name="arquivo" ></input>
-								</br>
-								<input class="btn btn-primary" type="submit"  value="Alterar Imagem"></input>
+					<p>
+                                <input type="file" name="arquivo" style="margin-left: 30px;"></input>
+								<p>
+								<input class="btn btn-primary" type="submit" value="Alterar Imagem" style="margin-left: 100px;"></input>
+								<p>
 								</form>
 					<form>
 					</form>
@@ -419,6 +421,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                                         </div>
 										
                             </div>
+							<br>
 							<input class="btn btn-primary" type="submit" value="Alterar dados"/>
 					<input type="hidden" name ="env" value="altera">
 					
