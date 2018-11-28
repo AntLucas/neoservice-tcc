@@ -1,6 +1,6 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php 
-	if($_POST['env'] && $_POST['env'] == "login"){
+	if(isset($_POST['env']) && $_POST['env'] == "login"){
 		if($_POST['Temail'] && $_POST['Tsenha']){
 			$Temail = $_POST['Temail'];
 			$Tsenha = $_POST['Tsenha'];
@@ -60,7 +60,7 @@
 		<link rel="stylesheet" href="../assets/css/main-login.css" />
 		<link rel="stylesheet" href="../assets/css/login.css" />
 		<link rel="stylesheet" href="../assets/css/teste.css"/>
-		<link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" type="text/css" href="../assets/fonts/iconic/css/material-design-iconic-font.min.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../assets/css/animate.css">
 		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>

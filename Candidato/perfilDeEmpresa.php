@@ -2,16 +2,6 @@
 
 <?php 
 session_start();
-$idcandidato = $_SESSION['IdCandidato'];
-
- if($_SESSION['Contador'] >= 2){
-	echo "aeeeee";
-	header('Location: editarPerfilCandidato.php');
-	
-	$_SESSION['Contador'] = 0; 
-}
-$_SESSION['Contador'] += 1;  
-
 ?>
 <?php
 $idcandidato =  utf8_encode($_SESSION['IdCandidato']);
@@ -31,7 +21,6 @@ $ingles	= utf8_encode($_SESSION['ingles']);
 $formacao	= utf8_encode($_SESSION['formacao']);
 $profissao	= utf8_encode($_SESSION['profissao']); 
 
-
 $idempresa = $_SESSION['idbusca'];
 
 $sql1 = "select * from tbempresas where IdEmpresa = '$idempresa'";
@@ -48,11 +37,12 @@ while($rowss = mysqli_fetch_array($sql2)){
 	$endereco = utf8_encode($rowss['Endereco']);
 	$numero = utf8_encode($rowss['Numero']);
 	$biografia = utf8_encode($rowss['biografia']);
+	$img2 = utf8_encode($rowss['foto']);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <?php
 						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
 						while($assoc = mysqli_fetch_assoc($imagem)){
@@ -60,11 +50,11 @@ while($rowss = mysqli_fetch_array($sql2)){
 						}
 						?>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-    <title>NeoService</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService - Perfil</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -80,7 +70,7 @@ while($rowss = mysqli_fetch_array($sql2)){
         <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
             <i class="fas fa-bars"></i>
         </a>
-         <nav id="sidebar" class="sidebar-wrapper">
+        <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
                     <a href="#">PERFIL</a>
@@ -90,7 +80,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                       <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -101,7 +91,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                   <form method="post" action="pesquisa.php">
+                    <form method="post" action="pesquisa.php">
                         <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -126,6 +116,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                            
 							</form>
 							
+							
                         </div>
                     </div>
                 </div>
@@ -136,7 +127,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="TelaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -245,7 +236,7 @@ while($rowss = mysqli_fetch_array($sql2)){
 			
         </nav>
         <!-- sidebar-wrapper  -->
-       <main class="page-content">
+        <main class="page-content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
@@ -253,16 +244,16 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../assets/images/user.jpg" alt=""/>
-                            
+                           <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img2"?>" alt="User picture">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        <?php echo"$nome ";?>
+									
+                                      <?php echo"$nome"?>
                                     </h5>
-                                   
+                                    
                                     <p class="proile-rating">ESTRELAS : <span>0/5</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -280,7 +271,7 @@ while($rowss = mysqli_fetch_array($sql2)){
 					$rown = mysqli_num_rows($query);
 					if($rown > 0){
 					?>
-					<a>Você já solicitou contato com essa empresa</a>
+					<h6>Você já solicitou contato com essa empresa</h6>
 					<?php
 					}
 					else{
@@ -295,7 +286,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                     </div>
                 </div>
                 <div class="row">
-                   <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="profile-work">
                             <p>VAGAS</p>
                              <div class="col-md-6">
@@ -398,7 +389,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                                                 <p><?php echo"$biografia";?></p>
                                             </div>
                                         </div>
-                            </div>		
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -420,6 +411,7 @@ while($rowss = mysqli_fetch_array($sql2)){
 </body>
 
 </html>
+
 
 <?php
 
@@ -449,13 +441,3 @@ else{
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-

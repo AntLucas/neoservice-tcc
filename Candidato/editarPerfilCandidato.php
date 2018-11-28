@@ -1,14 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
 
-							?>
 <?php 
 session_start();
 $idcandidato = $_SESSION['IdCandidato'];
@@ -53,7 +44,12 @@ while($rowss = mysqli_fetch_array($sql2)){
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,7 +81,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                       <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -96,7 +92,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post" >
+                   <form method="post" action="pesquisa.php">
                         <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -227,7 +223,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                         <i class="fa fa-cog"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                        <a class="dropdown-item" href="excluirCandidato.php"><strong>EXCLUIR CONTA</strong></a>
                     </div>
                 </div>
                 <div>
@@ -244,18 +240,23 @@ while($rowss = mysqli_fetch_array($sql2)){
             <div class="container-fluid">
                 <div class="row">
                     <div class="container emp-profile">
+					<form method="post" action="alterarCandidato.php" enctype="multipart/form-data">
+                                <input type="file" name="arquivo" ></input>
+								</br>
+								<input class="btn btn-primary" type="submit"  value="Alterar Imagem"></input>
+								</form>
 					<form>
 					</form>
             <form method="post" action="editarPerfilCandidato.php">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../assets/images/user.jpg" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Alterar
-                                <input type="file" name="file"/>
-                            </div>
+						
+                            <img src="../assets/images/fotos/<?php echo"$img"?>" alt=""/>
+                            
+                               
                         </div>
+						
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -420,9 +421,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                             </div>
 							<input class="btn btn-primary" type="submit" value="Alterar dados"/>
 					<input type="hidden" name ="env" value="altera">
-					<?php
-					echo"".$_SESSION['Contador'];
-					?>
+					
                         </div>
                     </div>
 					
@@ -432,13 +431,9 @@ while($rowss = mysqli_fetch_array($sql2)){
 
 
 <?php
-if($_POST['env'] && $_POST['env'] == "altera"){
+if(isset($_POST['env']) && $_POST['env'] == "altera"){
 	
-	?>
-	<script>
-	alert("AAAA");
-	</script>
-	<?php
+	
 	if($_POST['nomeu'] && $_POST['senha'] && $_POST['nomec'] && $_POST['email'] && $_POST['rua'] && $_POST['biografia'] && $_POST['experiencias'] && $_POST['ingles'] && $_POST['formacao'] && $_POST['profissao'] ){
 		
 		
@@ -518,12 +513,12 @@ $profissao	= utf8_encode($_SESSION['profissao']);
 	}
 	else{
 		echo"Preencha todos os campos";
-		echo"nao cliquei $nomeu $nomecs";
+		
 	}
 	
 }
 else{
-	echo"nao cliquei $nomeu $nomecs";
+	
 	
 	
 }

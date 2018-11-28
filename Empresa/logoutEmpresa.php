@@ -1,8 +1,8 @@
-<?php include_once("../lib/dbconnect.php"); ?>
+<?php include_once("../assets/lib/dbconnect.php"); 
 
 
 
-<?php
+
 session_start();
 session_destroy();
 header("Location: loginEmpresa.php")

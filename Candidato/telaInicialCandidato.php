@@ -1,14 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
 
-							?>
 <?php 
 session_start();
 ?>
@@ -33,6 +24,12 @@ $profissao	= utf8_encode($_SESSION['profissao']);
 
 <!DOCTYPE html>
 <html>
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,7 +79,7 @@ $profissao	= utf8_encode($_SESSION['profissao']);
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                       <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -93,8 +90,8 @@ $profissao	= utf8_encode($_SESSION['profissao']);
                 <!-- sidebar-header  -->
                  <div class="sidebar-search">
                     <div>
-                    <form method="post" >
-                       <div class="input-group">
+                    <form method="post" action="pesquisa.php">
+                        <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
 					
@@ -224,7 +221,7 @@ $profissao	= utf8_encode($_SESSION['profissao']);
                         <i class="fa fa-cog"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                        <a class="dropdown-item" href="excluirCandidato.php"><strong>EXCLUIR CONTA</strong></a>
                     </div>
                 </div>
                 <div>

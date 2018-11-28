@@ -1,7 +1,9 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
 <?php
-ini_set('display_errors', 0 );
+
 error_reporting(0);
+ini_set(“display_errors”, 0 );
+
 ?>
 <?php
 session_start();
@@ -15,19 +17,29 @@ $id = $_SESSION['IdEmpresa'];
 	$_SESSION['Contador'] = 0; 
 }
 $_SESSION['Contador'] +=1;
+$idempresa=  utf8_encode($_SESSION['IdEmpresa']);
+
+
 ?>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
-
+<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
 <html class=''>
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbempresas where idempresa = $idempresa");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
 
@@ -747,7 +759,7 @@ $_SESSION['Contador'] +=1;
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="https://image.freepik.com/icones-gratis/buldings-comerciais_318-35853.jpg" class="online" alt="" />
+			<img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
 				<p><?php
 				echo"".$_SESSION['NmEmpresa'];
 				?></p>
@@ -781,7 +793,8 @@ $_SESSION['Contador'] +=1;
 				a.NmEmpresa,
 				b.IdCandidato,
 				b.NmCandidato,
-				c.IdContato
+				c.IdContato,
+				b.foto
 		
 
 				from TbEmpresas a
@@ -802,12 +815,13 @@ $_SESSION['Contador'] +=1;
 					$nome = utf8_encode($row['NmCandidato']);
 					$idc = $row['IdCandidato'];
 					$idcont = $row['IdContato'];
+					$img2 = utf8_encode($row['foto']);
 					
 					
 				?>
 				<form method="post" action="chatEmpresa.php" >
 				<?php
-				if($_SESSION['idcontato'] == $idcont){
+				if(isset($_SESSION['idcontato']) && $_SESSION['idcontato'] == $idcont){
 					?><li class="contact active"> <?php
 				}
 				else{
@@ -817,7 +831,7 @@ $_SESSION['Contador'] +=1;
 				?>
 					<div class="wrap">
 						<span class="contact-status away"></span>
-						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeYP7-3A7vXH2HsId4wkOghFexmjqeSiO8RoxnZGcA5CVk1Yq" alt="" />
+						<img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img2"?>" alt="User picture">
 						<?php 
 						echo"<input type='hidden' name='idcan' value='$idc'/> <input type='hidden' name='idcont' value='$idcont'/>";
 					
@@ -860,15 +874,26 @@ $_SESSION['Contador'] +=1;
 				<?php 
 				if(isset($_POST['clicarcontato']) && $_POST['clicarcontato'] == "clicou"){
 				$_SESSION['idcan'] = $_POST['idcan'];
+				
 				$_SESSION['nomecan'] = utf8_encode($_POST['nomecan']);
 				$_SESSION['idcontato'] = $_POST['idcont'];
 				
 				
-				echo"".$_SESSION['idcan'] .$_SESSION['nomecan'] .$_SESSION['idcontato'];
+				
+				
 				}
 				else{
 					
 				}
+				$i = $_SESSION['idcan'];
+				$sqli = mysqli_query($conn,"select foto from tbCandidatos where idcandidato = $i");
+				while($ja = mysqli_fetch_assoc($sqli)){
+				$imgs = utf8_encode($ja['foto']);
+				}
+				 $_SESSION['foto'] = $imgs;
+				 
+				 $img3 = $_SESSION['foto'];
+				
 				?>
 			
 				
@@ -885,7 +910,7 @@ $_SESSION['Contador'] +=1;
 	<form method="post" enctype="multipart/form-data">
 	<div class="content">
 		<div class="contact-profile">
-			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeYP7-3A7vXH2HsId4wkOghFexmjqeSiO8RoxnZGcA5CVk1Yq" alt="" />
+			<img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img3"?>" alt="User picture">
 			<p><?php echo"".$_SESSION['nomecan'];?></p>
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
@@ -954,7 +979,7 @@ $_SESSION['Contador'] +=1;
 			 if($ide == null ){
 				echo "
 					<li class='sent'>
-					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeYP7-3A7vXH2HsId4wkOghFexmjqeSiO8RoxnZGcA5CVk1Yq' alt='' />
+					<img class='img-responsive img-rounded' src='../assets/images/fotos/$img3' alt='User picture'>
 					<p>$mensagens</p>
 					
 				</li>
@@ -966,7 +991,7 @@ $_SESSION['Contador'] +=1;
 				echo "
 				
 				<li class='replies'>
-					<img src='https://image.freepik.com/icones-gratis/buldings-comerciais_318-35853.jpg' alt='' />
+					<img class='img-responsive img-rounded' src='../assets/images/fotos/$img' alt='User picture'>
 					<p>$mensagens</p>
 				</li>
 				";

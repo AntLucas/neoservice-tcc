@@ -79,7 +79,7 @@
 				</form>
 				
 					<?php 
-			if($_POST['env'] && $_POST['env'] == "login"){
+			if(isset($_POST['env']) && $_POST['env'] == "login"){
 			if($_POST['Temail'] && $_POST['Tsenha']){
 			$Temail = $_POST['Temail'];
 			$Tsenha = $_POST['Tsenha'];

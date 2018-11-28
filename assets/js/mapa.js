@@ -5,8 +5,8 @@ if (!mapboxgl.supported()) {
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v9',
-    center: [-47.9292, -15.7801],
-    zoom: 3
+    center: [-46.6388,  -23.5489],
+    zoom: 10
   });
 }
 

@@ -9,16 +9,7 @@ if($_SESSION['Contador'] == 2){
 }
 $_SESSION['Contador'] +=1;
 ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaCandidato.php');
-									}
-									else{
-										
-											}
 
-							?>
 <?php
 $_SESSION['Contador'] = 1;
 				
@@ -43,7 +34,12 @@ $_SESSION['Contador'] = 1;
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbempresas where idempresa = $idempresa");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,7 +71,7 @@ $_SESSION['Contador'] = 1;
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$nme";?>
@@ -87,7 +83,7 @@ $_SESSION['Contador'] = 1;
 				<div class="sidebar-search">
                 <div>
 				
-                    <form method="post">
+                   <form method="post" action="pesquisaEmpresa.php">
                         <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
@@ -206,7 +202,7 @@ while($lc = @mysqli_fetch_array($slq) ){
 	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
 	$echo = mysqli_num_rows($sqlil);
 	
-	if($echo==0){
+	if($echo>0){
 	
 	}
 		
@@ -230,10 +226,10 @@ while($lc = @mysqli_fetch_array($slq) ){
 ?>
 </div>
                                     <div class="notification-time">
-                                       <form method="Post">
+                                       <form method="Post" action="iniciarContato.php">
 									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
 									<input type="submit" name="a" value="iniciar contato"/>
-									<input type="hidden" name="env2" value="clicou"/>
+									
 	
 									</form>
 									
@@ -250,41 +246,6 @@ while($lc = @mysqli_fetch_array($slq) ){
 ?>
 
 
-<?php
-$iddocan = $_POST["pegar"];
-
-
-if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
-	
-	
-	
-	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysqli_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysqli_query($conn,"insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		$sqlill = mysqli_query($conn,"delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-		header("Location: chatEmpresa.php");
-			echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-			
-	}
-	else{
-		echo"<script>
-		alert('aaaaa');
-		</script>";
-	}
-	}
-}
-else{
-	
-}
-
-?>
                         </a>
                         <div class="dropdown-divider"></div>
                    
@@ -302,7 +263,7 @@ else{
                         <i class="fa fa-cog"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                        <a class="dropdown-item" href="excluirEmpresa.php"><strong>EXCLUIR CONTA!</strong></a>
                     </div>
                 </div>
                 <div>
@@ -321,7 +282,7 @@ else{
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../assets/images/user.jpg" alt=""/>
+                            <img src="../assets/images/fotos/<?php echo"$img"?>" alt=""/>
 							
 							
                         </div>
@@ -414,7 +375,7 @@ else{
                                         </div>
                               	</form>
 								<?php
-								if($_POST['cad'] && $_POST['cad']=="cadastrar"){
+								if(isset($_POST['cad']) && $_POST['cad']=="cadastrar"){
 									$nome = $_POST['nome'];
 									$salario = $_POST['salario'];
 									$horario = $_POST['horario'];

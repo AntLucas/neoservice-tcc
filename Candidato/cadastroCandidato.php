@@ -117,7 +117,8 @@ error_reporting(0);
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="candidato" role="tabpanel" aria-labelledby="candidato-tab">
                                 <h3 class="register-heading">Cadastre-se como candidato</h3>
-								
+								<form>
+								</form>
 								<form name="formCadastro" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
@@ -199,8 +200,9 @@ error_reporting(0);
 			$estado = $_POST['uf'];
 			
 			
+		
 			if($senha == $senha2){
-			if ($con){
+			if ($conn){
 	$sqli = mysqli_query($conn,"select * from TbCandidatos where NmUsuario = '$nmUsu'");
 	$sqlii = mysqli_query($conn,"select * from TbCandidatos where Email = '$email'");
 
@@ -227,10 +229,14 @@ error_reporting(0);
 			
 	
 	
-		$sql = @mysqli_query($conn,"insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao)
-		values('$nmUsu','$senha','$nmEsb','$email','$bday','$cep','$estado','$cidade','$bairro','$rua','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Sem Profissão');") or die (mysqli_error());
+		$sql = @mysqli_query($conn,"insert into TbCandidatos(NmUsuario,Senha,NmCandidato,Email,bdat,cep,estado,cidade,bairro,rua,biografia,xp,ingles,formacao,profissao,foto)
+		values('$nmUsu','$senha','$nmEsb','$email','$bday','$cep','$estado','$cidade','$bairro','$rua','Edite esse campo','Edite esse campo','Edite esse campo','Edite esse campo','Sem Profissão','user.jpg');") or die (mysqli_error());
  
-	
+	echo"
+	<script>
+	alert('aeee');
+	</script>
+	";
 	echo"<div class='alert alert-success'>Você foi cadastrado com sucesso, aguarde um instante.</div>";
 	
  

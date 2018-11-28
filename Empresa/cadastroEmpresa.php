@@ -1,8 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-ini_set('display_errors', 0 );
-error_reporting(0);
-?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -192,7 +189,8 @@ function validarCNPJ(cnpj) {
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="empresa" role="tabpanel" aria-labelledby="candidato-tab">
                                 <h3 class="register-heading">Cadastre-se como empresa</h3>
-								
+								<form>
+								</form>
 								<form name="formCadastro" method="post">
                                 <div class="row register-form">
                                     <div class="col-md-6">
@@ -249,7 +247,7 @@ function validarCNPJ(cnpj) {
 </html>
 
 <?php
-	if($_POST['env'] && $_POST['env'] == "Registrar"){
+	if(isset($_POST['env']) && $_POST['env'] == "Registrar"){
 		if($_POST['nmUsu'] || $_POST['nmEmpresa'] || $_POST['razaoSocial'] || $_POST['cnpj'] || $_POST['email'] || $_POST['senha'] || $_POST['senha2'] || $_POST['cep'] || $_POST['rua'] || $_POST['bairro'] || $_POST['cidade'] || $_POST['estado'] || $_POST['numero']){
 			$nmUsu = $_POST['nmUsu'];
 			$nmEmpresa = $_POST['nmEmpresa'];
@@ -265,29 +263,30 @@ function validarCNPJ(cnpj) {
 			$estado = $_POST['uf'];
 			$numero = $_POST['numero'];
 			
-			
-			if($senha == $senha2){
-			if ($con){
-	$sqli = mysql_query("select * from TbEmpresas where NmUsuario = '$nmUsu'");
-	$sqlii = mysql_query("select * from TbEmpresas where Email = '$email'");
-	$sqliii = mysql_query("select * from TbEmpresas where CNPJ = '$cnpj'");
-
-	if(mysql_num_rows($sqli)>=1){
 		
+			if($senha == $senha2){
+			if ($conn){
+	$sqli = mysqli_query($conn,"select * from TbEmpresas where NmUsuario = '$nmUsu'");
+	$sqlii = mysqli_query($conn,"select * from TbEmpresas where Email = '$email'");
+	$sqliii = mysqli_query($conn,"select * from TbEmpresas where CNPJ = '$cnpj'");
+
+	if(mysqli_num_rows($sqli)>0){
+	
 	echo "<div class='alert alert-danger'>Esse nome de usuário já está sendo utilizado!</div>";
 		
-		
+	
 	}
 	
 	
 	
-	elseif(mysql_num_rows($sqlii)>=1){
+	elseif(mysqli_num_rows($sqlii)>0){
 		
 	echo "<div class='alert alert-danger'>Esse E-mail já está sendo utilizado!</div>";
+
 	}
 	
-	elseif(mysql_num_rows($sqliii)>=1){
-		
+	elseif(mysqli_num_rows($sqliii)>0){
+	
 	echo "<div class='alert alert-danger'>Esse CNPJ já está sendo utilizado!</div>";
 	}
 	
@@ -298,11 +297,22 @@ function validarCNPJ(cnpj) {
 	else{
 			
 			
-			
-		$sql = @mysql_query("insert into TbEmpresas(NmUsuario,NmEmpresa,Razao,CNPJ,Email,Senha,CEP,Endereco,Bairro,Cidade,Estado,Numero,biografia)
-		values('$nmUsu','$nmEmpresa','$razaoSocial','$cnpj','$email','$senha','$cep','$rua','$bairro','$estado','$cidade','$numero','Edite esse campo');") or die (mysql_error());
- 
+	$sql = mysqli_query($conn,"insert into TbEmpresas(NmUsuario,NmEmpresa,Razao,CNPJ,Email,Senha,CEP,Endereco,Bairro,Cidade,Estado,Numero,biografia,foto)
+		values('$nmUsu','$nmEmpresa','$razaoSocial','$cnpj','$email','$senha',$cep,'$rua','$bairro','$cidade','$estado',$numero,'Edite esse campo','user.jpg');") or die (mysqli_error());
 	
+		$nmUsu = $_POST['nmUsu'];
+			$nmEmpresa = $_POST['nmEmpresa'];
+			$razaoSocial = $_POST['razaoSocial'];
+			$cnpj = $_POST['cnpj'];
+			$email= $_POST['email'];
+			$senha = $_POST['senha'];
+			$senha2 = $_POST['senha2'];
+			$cep = $_POST['cep'];
+			$rua = $_POST['rua'];
+			$bairro = $_POST['bairro'];
+			$cidade = $_POST['cidade'];
+			$estado = $_POST['uf'];
+			$numero = $_POST['numero'];
 	echo"<div class='alert alert-success'>Você foi cadastrado com sucesso, aguarde um instante.</div>";
 	
  
@@ -313,6 +323,7 @@ else{
 }
 		}
 		else{
+			
 			echo"<div class='alert alert-danger'>As Senhas devem ser iguais!</div>";
 		}
 		}
@@ -320,5 +331,7 @@ else{
 		else{
 			echo"<div class='alert alert-danger'>Preencha Todos os Campos</div>";
 		}
+		
+			
 	}
 ?>

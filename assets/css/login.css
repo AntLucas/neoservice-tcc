@@ -141,7 +141,7 @@ iframe {
   margin: 0 auto;
   background-size: 120px;
   background-position: center;
-  background-image: url('https://icon-icons.com/icons2/1261/PNG/512/1496676746-rounded-high-ultra-colour14-rocket_84616.png');
+  background-image: url('../images/loginCandidato.png');
 }
 
 .login100-form-logo-2 {
@@ -160,7 +160,7 @@ iframe {
   margin: 0 auto;
   background-size: 125px;
   background-position: center;
-  background-image: url('https://png.pngtree.com/element_origin_min_pic/16/08/27/1457c1332258ba3.jpg');
+  background-image: url('../images/loginEmpresa.jpg');
 }
 
 .login100-form-title {

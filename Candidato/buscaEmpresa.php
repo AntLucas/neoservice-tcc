@@ -3,7 +3,7 @@
 session_start();
 ?>
 	<?php
-						if($_POST['perfil'] && $_POST['perfil']=="perfils"){
+						if(isset($_POST['perfil']) && $_POST['perfil']=="perfils"){
 						$idemp = $_POST['idd'];
 						$_SESSION['idbusca'] = $idemp;
 						echo"".$_SESSION['idbusca'];
@@ -11,16 +11,7 @@ session_start();
 						}
 
 ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
 
-							?>
 <?php
 $pesquisa = $_SESSION['pesquisa'];
 $idcandidato =  utf8_encode($_SESSION['IdCandidato']);
@@ -51,7 +42,12 @@ while($rowss = mysqli_fetch_array($sql2)){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,7 +79,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -94,8 +90,8 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post" action="buscaEmpresa.php">
-                       <div class="input-group">
+                    <form method="post" action="pesquisa.php">
+                        <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
 					
@@ -119,6 +115,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                            
 							</form>
 							
+							
                         </div>
                     </div>
                 </div>
@@ -129,7 +126,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                             <span>Painel Geral</span>
                         </li>
                         <li class="sidebar">
-                            <a href="telaInicialCandidato.php">
+                            <a href="TelaInicialCandidato.php">
                                 <i class="fa fa-globe"></i>
                                 <span>Início</span>
                             </a>
@@ -150,7 +147,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                                     </li>
 									
 									<li>
-                                        <a href="cadastrarCompetencias.php">Cadastrar competências</a>
+                                        <a href="CompetenciasCadastrarExcluir.php">Competências</a>
                                     </li>
                                 </ul>
                             </div>
@@ -159,166 +156,84 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <!-- sidebar-menu  -->
             </div>
-<!-- sidebar-content  -->
+            <!-- sidebar-content  -->
             <div class="sidebar-footer">
                 <div class="dropdown">
 
-                    <a href="" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="" id="dropdownMenuNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        <span class="badge badge-pill badge-warning notification">
-						<?php
-						$slqs = mysqli_query($conn,"select a.NmCandidato,
-a.IdCandidato,
-b.NmEmpresa,
-b.IdEmpresa,
-c.IdSolicitacao
-
-from tbcandidatos a
-inner join tbsolicitacao c
-on a.IdCandidato = c.fk_IdCandidato
-inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa where fk_IdEmpresa=$idempresa") or die (mysqli_error());
-						$lins = mysqli_num_rows($slqs);
-						echo"$lins";
-						?>
-						</span>
+                        <span class="badge badge-pill badge-warning notification">3</span>
                     </a>
-                     <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
+                    <div class="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
                         <div class="notifications-header">
                             <i class="fa fa-bell"></i>
-                            Notificações
+                            Notifications
                         </div>
                         <div class="dropdown-divider"></div>
-                     <?php
-
-$slq = mysqli_query($conn,"select a.NmCandidato,
-a.IdCandidato,
-b.NmEmpresa,
-b.IdEmpresa,
-c.IdSolicitacao
-
-from tbcandidatos a
-inner join tbsolicitacao c
-on a.IdCandidato = c.fk_IdCandidato
-inner join tbempresas b
-on b.IdEmpresa = c.fk_IdEmpresa") or die (mysqli_error());
-echo"Notificações";
-
-while($lc = @mysqli_fetch_array($slq) ){
-	$idemp = $lc['IdEmpresa'];
-	$idcand = $lc['IdCandidato'];
-	$idsoli = $lc['IdSolicitacao'];
-	$nmcandidato = utf8_encode($lc['NmCandidato']);
-	$nmempresa= utf8_encode($lc['NmEmpresa']);
-	
-	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$idcand' and fk_IdEmpresa='$idempresa'");
-	$echo = mysqli_num_rows($sqlil);
-	
-	if($echo==0){
-	
-	}
-		
-	else{
-	
-	?>
-
-                        <a class="dropdown-item" href="chatEmpresa.php">
+                        <a class="dropdown-item" href="#">
+                            <div class="notification-content">
+                                <div class="icon">
+                                    <i class="fas fa-check text-success border border-success"></i>
+                                </div>
+                                <div class="content">
+                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
+                                    <div class="notification-time">
+                                        6 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <div class="notification-content">
+                                <div class="icon">
+                                    <i class="fas fa-exclamation text-info border border-info"></i>
+                                </div>
+                                <div class="content">
+                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
+                                    <div class="notification-time">
+                                        Today
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item" href="#">
                             <div class="notification-content">
                                 <div class="icon">
                                     <i class="fas fa-exclamation-triangle text-warning border border-warning"></i>
                                 </div>
                                 <div class="content">
-                                    <div class="notification-detail">
-										
-	<?php
-	echo"<br>$nmcandidato Solicitou um contato$echo!<br>";
-	
-
-
-?>
-</div>
+                                    <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing elit. In totam explicabo</div>
                                     <div class="notification-time">
-                                       <form method="Post">
-									<input type="hidden" name="pegar" value="<?php echo"$idcand";?>"/>
-									<input type="submit" name="a" value="iniciar contato"/>
-									<input type="hidden" name="env2" value="clicou"/>
-	
-									</form>
-									
-									
+                                        Yesterday
                                     </div>
                                 </div>
                             </div>
-							<?php
-										}
-}
-	
-
-
-?>
-
-
-<?php
-$iddocan = $_POST["pegar"];
-
-
-if(isset($_POST['env2']) && $_POST['env2'] == "clicou"){
-	
-	
-	
-	$sqlil = mysqli_query($conn,"select * from TbContatos where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-	$echo = mysqli_num_rows($sqlil);
-	
-	if($echo>=1){
-		
-	}
-	else{
-	if(mysqli_query($conn,"insert into TbContatos(fk_IdEmpresa,fk_IdCandidato) values('$fkid','$iddocan')")){
-		$sqlill = mysqli_query($conn,"delete from TbSolicitacao where fk_IdCandidato = '$iddocan' and fk_IdEmpresa='$fkid'");
-		header("Location: chatEmpresa.php");
-			echo"<script>
-		alert('$iddocan  $fkid');
-		</script>";
-			
-	}
-	else{
-		echo"<script>
-		alert('aaaaa');
-		</script>";
-	}
-	}
-}
-else{
-	
-}
-
-?>
                         </a>
                         <div class="dropdown-divider"></div>
-                   
+                        <a class="dropdown-item text-center" href="#">View all notifications</a>
                     </div>
-					
-					
-					
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="chatEmpresa.php"><i class="fa fa-envelope"></i></a>
+                        <a href="chatCandidato.php"><i class="fa fa-envelope"></i></a>
                 </div>
                 <div class="dropdown">
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cog"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                        <a class="dropdown-item" href="excluirCandidato.php"><strong>EXCLUIR CONTA</strong></a>
                     </div>
                 </div>
                 <div>
-                    <a href="logoutEmpresa.php">
+                    <a href="logoutCandidato.php">
                         <i class="fa fa-power-off"></i>
                     </a>
                 </div>
             </div>
+			
+			
+        </nav>
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container-fluid">
@@ -342,6 +257,7 @@ else{
 		while($lc = @mysqli_fetch_array($sqlpesquisa2) ){
 		$nmempresa = $lc['NmEmpresa'];
 		$idempresa = $lc['IdEmpresa'];
+		$img2 = utf8_encode($lc['foto']);
 		?>				
 		
 				  <div class="col-sm-6">
@@ -361,7 +277,7 @@ else{
 					  </h4>
 					  <div class="card-body">
 						  <div class="image float-right user-r">
-							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlzMdhwbQezvSU8ZGqUWZEJXPG7cdEGyCvs-4M3CHLHLHMrpZa6w" class="img-thumbnail" alt="avatar"/>
+							<img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img2"?>" alt="User picture">
 						  </div>
 						  <br>
 						<h4 class="card-title">Vagas</h4>

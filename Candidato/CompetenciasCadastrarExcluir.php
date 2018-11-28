@@ -1,14 +1,5 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
-<?php
-							if(isset($_POST['env']) && $_POST['env'] == "pesquisar"){
-							$_SESSION['pesquisa'] = $_POST['pesquisa'];
-								header('Location: buscaEmpresa.php');
-									}
-									else{
-										
-											}
 
-							?>
 <?php 
 session_start();
 ?>
@@ -42,7 +33,12 @@ while($rowss = mysqli_fetch_array($sql2)){
 
 <!DOCTYPE html>
 <html lang="en">
-
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,7 +70,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 </div>
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="../assets/images/user.jpg" alt="User picture">
+                       <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><?php echo"$NmC"?>
@@ -85,8 +81,8 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <!-- sidebar-header  -->
                 <div class="sidebar-search">
                     <div>
-                    <form method="post">
-                       <div class="input-group">
+                    <form method="post" action="pesquisa.php">
+                        <div class="input-group">
 						
                             <input type="text" name="pesquisa" class="form-control search-menu" list="historico" placeholder="Pesquise..."/>
 					
@@ -215,8 +211,8 @@ while($rowss = mysqli_fetch_array($sql2)){
                     <a href="#" class="" id="dropdownMenuMessage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cog"></i>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
-                        <a class="dropdown-item" href="#">Ajuda</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuMessage">
+                        <a class="dropdown-item" href="excluirCandidato.php"><strong>EXCLUIR CONTA</strong></a>
                     </div>
                 </div>
                 <div>
@@ -237,7 +233,7 @@ while($rowss = mysqli_fetch_array($sql2)){
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="../assets/images/user.jpg" alt=""/>
+                            <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
                             <div class="file btn btn-lg btn-primary">
                                 Alterar
                                 <input type="file" name="file"/>

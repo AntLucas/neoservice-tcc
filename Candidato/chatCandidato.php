@@ -1,9 +1,14 @@
 <?php include_once("../assets/lib/dbconnect.php"); ?>
+<?php
 
+error_reporting(0);
+ini_set(“display_errors”, 0 );
+
+?>
 <?php
 session_start();
 $id = $_SESSION['IdCandidato'];
-
+$idcandidato =  utf8_encode($_SESSION['IdCandidato']);
 
 
  if($_SESSION['Contador'] == 2){
@@ -18,13 +23,20 @@ $_SESSION['Contador'] +=1;
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+<link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <title>NeoService</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
 <html class=''>
+<?php
+						$imagem = mysqli_query($conn,"select foto from tbcandidatos where idcandidato = $idcandidato");
+						while($assoc = mysqli_fetch_assoc($imagem)){
+							$img = utf8_encode($assoc['foto']);
+						}
+						?>
 <head>
 
 <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
@@ -749,7 +761,7 @@ $_SESSION['Contador'] +=1;
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeYP7-3A7vXH2HsId4wkOghFexmjqeSiO8RoxnZGcA5CVk1Yq" class="online" alt="" />
+				<img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img"?>" alt="User picture">
 				<p><?php
 				echo"".$_SESSION['NmCandidato'];
 				?></p>
@@ -785,7 +797,8 @@ $_SESSION['Contador'] +=1;
 				a.NmEmpresa,
 				b.IdCandidato,
 				b.NmCandidato,
-				c.IdContato
+				c.IdContato,
+				a.foto
 		
 
 				from TbCandidatos b
@@ -808,7 +821,7 @@ $_SESSION['Contador'] +=1;
 					$nome = utf8_encode($row['NmEmpresa']);
 					$ide = utf8_encode($row['IdEmpresa']);
 					$idcont = utf8_encode($row['IdContato']);
-					
+					$img2 = utf8_encode($row['foto']);
 					
 				?>
 				<form method="post" action="chatCandidato.php" >
@@ -823,7 +836,7 @@ $_SESSION['Contador'] +=1;
 				?>
 					<div class="wrap">
 						<span class="contact-status away"></span>
-						<img src="https://image.freepik.com/icones-gratis/buldings-comerciais_318-35853.jpg" alt="" />
+						 <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img2"?>" alt="User picture">
 						<?php 
 						echo"<input type='hidden' name='idemp' value='$ide'/> <input type='hidden' name='idcont' value='$idcont'/>";
 					
@@ -876,6 +889,13 @@ $_SESSION['Contador'] +=1;
 				else{
 					
 				}
+				
+				$i = $_SESSION['idemp'];
+				$query = mysqli_query($conn,"select foto from tbempresas where idempresa = $i");
+				while($while2 = mysqli_fetch_assoc($query)){
+					$img3 = utf8_encode($while2['foto']);
+				}
+				
 				?>
 			
 				
@@ -891,7 +911,7 @@ $_SESSION['Contador'] +=1;
 	<form method="post" enctype="multipart/form-data">
 	<div class="content">
 		<div class="contact-profile">
-			<img src="https://image.freepik.com/icones-gratis/buldings-comerciais_318-35853.jpg" alt="" />
+			 <img class="img-responsive img-rounded" src="../assets/images/fotos/<?php echo"$img3"?>" alt="User picture">
 			<p><?php echo"".$_SESSION['nomeemp'];?></p>
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
@@ -960,7 +980,7 @@ $_SESSION['Contador'] +=1;
 			 if($idc == null ){
 				echo "
 					<li class='sent'>
-					<img src='https://image.freepik.com/icones-gratis/buldings-comerciais_318-35853.jpg' alt='' />
+					  <img class='img-responsive img-rounded' src='../assets/images/fotos/$img3' alt='User picture'>
 					<p>$mensagens</p>
 					
 				</li>
@@ -972,7 +992,7 @@ $_SESSION['Contador'] +=1;
 				echo "
 				
 				<li class='replies'>
-					<img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREeYP7-3A7vXH2HsId4wkOghFexmjqeSiO8RoxnZGcA5CVk1Yq' alt='' />
+					 <img class='img-responsive img-rounded' src='../assets/images/fotos/$img' alt='User picture'>
 					<p>$mensagens</p>
 				</li>
 				";
