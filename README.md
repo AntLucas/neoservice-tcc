@@ -20,7 +20,8 @@
 
 ## Início Rápido
 
-O Desemprego, pode ser considerado um enorme problema no Brasil, visto as dificuldades de se estar empregado em nosso país devido a presente crise que enfrentamos, assim como a dificuldade de empresas de encontrar bons profissionais para suas vagas. Portanto, é de suma importância buscar meios para que esta realidade mude. Nosso aplicativo mostrará uma possível solução para encontro de profissionais e empresas focadas em trabalhos sazonais. 
+  O Desemprego, pode ser considerado um enorme problema no Brasil, visto as dificuldades de se estar empregado em nosso país devido a presente crise que enfrentamos, assim como a dificuldade de empresas de encontrar bons profissionais para suas vagas. Portanto, é de suma importância buscar meios para que esta realidade mude. Nosso aplicativo mostrará uma possível solução para encontro de profissionais e empresas focadas em trabalhos sazonais. 
+  
 O projeto tende a proporcionar uma aplicação, que possibilite auxiliar na busca de funcionários, sendo tanto estudantes quanto profissionais, de maneira prática, rápida e simples. Por esse motivo, o projeto é focado em trabalhos sazonais, nos períodos em que o mercado mais necessita, sem qualquer efetivação. Para um estudante ou até mesmo uma pessoa que está atualmente desempregada.
 
 ## Informações
