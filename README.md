@@ -15,10 +15,8 @@
 
 - [Início Rápido](#início-rápido)
 - [Informações](#informações)
-- [Versão](#versão)
 - [Desenvolvedores](#desenvolvedores)
 - [Obrigados](#obrigados)
-- [Copyright](#copyright)
 
 ## Início Rápido
 
@@ -37,11 +35,6 @@ Plataformas disponíveis:
 ```
 Navegador.
 ```
-
-## Versão
-
-Atualmente estamos em um versão de desenvolvimento.
-
 ## Desenvolvedores
 
 **Douglas Almeida**
@@ -60,8 +53,4 @@ Veja também a lista de [contribuições](https://github.com/toosugoi4u/neoservi
 
 ## Obrigados
 
-<img src="http://eteczonaleste.com.br/2018/wp-content/uploads/2018/05/logo-novo-e1526595455530.png" alt="Etec da Zona Leste logo" width="130" height="90">
-
 Agradecimentos a instituição de ensino [Etec da Zona Leste](http://www.eteczonaleste.com.br/), pela comodidade do ambiente, ríquissima fonte de conhecimentos e qualidade de ensino dos professores. 
-
-## Copyright
